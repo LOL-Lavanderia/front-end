@@ -13,10 +13,14 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       {
-      path: 'dashboard',
-      component: DashboardComponent
+        path: 'dashboard',
+        component: DashboardComponent,
+        title: 'Pagina Inicial'
       },
-      { path: 'cadastro', component: CadastroClienteComponent},
+      { path: 'cadastro',
+      component: CadastroClienteComponent,
+      title: 'Cadastro de Cliente'
+     },
     ]
   }
 ];

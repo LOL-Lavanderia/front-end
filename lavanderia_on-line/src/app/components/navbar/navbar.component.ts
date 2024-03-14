@@ -1,8 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
-
+import { Component } from '@angular/core';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -10,6 +6,4 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class NavbarComponent {
   isEmployee: boolean = false;
-
-
 }
