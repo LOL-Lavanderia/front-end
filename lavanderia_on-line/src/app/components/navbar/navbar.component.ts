@@ -9,11 +9,7 @@ import { map, shareReplay } from 'rxjs/operators';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  private breakpointObserver = inject(BreakpointObserver);
+  isEmployee: boolean = false;
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
+
 }
