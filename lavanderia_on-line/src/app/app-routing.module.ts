@@ -17,10 +17,11 @@ const routes: Routes = [
         component: DashboardComponent,
         title: 'Pagina Inicial'
       },
-      { path: 'cadastro',
-      component: CadastroClienteComponent,
-      title: 'Cadastro de Cliente'
-     },
+      {
+        path: 'cadastro',
+        component: CadastroClienteComponent,
+        title: 'Cadastro de Cliente'
+      },
     ]
   }
 ];
