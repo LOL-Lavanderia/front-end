@@ -16,14 +16,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MainComponent } from './main/main.component';
 import { CadastroClienteComponent } from './cliente/cadastro-cliente/cadastro-cliente.component';
-
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     DashboardComponent,
     MainComponent,
-    CadastroClienteComponent
+    CadastroClienteComponent,
   ],
   imports: [
     BrowserModule,

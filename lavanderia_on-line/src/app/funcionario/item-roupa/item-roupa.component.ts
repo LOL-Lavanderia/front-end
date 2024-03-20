@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Item } from '../../shared/models/item.model';
-import { ItemService } from '../../shared/services/item.service';
+import { Item } from '../../shared/models/item/item.model';
+import { ItemService } from '../../shared/services/itemservice/item.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatIcon } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';

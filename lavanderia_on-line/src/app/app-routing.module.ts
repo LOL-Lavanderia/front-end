@@ -5,6 +5,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MainComponent } from './main/main.component';
 import { CadastroClienteComponent } from './cliente/cadastro-cliente/cadastro-cliente.component';
 import { ItemRoupaComponent } from './funcionario/item-roupa/item-roupa.component';
+import { PedidosAbertosComponent } from './funcionario/pedidos-abertos/pedidos-abertos/pedidos-abertos.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/autenticacao', pathMatch: 'full' },
@@ -27,6 +28,11 @@ const routes: Routes = [
         path: 'item-roupa',
         component: ItemRoupaComponent,
         title: 'Cadastro de Peça de Roupa'
+      },
+      {
+      path: 'pagina-inicial-funcionario',
+      component: PedidosAbertosComponent,
+      title: 'Pedidos Abertos'
       },
     ]
   }
