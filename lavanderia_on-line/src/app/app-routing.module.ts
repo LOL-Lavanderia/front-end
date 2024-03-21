@@ -4,6 +4,7 @@ import { AutenticacaoComponent } from './autenticacao/autenticacao.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MainComponent } from './main/main.component';
 import { CadastroClienteComponent } from './cliente/cadastro-cliente/cadastro-cliente.component';
+import { ListagemPedidosComponent } from './cliente/listagem-pedidos/listagem-pedidos.component';
 import { ItemRoupaComponent } from './funcionario/item-roupa/item-roupa.component';
 import { PedidosAbertosComponent } from './funcionario/pedidos-abertos/pedidos-abertos/pedidos-abertos.component';
 
@@ -23,6 +24,11 @@ const routes: Routes = [
         path: 'cadastro',
         component: CadastroClienteComponent,
         title: 'Cadastro de Cliente'
+      },
+      {
+        path: 'listagem-pedidos',
+        component: ListagemPedidosComponent,
+        title: 'Listagem de Pedidos Cliente'
       },
       {
         path: 'item-roupa',
