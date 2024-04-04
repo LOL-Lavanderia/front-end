@@ -42,21 +42,45 @@ export class PedidosAbertosComponent {
 
 
   ngOnInit(): void {
-    if (this.pedidos) {
-      this.pedidoService.listAll().subscribe(data => {
-        this.pedidos = data;
-      }, error => {
-        // Você pode adicionar tratamento de erro aqui
-        console.error('Erro ao buscar itens', error);
-      });
-    } else {
-      // Lidar com erro - usuário não logado
-      console.warn('Usuário não está logado');
-    }
+   this.loadPedidos();
+  }
+
+  loadPedidos(){
+    this.pedidoService.listAll().subscribe(data => {
+      this.pedidos = data;
+   }, error => {
+      console.error('Erro ao recarregar a lista de pedidos', error);
+   });
   }
 
   goToUpdatePage(pedidoId: number): void {
     // Navigates to the update pedido page with the pedido ID
     this.router.navigate(['/atualizar-pedido', pedidoId]);
   }
+
+  recolherPedido(id: number) {
+    // Encontre o pedido no array por ID
+    const pedido = this.pedidos.find(p => p.id === id);
+   
+    // Verifique se o pedido foi encontrado
+    if (pedido) {
+       // Atualize o status do pedido
+       pedido.status = 'Recolhido';
+   
+       // Chame a função updatePedido para enviar a atualização para o backend
+       this.pedidoService.updatePedido(id, pedido).subscribe(
+         success => {
+           // Atualize a lista de pedidos após a atualização bem-sucedida
+           this.loadPedidos();
+         },
+         error => {
+           // Trate o erro aqui
+           console.error('Erro ao recolher o pedido:', error);
+         }
+       );
+    } else {
+       // Trate o caso em que o pedido não foi encontrado
+       console.error('Pedido não encontrado:', id);
+    }
+   }
 }

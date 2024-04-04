@@ -37,6 +37,9 @@
           <button mat-button (click)="excluirPedido(pedido.id)" color="warn">
             <mat-icon>delete</mat-icon> Excluir
           </button>
+          <button *ngIf="pedido.status === 'Em Aberto'" mat-button (click)="recolherPedido(pedido.id)" color="accent">
+            <mat-icon>replay</mat-icon> Recolher
+          </button>
         </mat-cell>
       </ng-container>
   
