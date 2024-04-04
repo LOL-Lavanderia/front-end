@@ -7,6 +7,7 @@ import { CadastroClienteComponent } from './cliente/cadastro-cliente/cadastro-cl
 import { ListagemPedidosComponent } from './cliente/listagem-pedidos/listagem-pedidos.component';
 import { ItemRoupaComponent } from './funcionario/item-roupa/item-roupa.component';
 import { PedidosAbertosComponent } from './funcionario/pedidos-abertos/pedidos-abertos/pedidos-abertos.component';
+import { ManterFuncionarioComponent } from './funcionario/manter-funcionario/manter-funcionario.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/autenticacao', pathMatch: 'full' },
@@ -40,6 +41,11 @@ const routes: Routes = [
       component: PedidosAbertosComponent,
       title: 'Pedidos Abertos'
       },
+      {
+       path: 'manter-funcionario',
+       component: ManterFuncionarioComponent,
+       title: 'Cadastro de Funcionários'
+       },
     ]
   }
 ];

@@ -17,6 +17,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MainComponent } from './main/main.component';
 import { CadastroClienteComponent } from './cliente/cadastro-cliente/cadastro-cliente.component';
 import { ListagemPedidosComponent } from './cliente/listagem-pedidos/listagem-pedidos.component';
+
 @NgModule({
   declarations: [
     AppComponent,
