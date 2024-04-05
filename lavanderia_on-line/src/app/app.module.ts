@@ -25,7 +25,6 @@ import { ListagemPedidosComponent } from './cliente/listagem-pedidos/listagem-pe
     DashboardComponent,
     MainComponent,
     CadastroClienteComponent,
-    ListagemPedidosComponent,
   ],
   imports: [
     BrowserModule,
