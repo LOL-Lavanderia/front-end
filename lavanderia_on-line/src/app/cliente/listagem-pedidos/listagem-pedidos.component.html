@@ -1,3 +1,115 @@
-<p>listagem-pedidos works!</p>
-<h1>Iniciando RF10 PAGAR PEDIDO</h1>
-<p>waiting for listagem de pedidos</p>
+<app-filter></app-filter>
+
+<div class="container mt-4">
+	<ng-container *ngFor="let order of listOrderF">
+		<div class="border rounded p-3 mb-3" [ngClass]="{
+          'background-orange': order.status === 'Pago',
+          'background-red': order.status === 'Rejeitado' || order.status === 'Cancelado',
+          'background-green': order.status === 'Finalizado',
+          'background-blue': order.status === 'Aguardando pagamento',
+          'background-gray': order.status === 'Recolhido',
+          'background-yellow': order.status === 'Em Aberto'
+        }">
+			<ng-container *ngIf="isEmployee; else customerLinks">
+
+				<div class="d-flex justify-content-between">
+					<h2>Pedido {{ order.id }}</h2>
+					<div>
+						<button *ngIf="order.status === 'Em Aberto'" class="btn btn-warning"
+							(click)="confirmarRecolhimento(order)">Confirmar Recolhimento</button>
+						<button *ngIf="order.status === 'Recolhido'" class="btn btn-success"
+							(click)="confirmarLavagem(order)">Confirmar Lavagem</button>
+						<button *ngIf="order.status === 'Pago'" class=" btn btn-primary"
+							(click)="finalizarPedido(order)">Finalizar
+							Pedido</button>
+					</div>
+
+				</div>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Status</th>
+							<th>Valor</th>
+							<th>Prazo</th>
+							<th>Criado em:</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{ order.status }}</td>
+							<td>R$ {{ order.value }},00</td>
+							<td>{{ order.time }} minutos</td>
+							<td>{{ order.openDate | date: 'dd/MM/yyyy - HH:mm'}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Tipo de Roupa</th>
+							<th>Quantidade</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let clothing of order.roupas">
+							<td>{{ clothing.name }}</td>
+							<td>{{ clothing.quantity }}</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</ng-container>
+
+			<ng-template #customerLinks>
+
+				<div class="d-flex justify-content-between">
+					<h2>Pedido {{ order.id }}</h2>
+					<div class="justify-content-between">
+						<button *ngIf="order.status === 'Em Aberto'" class="btn btn-danger"
+							(click)="cancelarPedido(order)">Cancelar Pedido</button>
+						<button *ngIf="order.status === 'Aguardando pagamento'" class="btn btn-success"
+							(click)="pagarPedido(order)">Pagar Pedido</button>
+					</div>
+				</div>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Status</th>
+							<th>Valor</th>
+							<th>Prazo</th>
+							<th>Criado em:</th>
+							<th *ngIf="order.status === 'Finalizado'">Finalizado em:</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{ order.status }}</td>
+							<td>R$ {{ order.value }},00</td>
+							<td>{{ order.time }} minutos</td>
+							<td>{{ order.openDate | date: 'dd/MM/yyyy - HH:mm'}}</td>
+							<td *ngIf="order.status === 'Finalizado'">{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm'}}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Tipo de Roupa</th>
+							<th>Quantidade</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let clothing of order.roupas">
+							<td>{{ clothing.name }}</td>
+							<td>{{ clothing.quantity }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</ng-template>
+		</div>
+
+	</ng-container>
+
+
+</div>

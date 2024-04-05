@@ -17,6 +17,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MainComponent } from './main/main.component';
 import { CadastroClienteComponent } from './cliente/cadastro-cliente/cadastro-cliente.component';
 import { ListagemPedidosComponent } from './cliente/listagem-pedidos/listagem-pedidos.component';
+import { FilterComponent } from './components/filter/filter.component';
+import { MaterialModule } from './components/filter/material/material.module';
+import { NovoPedidoComponent } from './cliente/novo-pedido/novo-pedido.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,8 @@ import { ListagemPedidosComponent } from './cliente/listagem-pedidos/listagem-pe
     MainComponent,
     CadastroClienteComponent,
     ListagemPedidosComponent,
+    FilterComponent,
+    NovoPedidoComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,11 @@ import { ListagemPedidosComponent } from './cliente/listagem-pedidos/listagem-pe
     MatListModule,
     MatGridListModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    MaterialModule
+  ],
+  exports: [
+    MaterialModule
   ],
   providers: [
     provideClientHydration(),
