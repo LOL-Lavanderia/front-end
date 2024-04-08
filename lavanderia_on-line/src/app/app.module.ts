@@ -17,6 +17,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MainComponent } from './main/main.component';
 import { CadastroClienteComponent } from './cliente/cadastro-cliente/cadastro-cliente.component';
 import { ListagemPedidosComponent } from './cliente/listagem-pedidos/listagem-pedidos.component';
+import { MaterialModule } from './components/material/material.module';
+import { NovoPedidoComponent } from './cliente/novo-pedido/novo-pedido.component';
+
+
+import { HttpClient, HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -25,9 +31,12 @@ import { ListagemPedidosComponent } from './cliente/listagem-pedidos/listagem-pe
     DashboardComponent,
     MainComponent,
     CadastroClienteComponent,
+    ListagemPedidosComponent,
+    NovoPedidoComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     MatToolbarModule,
     MatButtonModule,
@@ -36,11 +45,16 @@ import { ListagemPedidosComponent } from './cliente/listagem-pedidos/listagem-pe
     MatListModule,
     MatGridListModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    MaterialModule
+  ],
+  exports: [
+    MaterialModule
   ],
   providers: [
     provideClientHydration(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient(withFetch()) // Fix: Call the withFetch function directly
   ],
   bootstrap: [AppComponent]
 })
