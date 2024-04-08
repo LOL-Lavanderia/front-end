@@ -28,7 +28,7 @@ const routes: Routes = [
         title: 'Cadastro de Cliente'
       },
       {
-        path: 'listagem-pedidos',
+        path: 'listar-pedidos',
         component: ListagemPedidosComponent,
         title: 'Listagem de Pedidos Cliente'
       },
