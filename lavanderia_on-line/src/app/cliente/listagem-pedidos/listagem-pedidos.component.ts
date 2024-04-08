@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from '../../shared/models/order';
 import { PedidoService } from '../../shared/services/pedidoservice/pedido.service.service';
+import { MaterialModule } from '../../components/material/material.module';
 // import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-listagem-pedidos',
   templateUrl: './listagem-pedidos.component.html',
   styleUrl: './listagem-pedidos.component.css',
-  standalone: true,
 })
 
 export class ListagemPedidosComponent implements OnInit {

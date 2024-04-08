@@ -15,13 +15,12 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MainComponent } from './main/main.component';
-import { CadastroClienteComponent } from './cliente/cadastro-cliente/cadastro-cliente.component';
-import { ListagemPedidosComponent } from './cliente/listagem-pedidos/listagem-pedidos.component';
 import { MaterialModule } from './components/material/material.module';
+
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { ListagemPedidosComponent } from './cliente/listagem-pedidos/listagem-pedidos.component';
+import { CadastroClienteComponent } from './cliente/cadastro-cliente/cadastro-cliente.component';
 import { NovoPedidoComponent } from './cliente/novo-pedido/novo-pedido.component';
-
-
-import { HttpClient, HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 
 
 @NgModule({
@@ -30,9 +29,9 @@ import { HttpClient, HttpClientModule, provideHttpClient, withFetch } from '@ang
     NavbarComponent,
     DashboardComponent,
     MainComponent,
-    CadastroClienteComponent,
     ListagemPedidosComponent,
-    NovoPedidoComponent,
+    CadastroClienteComponent,
+    NovoPedidoComponent
   ],
   imports: [
     BrowserModule,

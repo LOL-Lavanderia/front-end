@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Roupa } from '../../shared/models/roupa';
 import { Order } from '../../shared/models/order';
 import { PedidoService } from '../../shared/services/pedidoservice/pedido.service.service';
+import { MaterialModule } from '../../components/material/material.module';
 
 @Component({
   selector: 'app-novo-pedido',
   templateUrl: './novo-pedido.component.html',
-  styleUrls: ['./novo-pedido.component.css']
+  styleUrls: ['./novo-pedido.component.css'],
 })
 export class NovoPedidoComponent {
   listaDeRoupas: Roupa[] = [
