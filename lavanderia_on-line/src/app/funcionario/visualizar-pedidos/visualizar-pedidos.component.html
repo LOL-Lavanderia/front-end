@@ -1,0 +1,51 @@
+<div class="mat-elevation-z8">
+    <mat-table [dataSource]="pedidos" class="mat-elevation-z8">
+
+      <!-- Coluna Pedido ID -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> Pedido ID </mat-header-cell>
+        <mat-cell *matCellDef="let pedido"> {{pedido.id}} </mat-cell>
+      </ng-container>
+
+      <!-- Coluna Data e Hora / Criação Pedido -->
+      <ng-container matColumnDef="createdAt">
+        <mat-header-cell *matHeaderCellDef> Data e Hora </mat-header-cell>
+        <mat-cell *matCellDef="let pedido"> {{pedido.createdAt}} </mat-cell>
+      </ng-container>
+
+
+      <!-- Coluna Prazo -->
+      <ng-container matColumnDef="term">
+        <mat-header-cell *matHeaderCellDef> Prazo </mat-header-cell>
+        <mat-cell *matCellDef="let pedido"> {{pedido.term}} </mat-cell>
+      </ng-container>
+
+
+      <!-- Coluna Status -->
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+        <mat-cell *matCellDef="let pedido"> {{pedido.status}} </mat-cell>
+      </ng-container>
+
+      <!-- Coluna Ações -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
+        <mat-cell *matCellDef="let pedido" class="action-buttons">
+          <button *ngIf="pedido.status === 'Em Aberto'" mat-button (click)="recolherPedido(pedido.id)" color="accent">
+            <mat-icon>replay</mat-icon> Recolher
+          </button>
+          <button *ngIf="pedido.status === 'Recolhido'" mat-button (click)="solicitaPagamentoPedido(pedido.id)" color="accent">
+            <mat-icon>replay</mat-icon> Solicitar Pagamento
+          </button>
+          <button *ngIf="pedido.status === 'Pago'" mat-button (click)="finalizarPedido(pedido.id)" color="accent">
+            <mat-icon>replay</mat-icon> Finalizar Pedido
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <div *ngIf="pedidos.length==0" class="centralizado">Nenhum Pedido cadastrado.</div>
+  </div>
