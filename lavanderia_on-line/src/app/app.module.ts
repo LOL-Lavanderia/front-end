@@ -21,6 +21,7 @@ import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/
 import { ListagemPedidosComponent } from './cliente/listagem-pedidos/listagem-pedidos.component';
 import { CadastroClienteComponent } from './cliente/cadastro-cliente/cadastro-cliente.component';
 import { NovoPedidoComponent } from './cliente/novo-pedido/novo-pedido.component';
+import { ConsultaPedidosComponent } from './cliente/consulta-pedidos/consulta-pedidos.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { NovoPedidoComponent } from './cliente/novo-pedido/novo-pedido.component
     MainComponent,
     ListagemPedidosComponent,
     CadastroClienteComponent,
-    NovoPedidoComponent
+    NovoPedidoComponent,
+    ConsultaPedidosComponent
   ],
   imports: [
     BrowserModule,

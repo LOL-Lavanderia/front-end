@@ -9,6 +9,7 @@ import { ItemRoupaComponent } from './funcionario/item-roupa/item-roupa.componen
 import { PedidosAbertosComponent } from './funcionario/pedidos-abertos/pedidos-abertos/pedidos-abertos.component';
 import { ManterFuncionarioComponent } from './funcionario/manter-funcionario/manter-funcionario.component';
 import { NovoPedidoComponent } from './cliente/novo-pedido/novo-pedido.component';
+import { ConsultaPedidosComponent } from './cliente/consulta-pedidos/consulta-pedidos.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/autenticacao', pathMatch: 'full' },
