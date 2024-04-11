@@ -1,0 +1,125 @@
+<app-navbar></app-navbar>
+<div class="container-fluid">
+    <div class="row">
+        <nav id="sidebarMenu"
+            class="area-logada__sidebar col-md-3 col-lg-2 d-md-block bg-body-tertiary sidebar collapse">
+            <div class="position-sticky pt-3 sidebar-sticky">
+                <app-sidebar></app-sidebar>
+            </div>
+        </nav>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div
+                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Olá, fulano!</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                </div>
+            </div>
+
+            <section class="pedido">
+                <div class="row">
+                    <h2>Faça seu pedido:</h2>
+                    <div class="form-group col-6">
+                        <select class="form-select" [(ngModel)]="itemSelecionado">
+                            <option *ngFor="let item of itens" [ngValue]="item">{{ item.nome }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-4">
+                        <input type="number" class="form-control" [(ngModel)]="quantidade">
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-primary" (click)="adicionarItemPedido()">Adicionar</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pedido__orcamento">
+                <h2>Seu pedido:</h2>
+
+                <div class="row">
+                    <div class="pedidos__tabela">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Peça</th>
+                                    <th scope="col">Quantidade</th>
+                                    <th scope="col">Valor unitário</th>
+                                    <th scope="col">Valor dos itens </th>
+                                    <th scope="col">Remover</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let itemPedido of itensPedido; let i = index">
+                                    <td>{{itemPedido.item.nome}}</td>
+                                    <td>{{itemPedido.quantidade}}</td>
+                                    <td>R$ {{ itemPedido.item.valor.toFixed(2) }}</td>
+                                    <td>R$ {{ (itemPedido.item.valor * itemPedido.quantidade).toFixed(2) }}</td>
+                                    <td>
+                                        <a (click)="removerItemPedido(i)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                <path
+                                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                            </svg>
+                                        </a>
+                                    </td>
+                                </tr>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <div class="pedido__orcamento">
+                <h3 class="orcamento__title">Orçamento:</h3>
+                <div class="orcamento__itens">
+                    <p><strong>Total de itens do pedido:</strong> 0</p>
+                    <p><strong>Valor total do pedido:</strong> R$ {{ totalPedido.toFixed(2) }} </p>
+                    <p><strong> Prazo de entrega: </strong> 2 dias úteis<p>
+                </div>
+                <div class="orcamento__actions">
+                    <button class="btn btn-primary" (click)="aceitar = !aceitar">
+                        Aprovar Pedido
+                    </button>
+                    <button class="btn btn-primary" (click)="recusar = !recusar">
+                        Recusar Pedido
+                    </button>
+                </div>
+            </div>
+            <section *ngIf="aceitar">
+                <div>
+                    <div class="modal__content">
+                        <h3 class="modal__title">Pedido Aprovado!</h3>
+                        <!-- O nuḿero do pedido precisa ser gerado aqui? -->
+                        <p><strong>Número do pedido: </strong>#000</p>
+                        <p><strong>Valor total do pedido: </strong>R$ {{ totalPedido.toFixed(2) }}</p>
+                        <p><strong>Prazo de lavagem:</strong> 2 dias</p>
+
+                        <div class="modal__buttons">
+                            <button class="btn btn-primary" routerLink="/cliente/listagem-pedidos">Ver pedidos</button>
+                            <button class="btn btn-danger" (click)="fecharModal($event)"><i
+                                    class="fa-sharp fa-regular fa-circle-xmark"></i> Fechar</button>
+                        </div>
+                    </div>
+                    <div class="overlay"></div>
+                </div>
+            </section>
+
+            <section *ngIf="recusar">
+                <div>
+                    <div class="modal__content">
+                        <h3 class="modal__title">Orçamento Recusado!</h3>
+                        <div class="modal__buttons">
+                            <button class="btn btn-primary" routerLink="/cliente/listagem-pedidos">Ver pedidos</button>
+                            <button class="btn btn-danger" (click)="fecharModalRecusado($event)"><i
+                                    class="fa-sharp fa-regular fa-circle-xmark"></i> Fechar</button>
+                        </div>
+                    </div>
+                    <div class="overlay"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+</div>
+<app-footer></app-footer>
