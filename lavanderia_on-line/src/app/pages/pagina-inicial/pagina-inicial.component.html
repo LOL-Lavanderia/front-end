@@ -1,12 +1,3 @@
-<ng-container *ngIf="isEmployee;">
-	<div class="container mt-4">
-		<select [(ngModel)]="selectedOrderStatus" class="form-control">
-			<option value="">Criados hoje</option>
-			<option value="">Filtrar por data</option>
-
-		</select>
-	</div>
-</ng-container>
 
 <div class="container mt-4">
 	<ng-container *ngFor="let order of listOrder">
