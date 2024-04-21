@@ -1,0 +1,108 @@
+<ng-container *ngIf="isEmployee;">
+	<div class="container mt-4">
+		<select [(ngModel)]="selectedOrderStatus" class="form-control">
+			<option value="">Criados hoje</option>
+			<option value="">Filtrar por data</option>
+
+		</select>
+	</div>
+</ng-container>
+
+<div class="container mt-4">
+	<ng-container *ngFor="let order of listOrder">
+		<div class="border rounded p-3 mb-3" [ngClass]="{
+          'background-yellow': order.status === 'Em Aberto'
+        }">
+			<ng-container *ngIf="isEmployee; else customerLinks">
+
+				<div class="d-flex justify-content-between">
+					<h2>Pedido {{ order.id }}</h2>
+					<div>
+						<button *ngIf="order.status === 'Em Aberto'" class="btn btn-warning"
+							(click)="confirmarRecolhimento(order)">Confirmar Recolhimento</button>
+					</div>
+
+				</div>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Status</th>
+							<th>Valor</th>
+							<th>Prazo</th>
+							<th>Criado em:</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{ order.status }}</td>
+							<td>R$ {{ order.value }},00</td>
+							<td>{{ order.time }} minutos</td>
+							<td>{{ order.openDate | date: 'dd/MM/yyyy - HH:mm'}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Tipo de Roupa</th>
+							<th>Quantidade</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let clothing of order.roupas">
+							<td>{{ clothing.name }}</td>
+							<td>{{ clothing.quantity }}</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</ng-container>
+
+			<ng-template #customerLinks>
+				<div class="d-flex justify-content-between">
+					<h2>Pedido {{ order.id }}</h2>
+					<div class="justify-content-between">
+						<button *ngIf="order.status === 'Em Aberto'" class="btn btn-danger"
+							(click)="cancelarPedido(order)">Cancelar Pedido
+                        </button>
+					</div>
+				</div>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Status</th>
+							<th>Valor</th>
+							<th>Prazo</th>
+							<th>Criado em:</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{ order.status }}</td>
+							<td>R$ {{ order.value }},00</td>
+							<td>{{ order.time }} minutos</td>
+							<td>{{ order.openDate | date: 'dd/MM/yyyy - HH:mm'}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Tipo de Roupa</th>
+							<th>Quantidade</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let clothing of order.roupas">
+							<td>{{ clothing.name }}</td>
+							<td>{{ clothing.quantity }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</ng-template>
+		</div>
+
+	</ng-container>
+
+
+</div>
