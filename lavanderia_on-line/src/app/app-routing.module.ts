@@ -6,10 +6,10 @@ import { MainComponent } from './main/main.component';
 import { CadastroClienteComponent } from './cliente/cadastro-cliente/cadastro-cliente.component';
 import { ListagemPedidosComponent } from './cliente/listagem-pedidos/listagem-pedidos.component';
 import { ItemRoupaComponent } from './funcionario/item-roupa/item-roupa.component';
-import { PedidosAbertosComponent } from './funcionario/pedidos-abertos/pedidos-abertos/pedidos-abertos.component';
 import { ManterFuncionarioComponent } from './funcionario/manter-funcionario/manter-funcionario.component';
 import { NovoPedidoComponent } from './cliente/novo-pedido/novo-pedido.component';
 import { ConsultaPedidosComponent } from './cliente/consulta-pedidos/consulta-pedidos.component';
+import { PaginaInicialComponent } from './pages/pagina-inicial/pagina-inicial.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/autenticacao', pathMatch: 'full' },
@@ -39,9 +39,9 @@ const routes: Routes = [
         title: 'Cadastro de Peça de Roupa'
       },
       {
-      path: 'pagina-inicial-funcionario',
-      component: PedidosAbertosComponent,
-      title: 'Pedidos Abertos'
+      path: 'pagina-inicial',
+      component: PaginaInicialComponent,
+      title: 'Pagina Inicial'
       },
       {
         path: 'manter-funcionario',

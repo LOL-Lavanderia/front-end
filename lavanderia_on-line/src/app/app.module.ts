@@ -22,6 +22,7 @@ import { ListagemPedidosComponent } from './cliente/listagem-pedidos/listagem-pe
 import { CadastroClienteComponent } from './cliente/cadastro-cliente/cadastro-cliente.component';
 import { NovoPedidoComponent } from './cliente/novo-pedido/novo-pedido.component';
 import { ConsultaPedidosComponent } from './cliente/consulta-pedidos/consulta-pedidos.component';
+import { PaginaInicialComponent } from './pages/pagina-inicial/pagina-inicial.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ConsultaPedidosComponent } from './cliente/consulta-pedidos/consulta-pe
     ListagemPedidosComponent,
     CadastroClienteComponent,
     NovoPedidoComponent,
-    ConsultaPedidosComponent
+    ConsultaPedidosComponent,
+    PaginaInicialComponent
   ],
   imports: [
     BrowserModule,
