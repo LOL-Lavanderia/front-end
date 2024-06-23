@@ -8,7 +8,6 @@ import { ListagemPedidosComponent } from './cliente/listagem-pedidos/listagem-pe
 import { ItemRoupaComponent } from './funcionario/item-roupa/item-roupa.component';
 import { ManterFuncionarioComponent } from './funcionario/manter-funcionario/manter-funcionario.component';
 import { NovoPedidoComponent } from './cliente/novo-pedido/novo-pedido.component';
-import { ConsultaPedidosComponent } from './cliente/consulta-pedidos/consulta-pedidos.component';
 import { PaginaInicialComponent } from './pages/pagina-inicial/pagina-inicial.component';
 
 const routes: Routes = [
@@ -46,8 +45,7 @@ const routes: Routes = [
       {
         path: 'manter-funcionario',
         component: ManterFuncionarioComponent,
-        title: 'Cadastro de Funcionários'
-
+        title: 'Funcionários'
       },
       {
         path: 'novo-pedido',
