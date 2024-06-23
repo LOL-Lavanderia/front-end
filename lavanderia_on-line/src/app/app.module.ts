@@ -15,7 +15,16 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MainComponent } from './main/main.component';
+import { MaterialModule } from './components/material/material.module';
+
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { ListagemPedidosComponent } from './cliente/listagem-pedidos/listagem-pedidos.component';
 import { CadastroClienteComponent } from './cliente/cadastro-cliente/cadastro-cliente.component';
+import { NovoPedidoComponent } from './cliente/novo-pedido/novo-pedido.component';
+import { ConsultaPedidosComponent } from './cliente/consulta-pedidos/consulta-pedidos.component';
+import { PaginaInicialComponent } from './pages/pagina-inicial/pagina-inicial.component';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -23,10 +32,15 @@ import { CadastroClienteComponent } from './cliente/cadastro-cliente/cadastro-cl
     NavbarComponent,
     DashboardComponent,
     MainComponent,
-    CadastroClienteComponent
+    ListagemPedidosComponent,
+    CadastroClienteComponent,
+    NovoPedidoComponent,
+    ConsultaPedidosComponent,
+    PaginaInicialComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     MatToolbarModule,
     MatButtonModule,
@@ -35,11 +49,17 @@ import { CadastroClienteComponent } from './cliente/cadastro-cliente/cadastro-cl
     MatListModule,
     MatGridListModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    MaterialModule,
+    ToastrModule.forRoot()
+  ],
+  exports: [
+    MaterialModule
   ],
   providers: [
     provideClientHydration(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient(withFetch()) // Fix: Call the withFetch function directly
   ],
   bootstrap: [AppComponent]
 })

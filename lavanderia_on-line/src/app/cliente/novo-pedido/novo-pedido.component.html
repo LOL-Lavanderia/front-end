@@ -1,0 +1,42 @@
+<div class="formulario">
+
+
+<div>
+  <mat-card class="example-card" appearance="outlined" style="flex: 30%">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Defina a Quantidade de Roupas:</mat-card-title>
+
+    </mat-card-header>
+    <mat-card-content style="display: flex; flex-direction: column;">
+      <mat-form-field *ngFor="let roupa of listaDeRoupas">
+        <label mat-label for="{{ roupa.name }}">
+          {{ roupa.name }} -
+          Valor por peça R${{ roupa.price }}</label>
+        <input matInput type="number" min="0" [(ngModel)]="roupa.quantity" name="{{ roupa.name }}"
+          id="{{ roupa.name }}">
+        <label mat-sufix>Total em {{ roupa.name }}: R$ {{ (roupa.price || 0) * (roupa.quantity || 0) }},00</label>
+
+      </mat-form-field>
+
+      <button class="btn btn-success mt-3" (click)="generateOrder()" [disabled]="!isOrderValid()">Enviar Pedido
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div>
+  <mat-card *ngIf="showOrcamento">
+    <mat-card-header>
+      <mat-card-title>Orçamento</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+
+      <p class="card-text">Valor Total: R$ {{ value }},00</p>
+      <p class="card-text">Prazo de Entrega: {{ time }} minutos</p>
+      <button class="btn btn-success" (click)="sendOrder()">Aprovar Orçamento</button>
+      <button class="btn btn-danger ml-2" (click)="declineOrder()">Recusar Orçamento</button>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>

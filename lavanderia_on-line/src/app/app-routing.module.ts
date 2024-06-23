@@ -4,6 +4,12 @@ import { AutenticacaoComponent } from './autenticacao/autenticacao.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MainComponent } from './main/main.component';
 import { CadastroClienteComponent } from './cliente/cadastro-cliente/cadastro-cliente.component';
+import { ListagemPedidosComponent } from './cliente/listagem-pedidos/listagem-pedidos.component';
+import { ItemRoupaComponent } from './funcionario/item-roupa/item-roupa.component';
+import { ManterFuncionarioComponent } from './funcionario/manter-funcionario/manter-funcionario.component';
+import { NovoPedidoComponent } from './cliente/novo-pedido/novo-pedido.component';
+import { ConsultaPedidosComponent } from './cliente/consulta-pedidos/consulta-pedidos.component';
+import { PaginaInicialComponent } from './pages/pagina-inicial/pagina-inicial.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/autenticacao', pathMatch: 'full' },
@@ -21,6 +27,32 @@ const routes: Routes = [
         path: 'cadastro',
         component: CadastroClienteComponent,
         title: 'Cadastro de Cliente'
+      },
+      {
+        path: 'listar-pedidos',
+        component: ListagemPedidosComponent,
+        title: 'Listagem de Pedidos Cliente'
+      },
+      {
+        path: 'item-roupa',
+        component: ItemRoupaComponent,
+        title: 'Cadastro de Peça de Roupa'
+      },
+      {
+      path: 'pagina-inicial',
+      component: PaginaInicialComponent,
+      title: 'Pagina Inicial'
+      },
+      {
+        path: 'manter-funcionario',
+        component: ManterFuncionarioComponent,
+        title: 'Cadastro de Funcionários'
+
+      },
+      {
+        path: 'novo-pedido',
+        component: NovoPedidoComponent,
+        title: 'Novo Pedido'
       },
     ]
   }
