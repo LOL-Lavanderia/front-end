@@ -70,6 +70,9 @@ export class PedidoService {
   listAll(): Observable<Order[]> {
     return this.http.get<Order[]>(`${this.apiUrl}`);
   }
+  listOpenOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.apiUrl}?status=Em Aberto`);
+  }
 
   deletePedido(id: number): Observable<void> {
     console.log(`${this.apiUrl}pedido/${id}`);

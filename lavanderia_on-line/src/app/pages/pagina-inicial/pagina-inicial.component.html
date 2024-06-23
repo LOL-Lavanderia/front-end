@@ -2,8 +2,13 @@
 <div class="container mt-4">
 	<ng-container *ngFor="let order of listOrder">
 		<div class="border rounded p-3 mb-3" [ngClass]="{
-          'background-yellow': order.status === 'Em Aberto'
-        }">
+		          'background-orange': order.status === 'Pago',
+		          'background-red': order.status === 'Rejeitado' || order.status === 'Cancelado',
+		          'background-green': order.status === 'Finalizado',
+		          'background-blue': order.status === 'Aguardando pagamento',
+		          'background-gray': order.status === 'Recolhido',
+		          'background-yellow': order.status === 'Em Aberto'
+		        }">
 			<ng-container *ngIf="isEmployee; else customerLinks">
 
 				<div class="d-flex justify-content-between">
