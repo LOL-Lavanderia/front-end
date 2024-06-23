@@ -16,7 +16,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MainComponent } from './main/main.component';
 import { MaterialModule } from './components/material/material.module';
-
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { ListagemPedidosComponent } from './cliente/listagem-pedidos/listagem-pedidos.component';
 import { CadastroClienteComponent } from './cliente/cadastro-cliente/cadastro-cliente.component';
@@ -24,6 +23,12 @@ import { NovoPedidoComponent } from './cliente/novo-pedido/novo-pedido.component
 import { ConsultaPedidosComponent } from './cliente/consulta-pedidos/consulta-pedidos.component';
 import { PaginaInicialComponent } from './pages/pagina-inicial/pagina-inicial.component';
 import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalFuncionarioComponent } from './funcionario/manter-funcionario/modal-funcionario/modal-funcionario.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ManterFuncionarioComponent } from './funcionario/manter-funcionario/manter-funcionario.component';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { NgxMaskPipe, provideEnvironmentNgxMask, NgxMaskDirective, provideNgxMask } from 'ngx-mask'
 
 
 @NgModule({
@@ -36,10 +41,13 @@ import { ToastrModule } from 'ngx-toastr';
     CadastroClienteComponent,
     NovoPedidoComponent,
     ConsultaPedidosComponent,
-    PaginaInicialComponent
+    PaginaInicialComponent,
+    ModalFuncionarioComponent,
+    ManterFuncionarioComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
     MatToolbarModule,
@@ -51,12 +59,21 @@ import { ToastrModule } from 'ngx-toastr';
     MatCardModule,
     MatMenuModule,
     MaterialModule,
-    ToastrModule.forRoot()
+    MatNativeDateModule,
+    MatDatepickerModule,
+    ToastrModule.forRoot(),
+    NgxMaskDirective,
+    NgxMaskPipe
+
   ],
   exports: [
     MaterialModule
   ],
   providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
+    //provideEnvironmentNgxMask(),
+    provideNgxMask(),
+    MatDatepickerModule,
     provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(withFetch()) // Fix: Call the withFetch function directly
