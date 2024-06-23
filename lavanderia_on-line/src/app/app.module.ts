@@ -23,6 +23,7 @@ import { CadastroClienteComponent } from './cliente/cadastro-cliente/cadastro-cl
 import { NovoPedidoComponent } from './cliente/novo-pedido/novo-pedido.component';
 import { ConsultaPedidosComponent } from './cliente/consulta-pedidos/consulta-pedidos.component';
 import { PaginaInicialComponent } from './pages/pagina-inicial/pagina-inicial.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { PaginaInicialComponent } from './pages/pagina-inicial/pagina-inicial.co
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
-    MaterialModule
+    MaterialModule,
+    ToastrModule.forRoot()
   ],
   exports: [
     MaterialModule
