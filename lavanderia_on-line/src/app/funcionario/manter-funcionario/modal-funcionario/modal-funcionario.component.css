@@ -1,0 +1,10 @@
+mat-card-content,h2{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.hidden {
+  visibility: hidden;
+  height: 0;
+  width: 0;
+}
