@@ -257,6 +257,23 @@
           "quantity": 1111111
         }
       ]
+    },
+    {
+      "id": "996",
+      "time": 2,
+      "status": "Em Aberto",
+      "value": 50,
+      "closeDate": "2024-06-23T00:08:40.294Z",
+      "openDate": "2024-06-23T00:08:40.294Z",
+      "roupas": [
+        {
+          "id": "1",
+          "name": "Calça",
+          "price": 50,
+          "time": 2,
+          "quantity": 1
+        }
+      ]
     }
   ],
   "users": [
