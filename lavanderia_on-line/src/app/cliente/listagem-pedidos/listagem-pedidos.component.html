@@ -23,14 +23,14 @@
 </ng-template>
 
 <div class="container mt-4">
-	<div *ngIf="noMacthesFound()">
+	<div *ngIf="noMatchesFound()">
 		<div class="alert alert-info mt-3">
 			Não há nenhum pedido com o status que você selecionou!
 		</div>
 	</div>
 </div>
 
-<div *ngIf="!noMacthesFound()"
+<div *ngIf="!noMatchesFound()"
  class="container mt-4">
 	<ng-container *ngFor="let order of listOrder">
 		<div class="border rounded p-3 mb-3" [ngClass]="{
