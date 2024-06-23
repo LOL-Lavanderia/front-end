@@ -1,44 +1,7 @@
-<ng-container *ngIf="isEmployee; else customerLinks">
-	<div class="container mt-4">
-		<select [(ngModel)]="selectedOrderStatus" class="form-control">
-			<option value="">Criados hoje</option>
-			<option value="">Filtrar por data</option>
-
-		</select>
-	</div>
-</ng-container>
-<ng-template #customerLinks>
-	<div class="container mt-4">
-		<select [(ngModel)]="selectedOrderStatus" class="form-control">
-			<option value="">Todos os os pedidos</option>
-			<option value="Em Aberto">Em Aberto</option>
-			<option value="Recolhido">Recolhido</option>
-			<option value="Rejeitado">Rejeitado</option>
-			<option value="Cancelado">Cancelado</option>
-			<option value="Aguardando pagamento">Aguardando pagamento</option>
-			<option value="Pago">Pago</option>
-			<option value="Finalizado">Finalizado</option>
-		</select>
-	</div>
-</ng-template>
 
 <div class="container mt-4">
-	<div *ngIf="noMatchesFound()">
-		<div class="alert alert-info mt-3">
-			Não há nenhum pedido com o status que você selecionou!
-		</div>
-	</div>
-</div>
-
-<div *ngIf="!noMatchesFound()"
- class="container mt-4">
 	<ng-container *ngFor="let order of listOrder">
 		<div class="border rounded p-3 mb-3" [ngClass]="{
-          'background-orange': order.status === 'Pago',
-          'background-red': order.status === 'Rejeitado' || order.status === 'Cancelado',
-          'background-green': order.status === 'Finalizado',
-          'background-blue': order.status === 'Aguardando pagamento',
-          'background-gray': order.status === 'Recolhido',
           'background-yellow': order.status === 'Em Aberto'
         }">
 			<ng-container *ngIf="isEmployee; else customerLinks">
@@ -48,11 +11,6 @@
 					<div>
 						<button *ngIf="order.status === 'Em Aberto'" class="btn btn-warning"
 							(click)="confirmarRecolhimento(order)">Confirmar Recolhimento</button>
-						<button *ngIf="order.status === 'Recolhido'" class="btn btn-success"
-							(click)="confirmarLavagem(order)">Confirmar Lavagem</button>
-						<button *ngIf="order.status === 'Pago'" class=" btn btn-primary"
-							(click)="finalizarPedido(order)">Finalizar
-							Pedido</button>
 					</div>
 
 				</div>
@@ -92,14 +50,12 @@
 			</ng-container>
 
 			<ng-template #customerLinks>
-
 				<div class="d-flex justify-content-between">
 					<h2>Pedido {{ order.id }}</h2>
 					<div class="justify-content-between">
 						<button *ngIf="order.status === 'Em Aberto'" class="btn btn-danger"
-							(click)="cancelarPedido(order)">Cancelar Pedido</button>
-						<button *ngIf="order.status === 'Aguardando pagamento'" class="btn btn-success"
-							(click)="pagarPedido(order)">Pagar Pedido</button>
+							(click)="cancelarPedido(order)">Cancelar Pedido
+                        </button>
 					</div>
 				</div>
 				<table class="table table-striped">
@@ -109,7 +65,6 @@
 							<th>Valor</th>
 							<th>Prazo</th>
 							<th>Criado em:</th>
-							<th *ngIf="order.status === 'Finalizado'">Finalizado em:</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -118,8 +73,6 @@
 							<td>R$ {{ order.value }},00</td>
 							<td>{{ order.time }} minutos</td>
 							<td>{{ order.openDate | date: 'dd/MM/yyyy - HH:mm'}}</td>
-							<td *ngIf="order.status === 'Finalizado'">{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm'}}
-							</td>
 						</tr>
 					</tbody>
 				</table>

@@ -21,6 +21,9 @@ import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/
 import { ListagemPedidosComponent } from './cliente/listagem-pedidos/listagem-pedidos.component';
 import { CadastroClienteComponent } from './cliente/cadastro-cliente/cadastro-cliente.component';
 import { NovoPedidoComponent } from './cliente/novo-pedido/novo-pedido.component';
+import { ConsultaPedidosComponent } from './cliente/consulta-pedidos/consulta-pedidos.component';
+import { PaginaInicialComponent } from './pages/pagina-inicial/pagina-inicial.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -31,7 +34,9 @@ import { NovoPedidoComponent } from './cliente/novo-pedido/novo-pedido.component
     MainComponent,
     ListagemPedidosComponent,
     CadastroClienteComponent,
-    NovoPedidoComponent
+    NovoPedidoComponent,
+    ConsultaPedidosComponent,
+    PaginaInicialComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +50,8 @@ import { NovoPedidoComponent } from './cliente/novo-pedido/novo-pedido.component
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
-    MaterialModule
+    MaterialModule,
+    ToastrModule.forRoot()
   ],
   exports: [
     MaterialModule

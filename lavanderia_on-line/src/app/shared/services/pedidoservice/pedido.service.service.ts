@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Pedido } from '../../models/pedido/pedido.model';
+import { Order } from '../../models/order';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Order } from '../../models/order';
+
 import { LocalStorageService } from '../../../local-storage.service';
 
 @Injectable({
@@ -10,16 +10,14 @@ import { LocalStorageService } from '../../../local-storage.service';
 })
 export class PedidoService {
 
-  private apiUrl = 'http://localhost:8080/';
+  private apiUrl = 'http://localhost:3000/orders';
 
   constructor(private http: HttpClient,
-    private localStorageService: LocalStorageService
+
 ) {
-    this.listOrder = this.localStorageService.getOrders();
+
 
 }
-
-
 
 
   listOrder: Order[] = [];
@@ -30,8 +28,9 @@ export class PedidoService {
   }
 
   addOrder(order: Order): void {
+    //enviar o json para o json server usando metodo post
     this.listOrder.push(order);
-    this.localStorageService.saveOrders(this.listOrder);
+
   }
 
   getPendingOrders(): Order[] {
@@ -51,7 +50,7 @@ export class PedidoService {
     const index = this.listOrder.findIndex(o => o.id === order.id);
     if (index !== -1) {
       this.listOrder[index] = order;
-      this.localStorageService.saveOrders(this.listOrder);
+
     }
   }
 
@@ -61,28 +60,35 @@ export class PedidoService {
 
 
 
+  getAllOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.apiUrl}`);
+  }
 
 
 
-  listAll(): Observable<Pedido[]> {
-    return this.http.get<Pedido[]>(`${this.apiUrl}pedido`);
+
+  listAll(): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.apiUrl}`);
   }
 
   deletePedido(id: number): Observable<void> {
     console.log(`${this.apiUrl}pedido/${id}`);
-    return this.http.delete<void>(`${this.apiUrl}pedido/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}${id}`);
   }
 
-  register(pedido: Pedido): Observable<Pedido> {
-    return this.http.post<Pedido>(`${this.apiUrl}pedido`, pedido);
+  createOrUpdatePedido(order: Order, id: string | undefined): Observable<Order> {
+    if (id) {
+      console.log("enviando pra = ", `${this.apiUrl}/${order.id}`);
+      return this.http.put<Order>(`${this.apiUrl}/${order.id}`, order);
+    } else {
+      return this.http.post<Order>(`${this.apiUrl}`, order);
+    }
   }
 
-  getPedidobyId(id: number): Observable<Pedido>{
-    return this.http.get<Pedido>(`${this.apiUrl}pedido/${id}`)
+  getPedidobyId(id: number): Observable<Order>{
+    return this.http.get<Order>(`${this.apiUrl}pedido/${id}`)
   }
 
-  updatePedido(id: number, pedido: Pedido): Observable<any> {
-    return this.http.put(`${this.apiUrl}pedido/${id}`, pedido);
-  }
+
 
 }

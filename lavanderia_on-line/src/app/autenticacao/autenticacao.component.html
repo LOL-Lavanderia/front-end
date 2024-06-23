@@ -3,20 +3,17 @@
 </mat-toolbar>
 
 <mat-card class="login-card">
-  <form class="form">
+  <form class="form" (ngSubmit)="onLogin()">
     <mat-form-field class="full-width">
       <mat-label>E-mail</mat-label>
-      <input type="email" matInput placeholder="Ex. pat@example.com">
+      <input type="email" matInput [(ngModel)]="usuario.email" name="email" placeholder="Ex. pat@example.com" required>
     </mat-form-field>
 
     <mat-form-field class="full-width">
       <mat-label>Senha</mat-label>
-      <input type="password" matInput>
+      <input type="password" matInput [(ngModel)]="usuario.password" name="password" required>
     </mat-form-field>
+
+    <button mat-raised-button color="warn" type="submit">Fazer login</button>
   </form>
-
-  <button mat-raised-button color="warn">Fazer login</button>
-
 </mat-card>
-
-

@@ -1,3 +1,10 @@
-label, p, h2{
-	color: black;
+input{
+	background-color: #797979;
+	margin-bottom: 10px;
+	border-radius: 2px;
+}
+.formulario{
+	display: flex;
+	flex-direction: row;
+	gap: 10;
 }
