@@ -24,8 +24,10 @@ import { Router } from '@angular/router';
   MatCardModule,
   FormsModule]
 })
+
+
 export class AutenticacaoComponent {
-  usuario: Usuario = new Usuario('', '');
+  usuario: Usuario = new Usuario(undefined, '', '', '', { role: 'client', cpf: '', address: [], phone: [] });
 
   constructor(private authService: AuthenticationService,
     private router: Router) {}
@@ -39,6 +41,6 @@ export class AutenticacaoComponent {
       console.error('Login failed');
     }
   }
-  
+
 
 }
