@@ -9,6 +9,7 @@ import { ItemRoupaComponent } from './funcionario/item-roupa/item-roupa.componen
 import { ManterFuncionarioComponent } from './funcionario/manter-funcionario/manter-funcionario.component';
 import { NovoPedidoComponent } from './cliente/novo-pedido/novo-pedido.component';
 import { PaginaInicialComponent } from './pages/pagina-inicial/pagina-inicial.component';
+import { ConsultaPedidosComponent } from './cliente/consulta-pedidos/consulta-pedidos.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/autenticacao', pathMatch: 'full' },
@@ -51,6 +52,11 @@ const routes: Routes = [
         path: 'novo-pedido',
         component: NovoPedidoComponent,
         title: 'Novo Pedido'
+      },
+      {
+        path: 'consulta-pedido',
+        component: ConsultaPedidosComponent,
+        title: 'Consulta Pedido'
       },
     ]
   }

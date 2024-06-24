@@ -1,38 +1,71 @@
-<p>consulta-pedidos em andamento</p>
-
-<div class="container">
-<!--
+<mat-card class="container">
     <div class="content">
         <label for="pedidoNumero">Número do Pedido:</label>
-        <input
-        (input)="consultarPedido()"
-        class="ml-2"
-        type="number"
-        id="pedidoNumero"
-        [(ngModel)]="pedidoNumero"
-        placeholder="Digite um numero">
+        <input (input)="consultarPedido()" class="ml-2" type="number" id="pedidoNumero" [(ngModel)]="pedidoNumero"
+            placeholder="Digite um numero">
     </div>
 
-    <div *ngIf="pedidos.length > 0;else noOrders" class="details">
-        <h3>Resultados da Consulta</h3>
-        <ul>
-            <li *ngFor="let pedido of pedidos">
-                <h4>Detalhes do Pedido {{ pedido.id }}</h4>
-                <p>Status: {{ pedido.status }}</p>
-                <p>Valor Total: R$ {{ pedido.value }},00</p>
-                <p>Prazo: {{ pedido.time }} minutos</p>
+    <div *ngIf="pedidos.length > 0; else noOrders" class="details">
+        <ng-container *ngFor="let pedido of pedidos">
+            <div class="border rounded p-3 mb-3" [ngClass]="{
+                  'background-orange': pedido.status === 'Pago',
+                  'background-red': pedido.status === 'Rejeitado' || pedido.status === 'Cancelado',
+                  'background-green': pedido.status === 'Finalizado',
+                  'background-blue': pedido.status === 'Aguardando pagamento',
+                  'background-gray': pedido.status === 'Recolhido',
+                  'background-yellow': pedido.status === 'Em Aberto'
+                }">
+                <div class="d-flex justify-content-between">
+                    <h2>Pedido {{ pedido.id }}</h2>
+                    <div class="justify-content-between">
+                        <button *ngIf="pedido.status === 'Em Aberto'" class="btn btn-danger"
+                            (click)="cancelarPedido(pedido)">Cancelar
+                            Pedido</button>
+                        <button *ngIf="pedido.status === 'Aguardando pagamento'" class="btn btn-success"
+                            (click)="pagarPedido(pedido)">Pagar Pedido</button>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Valor</th>
+                            <th>Prazo</th>
+                            <th>Criado em:</th>
+                            <th *ngIf="pedido.status === 'Finalizado'">Finalizado em:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ pedido.status }}</td>
+                            <td>R$ {{ pedido.value }},00</td>
+                            <td>{{ pedido.time }} minutos</td>
+                            <td>{{ pedido.openDate | date: 'dd/MM/yyyy - HH:mm'}}</td>
+                            <td *ngIf="pedido.status === 'Finalizado'">{{ pedido.closeDate | date: 'dd/MM/yyyy -
+                                HH:mm'}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Tipo de Roupa</th>
+                            <th>Quantidade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let clothing of pedido.roupas">
+                            <td>{{ clothing.name }}</td>
+                            <td>{{ clothing.quantity }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </ng-container>
 
-                <h4>Roupas no Pedido:</h4>
-                <ul>
-                    <li *ngFor="let roupas of pedido.roupas">{{ roupas.name }} - Quantidade: {{ roupas.quantity }}</li>
-                </ul>
-            </li>
-        </ul>
     </div>
-    
     <ng-template #noOrders>
-        <h3>Nenhum pedido encontrado!</h3>
+        <h3>Nenhum pedido encontrado</h3>
     </ng-template>
--->
-</div>
-
+</mat-card>
