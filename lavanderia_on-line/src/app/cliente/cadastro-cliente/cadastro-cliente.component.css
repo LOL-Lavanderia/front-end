@@ -1,0 +1,14 @@
+.title-center {
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.auto-cadastro {
+    background-color: white;
+    margin: 2% 25%;
+    padding: 2% 2% 1%;
+}
+
+.full-width {
+    width: 100%;
+}
