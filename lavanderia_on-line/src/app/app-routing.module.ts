@@ -14,7 +14,7 @@ import { ConsultaPedidosComponent } from './cliente/consulta-pedidos/consulta-pe
 const routes: Routes = [
   { path: '', redirectTo: '/autenticacao', pathMatch: 'full' },
   { path: 'autenticacao', component: AutenticacaoComponent },
-  { path: 'cadastro',  component: CadastroClienteComponent},
+  { path: 'cadastro',  component: CadastroClienteComponent,},
   {
     path: '',
     component: MainComponent,

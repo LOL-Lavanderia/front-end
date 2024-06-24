@@ -42,5 +42,8 @@ export class AutenticacaoComponent {
     }
   }
 
+  autoCadastro() {
+    this.router.navigate(['/cadastro']);
+  }
 
 }
