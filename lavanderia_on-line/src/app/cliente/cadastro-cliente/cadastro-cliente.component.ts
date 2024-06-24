@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Usuario } from '../../shared/models/usuario/usuario';
 
 @Component({
   selector: 'app-cadastro-cliente',
@@ -7,5 +8,17 @@ import { Component } from '@angular/core';
 })
 export class CadastroClienteComponent {
 
+usuario!: Usuario;
 
+
+constructor() { }
+
+// cadastra(){
+//   this.usuario = new Usuario(
+//     'exemplo@email.com',
+//     'Nome do Cliente',
+//     'senha123',
+//     { role: 'client', cpf: '123.456.789-00', address: 'Rua do Cliente' }
+  // )
+// }
 }

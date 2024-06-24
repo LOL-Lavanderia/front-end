@@ -18,12 +18,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 @NgModule({
   declarations: [],
   imports: [
-    MatFormFieldModule,
+    MatDatepickerModule,
     MatSelectModule,
     MatTableModule,
     MatPaginatorModule,
@@ -46,6 +47,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatCardModule
     ],
   exports: [
+    MatDatepickerModule,
     MatFormFieldModule,
     MatSelectModule,
     MatTableModule,

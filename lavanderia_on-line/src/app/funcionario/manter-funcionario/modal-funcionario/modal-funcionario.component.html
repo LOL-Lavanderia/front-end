@@ -1,0 +1,34 @@
+<mat-card [formGroup]="employeeForm" >
+	<mat-card-content>
+		<h2 style="color: aliceblue;">Cadastro de Funcionário</h2>
+
+		<mat-form-field appearance="fill">
+			<mat-label>Email</mat-label>
+			<input matInput formControlName="email" placeholder="Email">
+			<mat-error *ngIf="email?.invalid && email?.touched">Email é obrigatório e deve ser válido.</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="fill">
+			<mat-label>Nome</mat-label>
+			<input matInput formControlName="name" placeholder="Nome">
+			<mat-error *ngIf="name?.invalid && name?.touched">Nome é obrigatório.</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="fill">
+			<mat-label>Senha</mat-label>
+			<input matInput formControlName="password" type="password" placeholder="Senha">
+			<mat-error *ngIf="password?.invalid && password?.touched">Senha é obrigatória.</mat-error>
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>Data de Nascimento</mat-label>
+			<input matInput formControlName="birthDate" placeholder="Data de Nascimento" [matDatepicker]="dp" readonly />
+			<mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+			<mat-datepicker #dp></mat-datepicker>
+			<mat-error *ngIf="birthDate?.invalid && birthDate?.touched">Data de Nascimento é obrigatória.</mat-error>
+		</mat-form-field>
+		<div>
+			<button mat-flat-button color="primary" (click)="submitForm()"  [disabled]="employeeForm.invalid">Salvar</button>
+			<button mat-button type="button" color="warn" (click)="closeModal()">Cancelar</button>
+		</div>
+	</mat-card-content>
+</mat-card>

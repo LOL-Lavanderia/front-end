@@ -1,38 +1,32 @@
-<div class="mat-elevation-z8">
-  <mat-table [dataSource]="funcionarios" class="mat-elevation-z8">
-
-    <!-- Coluna ID -->
-    <ng-container matColumnDef="id">
+<div>
+  <button class="btn" mat-button (click)="openNewEmployeeModal()">
+    Adicionar Funcionário
+    <mat-icon>add</mat-icon>
+  </button>
+  <mat-table [dataSource]="employees">
+    <!-- <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
       <mat-cell *matCellDef="let funcionario"> {{funcionario.id}} </mat-cell>
-    </ng-container>
-
-    <!-- Coluna E-mail -->
+    </ng-container> -->
     <ng-container matColumnDef="email">
       <mat-header-cell *matHeaderCellDef> E-mail </mat-header-cell>
       <mat-cell *matCellDef="let funcionario"> {{funcionario.email}} </mat-cell>
     </ng-container>
-
-    <!-- Coluna Nome -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
       <mat-cell *matCellDef="let funcionario"> {{funcionario.name}} </mat-cell>
     </ng-container>
-
-    <!-- Coluna Data de Nascimento -->
     <ng-container matColumnDef="birthDate">
       <mat-header-cell *matHeaderCellDef> Data de Nascimento </mat-header-cell>
-      <mat-cell *matCellDef="let funcionario"> {{funcionario.birthDate | date:'dd/MM/yyyy'}} </mat-cell>
+      <mat-cell *matCellDef="let funcionario"> {{funcionario.role.birthDate | date:'dd/MM/yyyy'}} </mat-cell>
     </ng-container>
-
-    <!-- Coluna Ações -->
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
       <mat-cell *matCellDef="let funcionario" class="action-buttons">
-        <button mat-button (click)="goToUpdatePage(funcionario.id)" color="primary">
+        <button mat-flat-button color="primary" (click)="openEmployeeModal(funcionario)" color="primary">
           <mat-icon>edit</mat-icon> Atualizar
         </button>
-        <button mat-button (click)="deleteFuncionario(funcionario.id)" color="warn">
+        <button mat-button (click)="deleteFuncionario(funcionario)" color="warn">
           <mat-icon>delete</mat-icon> Excluir
         </button>
       </mat-cell>
@@ -42,8 +36,6 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
-  <div *ngIf="funcionarios.length === 0" class="centralizado">Nenhum funcionário cadastrado.</div>
-  <button mat-fab color="primary" class="add-button" (click)="novoFuncionario()">
-    <mat-icon>add</mat-icon>
-  </button>
+  <div *ngIf="employees.length === 0">Nenhum funcionário cadastrado.</div>
+
 </div>

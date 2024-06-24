@@ -1,0 +1,31 @@
+.background-orange {
+	background-color: rgb(255, 167, 80);
+}
+
+.background-red {
+	background-color: rgb(255, 96, 96);
+}
+
+.background-gray {
+	background-color: rgb(171, 171, 171);
+}
+
+.background-blue {
+	background-color: rgb(134, 213, 255);
+}
+
+.background-green {
+	background-color: rgb(143, 247, 143);
+}
+
+.background-yellow {
+	background-color: rgb(255, 255, 132);
+}
+
+.bottonr {
+	justify-content: space-between;
+}
+
+.container {
+	color: black
+}

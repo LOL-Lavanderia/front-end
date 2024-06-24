@@ -8,6 +8,7 @@ export class Order {
 	closeDate: Date = new Date();
 	openDate: Date = new Date();
 	roupas: Roupa[] = [];
+	clienteId: string = '';
 
 	constructor(time: number, value: number) {
 

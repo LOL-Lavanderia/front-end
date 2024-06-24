@@ -10,7 +10,7 @@ import { PedidoService } from '../../shared/services/pedidoservice/pedido.servic
 export class PaginaInicialComponent implements OnInit {
 
   listOrder: Order[] = [];
-  isEmployee: boolean = true;
+  isEmployee: boolean = false;
   selectedOrderStatus: string = '';
 
   constructor(public pedidoService: PedidoService) { }
@@ -40,19 +40,9 @@ export class PaginaInicialComponent implements OnInit {
   }
 
   loadOrders(): void {
-    this.pedidoService.listAll().subscribe(
-      (orders) => {
-        this.listOrder = orders;
-        this.listOrder.sort((a, b) => {
-          const dateA = new Date(a.openDate);
-          const dateB = new Date(b.openDate);
-          return dateB.getTime() - dateA.getTime();
-        });
-      },
-      (error) => {
-        console.error('Erro ao carregar pedidos:', error);
-      }
-    );
+    this.pedidoService.listOpenOrders().pipe().subscribe((orders) => {
+      this.listOrder = orders;
+    });
   }
 
   confirmarRecolhimento(order: Order): void {

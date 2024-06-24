@@ -9,12 +9,13 @@ import { PedidoService } from '../../shared/services/pedidoservice/pedido.servic
 })
 export class ListagemPedidosComponent implements OnInit {
   listOrder: Order[] = [];
-  isEmployee: boolean = true;
+  isEmployee: boolean = false;
   selectedOrderStatus: string = '';
 
   constructor(public pedidoService: PedidoService) { }
 
   ngOnInit(): void {
+    // this.isEmployee = this.authService.getLoggedUser().isEmployee();
     this.loadOrders();
   }
 
