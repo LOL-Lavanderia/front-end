@@ -3,22 +3,28 @@
   <ng-container *ngIf="isEmployee; else customerLinks">
     <!-- Links específicos para funcionários -->
     <a mat-list-item routerLink="/listar-pedido">
-      <mat-icon>view_list</mat-icon><span>Pedidos</span>
+      <mat-icon>view_list</mat-icon><span> Pedidos </span>
     </a>
-    <a mat-list-item routerLink="/roupas/listar">
-      <mat-icon>tshirt</mat-icon><span>Roupas</span>
+    <a mat-list-item *ngIf="!isItemRoupa; else cadastrarRoupaLink" routerLink="/roupas/listar">
+      <mat-icon>tshirt</mat-icon><span> Roupas </span>
     </a>
+    <ng-template #cadastrarRoupaLink>
+      <a mat-list-item routerLink="/cadastro-de-roupa">
+        <mat-icon (click)="openDialog()">add_circle</mat-icon><span (click)="openDialog()"> Incluir Peça </span>
+      </a>
+    </ng-template>
     <a mat-list-item routerLink="/funcionarios/listar">
-      <mat-icon>people</mat-icon><span>Funcionários</span>
+      <mat-icon>people</mat-icon><span> Funcionários </span>
     </a>
     <a mat-list-item routerLink="/relatorios">
-      <mat-icon>bar_chart</mat-icon><span>Relatórios</span>
+      <mat-icon>bar_chart</mat-icon><span> Relatórios </span>
     </a>
   </ng-container>
+
   <ng-template #customerLinks>
     <!-- Links específicos para mat-list-item clientes -->
     <a mat-list-item routerLink="/listar-pedidos">
-      <mat-icon>view_list</mat-icon><span> Meus Pedidos</span>
+      <mat-icon>view_list</mat-icon><span> Meus Pedidos </span>
     </a>
     <a mat-list-item routerLink="/novo-pedido">
       <mat-icon>add</mat-icon><span> Novo Pedido</span>

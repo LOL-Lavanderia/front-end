@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Adicionar Nova Peça</h2>
+<mat-dialog-content>
+  <form #form="ngForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input matInput placeholder="Nome da peça" ngModel name="name" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Preço</mat-label>
+      <input matInput type="number" placeholder="Preço" ngModel name="price" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Prazo (em dias)</mat-label>
+      <input matInput type="number" placeholder="Prazo" ngModel name="deadline" required>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="warn" (click)="onCancel()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="onSave()" cdkFocusInitial>Salvar</button>
+</mat-dialog-actions>
