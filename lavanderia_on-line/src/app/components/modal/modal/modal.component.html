@@ -1,21 +1,19 @@
-<h2 mat-dialog-title>Adicionar Nova Peça</h2>
-<mat-dialog-content>
-  <form #form="ngForm">
-    <mat-form-field appearance="fill">
-      <mat-label>Nome</mat-label>
-      <input matInput placeholder="Nome da peça" ngModel name="name" required>
+<h2 mat-dialog-title>{{ operacao === 'atualizar' ? 'Atualizar Roupa' : 'Nova Roupa' }}</h2>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field>
+      <input matInput formControlName="nome" placeholder="Nome">
     </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Preço</mat-label>
-      <input matInput type="number" placeholder="Preço" ngModel name="price" required>
+    <mat-form-field>
+      <input matInput formControlName="valor" placeholder="Valor">
     </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Prazo (em dias)</mat-label>
-      <input matInput type="number" placeholder="Prazo" ngModel name="deadline" required>
+    <mat-form-field>
+      <input matInput formControlName="prazo" placeholder="Prazo">
     </mat-form-field>
+    <!-- Adicione mais campos conforme necessário -->
   </form>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button color="warn" (click)="onCancel()">Cancelar</button>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
   <button mat-raised-button color="primary" (click)="onSave()" cdkFocusInitial>Salvar</button>
-</mat-dialog-actions>
+</div>

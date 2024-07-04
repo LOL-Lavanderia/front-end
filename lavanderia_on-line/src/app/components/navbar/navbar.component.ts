@@ -20,6 +20,9 @@ export class NavbarComponent {
     });
   }
   openDialog(): void {
-    const dialogRef = this.dialog.open(ModalComponent);
+    const dialogRef = this.dialog.open(ModalComponent, {
+      width: '250px',
+      data: { roupa: null, operacao: 'criar' }
+    });
   }
 }
