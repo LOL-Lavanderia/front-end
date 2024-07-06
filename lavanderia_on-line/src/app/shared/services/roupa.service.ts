@@ -34,4 +34,5 @@ export class RoupaService {
     const url = `${this.apiUrl}/${roupa.id}`;
     return this.http.put<Roupa>(url, roupa);
   }
+  
 }

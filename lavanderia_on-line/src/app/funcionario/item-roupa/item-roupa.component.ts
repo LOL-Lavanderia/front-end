@@ -62,7 +62,7 @@ export class ItemRoupaComponent {
         data: { roupa, operacao: 'atualizar' }
       });
       console.log('Abrindo modal para atualizar', roupa);
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.componentInstance.updateConfirmed.subscribe(result => {
         if (result) {
           this.roupaService.alterar(result).subscribe(() => {
             console.log('Roupa atualizada com sucesso!');
@@ -73,6 +73,7 @@ export class ItemRoupaComponent {
         }
       });
     });
+
   }
 }
 

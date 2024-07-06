@@ -26,9 +26,21 @@
     },
     {
       "id": "5",
-      "name": "Cueca",
-      "price": 15,
+      "name": "Atualizei",
+      "price": "30",
       "time": 0.5
+    },
+    {
+      "id": "836e",
+      "name": "Jaqueta",
+      "price": "45",
+      "time": "6"
+    },
+    {
+      "id": "7b56",
+      "name": "Luvas",
+      "price": "3",
+      "time": "1"
     }
   ],
   "orders": [
