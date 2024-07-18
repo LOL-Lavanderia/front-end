@@ -31,6 +31,7 @@ import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { NgxMaskPipe, provideEnvironmentNgxMask, NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { ModalRoupaComponent } from './funcionario/item-roupa/modal-roupa/modal-roupa/modal-roupa.component'
 import { ItemRoupaComponent } from './funcionario/item-roupa/item-roupa.component';
+import { RelatoriosComponent } from './funcionario/relatorios/relatorios.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { ItemRoupaComponent } from './funcionario/item-roupa/item-roupa.componen
     ManterFuncionarioComponent,
     ModalRoupaComponent,
     ItemRoupaComponent,
+    RelatoriosComponent,
   ],
   imports: [
     BrowserModule,
