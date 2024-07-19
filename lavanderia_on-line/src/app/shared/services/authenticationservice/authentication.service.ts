@@ -7,11 +7,11 @@ import { Usuario } from '../../models/usuario/usuario';
 // export type Client = { role: "client", cpf: string, address: Address[], phone: Phone[] };
 export class AuthenticationService {
 
-  private readonly mockedUser = new Usuario(undefined, 'test@example.com', 'mateus', '123456', { role: 'client', cpf: '', address: [], phone: [] });
+  private readonly mockedUser = new Usuario(undefined, 'test@example.com', 'mateus', '123456', { role: 'client', cpf: '', enderecos: [], telefones: [] });
 
   constructor() { }
 
   login(email: string, password: string): boolean {
-    return email === this.mockedUser.email && password === this.mockedUser.password;
+    return email === this.mockedUser.email && password === this.mockedUser.senha;
   }
 }

@@ -48,7 +48,7 @@ export class ManterFuncionarioComponent implements OnInit {
   }
 
   deleteFuncionario(employee: Usuario): void {
-    if (confirm(`Deseja realmente excluir o funcionário ${employee.name}?`)) {
+    if (confirm(`Deseja realmente excluir o funcionário ${employee.nome}?`)) {
       this.userService.deleteUser(employee.id!).pipe().subscribe(() => {
         this.employees = this.employees.filter((e) => e.id !== employee.id);
       });

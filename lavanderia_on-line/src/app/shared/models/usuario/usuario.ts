@@ -1,4 +1,4 @@
-export type Client = { role: "client", cpf: string, address: Address[], phone: Phone[]};
+export type Client = { role: "client", cpf: string, enderecos: Enderecos[], telefones: Telefones[]};
 export type Employee = { role: "employee", birthDate: string };
 export type Role = Client | Employee;
 
@@ -10,13 +10,13 @@ export class Usuario {
   constructor(
     public id: string | undefined,
     public email: string,
-    public name: string,
-    public password: string,
+    public nome: string,
+    public senha: string,
     public role: Role,
   ) { }
 }
 
-export interface Address {
+export interface Enderecos {
   id: number;
   logradouro: string;
   numero: string;
@@ -26,7 +26,7 @@ export interface Address {
   tipo: number;
 }
 
-export interface Phone {
+export interface Telefones {
   id: number;
   numero: number;
 }

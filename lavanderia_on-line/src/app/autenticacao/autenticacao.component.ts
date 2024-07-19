@@ -27,13 +27,13 @@ import { Router } from '@angular/router';
 
 
 export class AutenticacaoComponent {
-  usuario: Usuario = new Usuario(undefined, '', '', '', { role: 'client', cpf: '', address: [], phone: [] });
+  usuario: Usuario = new Usuario(undefined, '', '', '', { role: 'client', cpf: '', enderecos: [], telefones: [] });
 
   constructor(private authService: AuthenticationService,
     private router: Router) {}
 
   onLogin(): void {
-    const isAuthenticated = this.authService.login(this.usuario.email, this.usuario.password);
+    const isAuthenticated = this.authService.login(this.usuario.email, this.usuario.senha);
     if (isAuthenticated) {
       this.router.navigate(['/dashboard']);
       console.log('Login successful!');

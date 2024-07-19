@@ -33,8 +33,8 @@ export class ModalFuncionarioComponent implements OnInit {
     console.log(user);
     this.employeeForm.setValue({
       email: user.email,
-      name: user.name,
-      password: user.password,
+      nome: user.nome,
+      password: user.senha,
       birthDate: (user.role as Employee).birthDate,
     });
   }
