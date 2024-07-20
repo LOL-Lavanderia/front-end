@@ -10,6 +10,7 @@ import { ManterFuncionarioComponent } from './funcionario/manter-funcionario/man
 import { NovoPedidoComponent } from './cliente/novo-pedido/novo-pedido.component';
 import { PaginaInicialComponent } from './pages/pagina-inicial/pagina-inicial.component';
 import { ConsultaPedidosComponent } from './cliente/consulta-pedidos/consulta-pedidos.component';
+import { RelatoriosComponent } from './funcionario/relatorios/relatorios.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/autenticacao', pathMatch: 'full' },
@@ -54,6 +55,11 @@ const routes: Routes = [
         path: 'consulta-pedido',
         component: ConsultaPedidosComponent,
         title: 'Consulta Pedido'
+      },
+      {
+        path: 'relatorios',
+        component: RelatoriosComponent,
+        title: 'Relatórios'
       },
     ]
   }
