@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { TitleService } from '../services/title.service';
+import { Component, OnInit } from '@angular/core';
+// import { TitleService } from '../services/title.service';
 
 @Component({
   selector: 'app-relatorios',
@@ -7,9 +7,9 @@ import { TitleService } from '../services/title.service';
   styleUrl: './relatorios.component.css'
 })
 
-export class RelatoriosComponent { implements OnInit {
-  constructor(private titleService: TitleService) {}
+export class RelatoriosComponent  implements OnInit {
+  // constructor(private titleService: TitleService) {}
   ngOnInit(): void {
-      this.titleService.setTitle('Relatorios');
+      // this.titleService.setTitle('Relatorios');
   }
 }
