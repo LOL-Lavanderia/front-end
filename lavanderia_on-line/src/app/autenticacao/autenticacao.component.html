@@ -6,12 +6,12 @@
   <form class="form" (ngSubmit)="onLogin()">
     <mat-form-field class="full-width">
       <mat-label>E-mail</mat-label>
-      <input type="email" matInput [(ngModel)]="usuario.email" name="email" placeholder="Ex. pat@example.com" required>
+      <input type="email" matInput [(ngModel)]="email" name="email" placeholder="Ex. pat@example.com" required>
     </mat-form-field>
 
     <mat-form-field class="full-width">
       <mat-label>Senha</mat-label>
-      <input type="password" matInput [(ngModel)]="usuario.senha" name="password" required>
+      <input type="password" matInput [(ngModel)]="password" name="password" required>
     </mat-form-field>
 
     <button mat-raised-button color="warn" type="submit">Fazer login</button>

@@ -5,6 +5,7 @@ import { PedidoService } from '../../shared/services/pedidoservice/pedido.servic
 import { MaterialModule } from '../../components/material/material.module';
 import { RoupaService } from '../../shared/services/roupa.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from '../../shared/services/authenticationservice/authentication.service';
 
 @Component({
   selector: 'app-novo-pedido',
@@ -13,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NovoPedidoComponent implements OnInit{
   listaDeRoupas: Roupa[] = [];
-
+  userId: string= '';
   showOrcamento: boolean = false;
   value: number = 0;
   time: number = 0;
@@ -22,9 +23,11 @@ export class NovoPedidoComponent implements OnInit{
 
   constructor(private pedidoService: PedidoService,
     private toastr: ToastrService,
-    private roupasService: RoupaService) { }
+    private roupasService: RoupaService,
+    private authenticationService: AuthenticationService) { }
 
 ngOnInit(): void {
+   this.obterIdUsuario(); 
     this.roupasService.listarRoupas().pipe().subscribe((roupas) => {
       this.listaDeRoupas = roupas;
       console.log(this.listaDeRoupas);
@@ -73,6 +76,7 @@ ngOnInit(): void {
     this.newOrder.openDate = new Date();
     this.insertClothes(this.newOrder);
     this.showOrcamento = true;
+    this.newOrder.setclienteId(this.userId);
   }
 
   multiplicaPrecoXQuantidade(roupa: Roupa): number {
@@ -118,5 +122,15 @@ ngOnInit(): void {
     this.value = 0;
     this.time = 0;
     this.showOrcamento = false;
+  }
+
+  obterIdUsuario(): void {
+    const userId = this.authenticationService.getCurrentUserId();
+    if (userId === null) {
+      throw new Error('Usuário não logado.');
+    } else
+    console.log('ID do usuário atual:', userId);
+    // Aqui você pode definir uma variável de instância para usar o ID do usuário em outras partes do componente
+    this.userId = userId;
   }
 }
