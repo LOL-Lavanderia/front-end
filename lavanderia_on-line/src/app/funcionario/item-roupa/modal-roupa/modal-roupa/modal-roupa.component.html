@@ -1,0 +1,27 @@
+<mat-card [formGroup]="roupaForm" >
+	<mat-card-content>
+		<h2 style="color: aliceblue;">Cadastro de Roupa</h2>
+
+		<mat-form-field appearance="fill">
+			<mat-label>Nome</mat-label>
+			<input matInput formControlName="nome" placeholder="Nome">
+			<mat-error *ngIf="nome?.invalid && nome?.touched">Nome é obrigatório.</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="fill">
+			<mat-label>Valor</mat-label>
+			<input matInput formControlName="valor" placeholder="Valor">
+			<mat-error *ngIf="valor && valor?.invalid && valor?.touched">Preço é obrigatória.</mat-error>
+		</mat-form-field>
+
+        <mat-form-field appearance="fill">
+			<mat-label>Prazo</mat-label>
+			<input matInput formControlName="prazo" placeholder="Prazo">
+			<mat-error *ngIf="prazo && prazo?.invalid && prazo?.touched">Prazo é obrigatória.</mat-error>
+		</mat-form-field>
+		<div>
+			<button mat-flat-button color="primary" (click)="submitForm()" >Salvar</button>
+			<button mat-button type="button" color="warn" (click)="closeModal()">Cancelar</button>
+		</div>
+	</mat-card-content>
+</mat-card>

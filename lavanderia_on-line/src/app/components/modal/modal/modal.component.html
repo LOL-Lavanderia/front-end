@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>{{ data.operacao === 'atualizar' ? 'Atualizar Roupa' : 'Nova Roupa' }}</h2>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field>
+      <input matInput formControlName="nome" placeholder="Nome">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="valor" placeholder="Valor">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="prazo" placeholder="Prazo">
+    </mat-form-field>
+    <!-- Adicione mais campos conforme necessário -->
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="onSave()" cdkFocusInitial>Salvar</button>
+</div>

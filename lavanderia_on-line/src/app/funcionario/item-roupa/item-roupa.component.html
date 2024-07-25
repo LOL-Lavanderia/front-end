@@ -1,46 +1,49 @@
-<div class="mat-elevation-z8">
-  <mat-table [dataSource]="itens" class="mat-elevation-z8">
+<div>
+  <button class="btn" mat-button (click)="openNewRoupaModal()">
+    Adicionar Roupa
+    <mat-icon>add</mat-icon>
+  </button>
+<mat-table [dataSource]="roupas">
 
-    <!-- Coluna Item ID -->
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef> Item ID </mat-header-cell>
-      <mat-cell *matCellDef="let item"> {{item.id}} </mat-cell>
-    </ng-container>
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+    <mat-cell *matCellDef="let roupa"> {{roupa.id}} </mat-cell>
+  </ng-container>
 
-    <!-- Coluna Nome -->
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
-      <mat-cell *matCellDef="let item"> {{item.name}} </mat-cell>
-    </ng-container>
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+    <mat-cell *matCellDef="let roupa"> {{roupa.name}} </mat-cell>
+  </ng-container>
 
-    <!-- Coluna Prazo -->
-    <ng-container matColumnDef="term">
-      <mat-header-cell *matHeaderCellDef> Prazo </mat-header-cell>
-      <mat-cell *matCellDef="let item"> {{item.term}} </mat-cell>
-    </ng-container>
+  <!-- Term Column -->
+  <ng-container matColumnDef="time">
+    <mat-header-cell *matHeaderCellDef> Prazo </mat-header-cell>
+    <mat-cell *matCellDef="let roupa"> {{roupa.time}} </mat-cell>
+  </ng-container>
 
-    <!-- Coluna Valor -->
-    <ng-container matColumnDef="amount">
-      <mat-header-cell *matHeaderCellDef> Valor </mat-header-cell>
-      <mat-cell *matCellDef="let item"> {{item.amount}} </mat-cell>
-    </ng-container>
+  <!-- Quantity Column -->
+  <ng-container matColumnDef="price">
+    <mat-header-cell *matHeaderCellDef> Valor </mat-header-cell>
+    <mat-cell *matCellDef="let roupa"> {{roupa.price}} </mat-cell>
+  </ng-container>
 
-    <!-- Coluna Ações -->
-    <ng-container matColumnDef="actions">
-      <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
-      <mat-cell *matCellDef="let item" class="action-buttons">
-        <button mat-button (click)="goToUpdatePage(item.id)" color="primary">
-          <mat-icon>edit</mat-icon> Atualizar
-        </button>
-        <button mat-button (click)="excluirItem(item.id)" color="warn">
-          <mat-icon>delete</mat-icon> Excluir
-        </button>
-      </mat-cell>
-    </ng-container>
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
+    <mat-cell *matCellDef="let roupa">
+      <button mat-flat-button color="primary" (click)="openRoupaModal(roupa)" color="primary">
+        <mat-icon>edit</mat-icon> Atualizar</button>
+      <button mat-button color="warn" (click)="deleteRoupa(roupa)"><mat-icon>delete</mat-icon> Excluir</button>
+    </mat-cell>
+  </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let roupa; columns: displayedColumns;"></mat-row>
+  
+</mat-table>
 
-  <div *ngIf="itens.length==0" class="centralizado">Nenhum Item cadastrado.</div>
+<div *ngIf="roupas.length === 0" class="centralizado">Nenhuma roupa cadastrada.</div>
+
 </div>

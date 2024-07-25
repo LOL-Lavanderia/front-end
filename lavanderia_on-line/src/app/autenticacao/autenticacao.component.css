@@ -17,3 +17,7 @@
   width: 100%;
 }
 
+.center-text {
+  text-align: left; 
+  margin-top: 15px;
+}

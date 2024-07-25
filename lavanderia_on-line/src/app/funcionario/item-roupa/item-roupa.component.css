@@ -1,7 +1,4 @@
-.centralizado {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-  }
-  
+.btn
+{
+	background-color: rgb(68, 139, 92);
+}

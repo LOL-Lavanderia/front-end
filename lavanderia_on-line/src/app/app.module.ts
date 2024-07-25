@@ -28,7 +28,13 @@ import { ModalFuncionarioComponent } from './funcionario/manter-funcionario/moda
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ManterFuncionarioComponent } from './funcionario/manter-funcionario/manter-funcionario.component';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
-import { NgxMaskPipe, provideEnvironmentNgxMask, NgxMaskDirective, provideNgxMask } from 'ngx-mask'
+import { NgxMaskPipe, provideEnvironmentNgxMask, NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { ModalRoupaComponent } from './funcionario/item-roupa/modal-roupa/modal-roupa/modal-roupa.component'
+import { ItemRoupaComponent } from './funcionario/item-roupa/item-roupa.component';
+import { RelatoriosComponent } from './funcionario/relatorios/relatorios.component';
+import { RelatorioReceitasComponent } from './funcionario/relatorio-receitas/relatorio-receitas.component';
+import { RelatorioClientesComponent } from './funcionario/relatorio-clientes/relatorio-clientes.component';
+import { RelatorioFieisComponent } from './funcionario/relatorio-fieis/relatorio-fieis.component';
 
 
 @NgModule({
@@ -43,7 +49,13 @@ import { NgxMaskPipe, provideEnvironmentNgxMask, NgxMaskDirective, provideNgxMas
     ConsultaPedidosComponent,
     PaginaInicialComponent,
     ModalFuncionarioComponent,
-    ManterFuncionarioComponent
+    ManterFuncionarioComponent,
+    ModalRoupaComponent,
+    ItemRoupaComponent,
+    RelatoriosComponent,
+    RelatorioReceitasComponent,
+    RelatorioClientesComponent,
+    RelatorioFieisComponent,
   ],
   imports: [
     BrowserModule,

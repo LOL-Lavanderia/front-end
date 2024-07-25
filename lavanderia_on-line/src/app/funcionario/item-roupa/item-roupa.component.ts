@@ -1,62 +1,60 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Item } from '../../shared/models/item/item.model';
-import { ItemService } from '../../shared/services/itemservice/item.service';
-import { MatTableModule } from '@angular/material/table';
-import { MatIcon } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
+import { Roupa } from '../../shared/models';
+import { RoupaService } from '../../shared/services/roupa.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalRoupaComponent } from './modal-roupa/modal-roupa/modal-roupa.component';
 
 @Component({
   selector: 'app-item-roupa',
-  standalone: true,
   templateUrl: './item-roupa.component.html',
   styleUrl: './item-roupa.component.css',
-  imports: [
-    MatTableModule,
-    MatIcon,
-    CommonModule
-  ]
 })
-export class ItemRoupaComponent {
+export class ItemRoupaComponent implements OnInit {
 
-  itens: Item[] = [];
-  displayedColumns: string[] = ['id', 'name', 'term', 'amount', 'actions'];
+  roupas: Roupa[] = [];
+  displayedColumns: string[] = ['id', 'name', 'time', 'price', 'actions'];
 
-  constructor(private router: Router, private itemService: ItemService) { }
+  constructor(
+     private router: Router, 
+     private roupaService: RoupaService,private dialog: MatDialog,) { }
+  
+     ngOnInit(): void {
+      this.carregarRoupas();
+    }
 
+    carregarRoupas(): void {
+      this.roupaService.listarRoupas().pipe().subscribe((data) => {
+        this.roupas = data;
+      }, error => {
+        console.error('Erro ao buscar roupas', error);
+      });
+    } 
+     
   returnHomePage(): void {
     this.router.navigate(['/admin_homepage'])
   }
 
-  novoItem(): void {
-    this.router.navigate(['/inserir_item']); // 3. Use o método navigate
+  openNewRoupaModal(): void {
+    this.openRoupaModal(new Roupa(undefined, '', undefined, undefined, undefined));
   }
 
-  excluirItem(id: number): void {
-    this.itemService.deleteItem(id).subscribe(() => {
-      this.itens = this.itens.filter(item => item.id !== id);
-    }, error => {
-      console.error(`Error when trying to delete item with id ${id}`, error);
+  openRoupaModal(roupa: Roupa): void {
+    const dialogRef = this.dialog.open(ModalRoupaComponent, {
+      data: roupa
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      // Verificar se há resultado ou mudanças significativas
+      if (result) {
+        this.carregarRoupas();
+      }
     });
   }
 
-
-  ngOnInit(): void {
-    if (this.itens) {
-      this.itemService.listAll().subscribe(data => {
-        this.itens = data;
-      }, error => {
-        // Você pode adicionar tratamento de erro aqui
-        console.error('Erro ao buscar itens', error);
-      });
-    } else {
-      // Lidar com erro - usuário não logado
-      console.warn('Usuário não está logado');
-    }
-  }
-
-  goToUpdatePage(itemId: number): void {
-    // Navigates to the update item page with the item ID
-    this.router.navigate(['/atualizar-item', itemId]);
+  deleteRoupa(roupa: Roupa): void {
+      this.roupaService.removerRoupa(roupa.id!).subscribe(() => {
+      this.roupas = this.roupas.filter(r => r.id !== roupa.id!);
+    });
   }
 }
