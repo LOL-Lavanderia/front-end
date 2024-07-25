@@ -22,4 +22,7 @@ export class Order {
 	setStatusOrder(status: string) {
 		this.status = status;
 	}
+	setclienteId(id: string){
+		this.clienteId = id;
+	}
 }

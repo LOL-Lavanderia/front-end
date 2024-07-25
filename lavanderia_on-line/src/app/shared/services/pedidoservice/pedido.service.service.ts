@@ -10,7 +10,7 @@ import { LocalStorageService } from '../../../local-storage.service';
 })
 export class PedidoService {
 
-  private apiUrl = 'http://localhost:3000/orders';
+  private apiUrl = 'http://localhost:8080/api/pedidos';
 
   constructor(private http: HttpClient,
 

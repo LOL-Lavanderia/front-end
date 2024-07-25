@@ -29,17 +29,22 @@ import { Router } from '@angular/router';
 export class AutenticacaoComponent {
   usuario: Usuario = new Usuario(undefined, '', '', '', { role: 'client', cpf: '', enderecos: [], telefones: [] });
 
+  email: string = '';
+  password: string = '';
+
   constructor(private authService: AuthenticationService,
     private router: Router) {}
 
   onLogin(): void {
-    const isAuthenticated = this.authService.login(this.usuario.email, this.usuario.senha);
-    if (isAuthenticated) {
-      this.router.navigate(['/dashboard']);
-      console.log('Login successful!');
-    } else {
-      console.error('Login failed');
-    }
+    this.authService.login(this.email, this.password).subscribe(
+      response => {
+        console.log('Login successful:', response);
+        this.router.navigate(['/pagina-inicial']); // Redirecionar para a página principal ou de perfil
+      },
+      error => {
+        console.error('Login failed:', error);
+      }
+    );
   }
 
   autoCadastro() {

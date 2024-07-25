@@ -8,12 +8,12 @@ import { Roupa } from '../models/roupa';
 })
 export class RoupaService {
 
-  private apiUrl = 'http://localhost:3000/roupas';
+  private apiUrl = 'http://localhost:8080/api/roupas';
 
   constructor(private http: HttpClient) { }
 
   listarRoupas(): Observable<Roupa[]> {
-    return this.http.get<Roupa[]>(this.apiUrl);
+    return this.http.get<Roupa[]>(`${this.apiUrl}/ativas`); 
   }
 
   removerRoupa(id: number): Observable<void> {
