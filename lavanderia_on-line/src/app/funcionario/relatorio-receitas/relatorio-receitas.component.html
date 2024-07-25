@@ -1,1 +1,13 @@
-<p>relatorio-receitas works!</p>
+
+<div class="container mt-4">
+    <h1>Relatórios de Receitas</h1>
+    <div>
+        Data inicial
+        <input type="date" class="mr-5" [(ngModel)]="dataInicial">
+        Data Final
+        <input type="date" class="mr-5" [(ngModel)]="dataFinal">
+        <button class="btn btn-primary margin_right=10" type="button" (click)="gerarRelatorio()">
+            Gerar Relatório
+        </button>
+    </div>
+</div>
