@@ -13,7 +13,7 @@ export class RoupaService {
   constructor(private http: HttpClient) { }
 
   listarRoupas(): Observable<Roupa[]> {
-    return this.http.get<Roupa[]>(this.apiUrl);
+    return this.http.get<Roupa[]>(`${this.apiUrl}/ativas`); 
   }
 
   removerRoupa(id: number): Observable<void> {
