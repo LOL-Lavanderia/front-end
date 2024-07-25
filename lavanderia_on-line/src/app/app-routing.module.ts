@@ -11,6 +11,9 @@ import { NovoPedidoComponent } from './cliente/novo-pedido/novo-pedido.component
 import { PaginaInicialComponent } from './pages/pagina-inicial/pagina-inicial.component';
 import { ConsultaPedidosComponent } from './cliente/consulta-pedidos/consulta-pedidos.component';
 import { RelatoriosComponent } from './funcionario/relatorios/relatorios.component';
+import { RelatorioClientesComponent } from './funcionario/relatorio-clientes/relatorio-clientes.component';
+import { RelatorioFieisComponent } from './funcionario/relatorio-fieis/relatorio-fieis.component';
+import { RelatorioReceitasComponent } from './funcionario/relatorio-receitas/relatorio-receitas.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/autenticacao', pathMatch: 'full' },
@@ -60,6 +63,21 @@ const routes: Routes = [
         path: 'relatorios',
         component: RelatoriosComponent,
         title: 'Relatórios'
+      },
+      {
+        path: 'relatorio-clientes',
+        component: RelatorioClientesComponent,
+        title: 'Relatório de Clientes'
+      },
+      {
+        path: 'relatorio-fieis',
+        component: RelatorioFieisComponent,
+        title: 'Relatório de Clientes Fiéis'
+      },
+      {
+        path: 'relatorio-receitas',
+        component: RelatorioReceitasComponent,
+        title: 'Relatórios de Receitas'
       },
     ]
   }
