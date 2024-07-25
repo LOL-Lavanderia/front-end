@@ -26,7 +26,7 @@ export class RelatorioClientesComponent implements OnInit {
     const data = this.clientes.map(cliente => [
       cliente.nome,
       cliente.email,
-      cliente.cpf,
+      // cliente.cpf
     ]);
 
     const columns = ['Nome', 'Email', 'CPF'];

@@ -10,7 +10,6 @@ export class Usuario {
   constructor(
     public id: string | undefined,
     public email: string,
-    public cpf: string,
     public nome: string,
     public senha: string,
     public role: Role,

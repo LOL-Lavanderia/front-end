@@ -11,6 +11,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 // export type Client = { role: "client", cpf: string, address: Address[], phone: Phone[] };
 export class AuthenticationService {
   private readonly apiUrl = 'http://localhost:8080/api/usuarios';
+  
   private currentUserSubject: BehaviorSubject<Usuario | null>;
   public currentUser: Observable<Usuario | null>;
 
