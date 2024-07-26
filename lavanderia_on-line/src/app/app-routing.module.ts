@@ -14,6 +14,8 @@ import { RelatoriosComponent } from './funcionario/relatorios/relatorios.compone
 import { RelatorioClientesComponent } from './funcionario/relatorio-clientes/relatorio-clientes.component';
 import { RelatorioFieisComponent } from './funcionario/relatorio-fieis/relatorio-fieis.component';
 import { RelatorioReceitasComponent } from './funcionario/relatorio-receitas/relatorio-receitas.component';
+import { authGuard } from './auth/auth.guard';
+import { VisualizarPedidosComponent } from './funcionario/visualizar-pedidos/visualizar-pedidos.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/autenticacao', pathMatch: 'full' },
@@ -26,28 +28,55 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
-        title: 'Pagina Inicial'
+        title: 'Pagina Inicial',
+        canActivate: [authGuard],
+        data:{
+            role: 'client,employee'
+        }
       },
      
       {
         path: 'listar-pedidos',
         component: ListagemPedidosComponent,
-        title: 'Listagem de Pedidos Cliente'
+        title: 'Listagem de Pedidos Cliente',
+        canActivate: [authGuard],
+        data:{
+            role: 'client'
+        }
       },
+      //PRECISA SER CRIADO
+      // {
+      //   path: 'visualizar-pedidos',
+      //   component: VisualizarPedidosComponent,
+      //   title: 'Visualizar Pedido',
+    
+      // },
       {
         path: 'item-roupa',
         component: ItemRoupaComponent,
-        title: 'Cadastro de Peça de Roupa'
+        title: 'Cadastro de Peça de Roupa',
+        canActivate: [authGuard],
+        data:{
+            role: 'employee'
+        }
       },
       {
       path: 'pagina-inicial',
       component: PaginaInicialComponent,
-      title: 'Pagina Inicial'
+      title: 'Pagina Inicial',
+      canActivate: [authGuard],
+        data:{
+            role: 'client,employee'
+        }
       },
       {
         path: 'manter-funcionario',
         component: ManterFuncionarioComponent,
-        title: 'Funcionários'
+        title: 'Funcionários',
+        canActivate: [authGuard],
+        data:{
+            role: 'employee'
+        }
       },
       {
         path: 'novo-pedido',

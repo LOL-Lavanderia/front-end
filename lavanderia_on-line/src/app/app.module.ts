@@ -56,6 +56,7 @@ import { RelatorioFieisComponent } from './funcionario/relatorio-fieis/relatorio
     RelatorioReceitasComponent,
     RelatorioClientesComponent,
     RelatorioFieisComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -75,11 +76,12 @@ import { RelatorioFieisComponent } from './funcionario/relatorio-fieis/relatorio
     MatDatepickerModule,
     ToastrModule.forRoot(),
     NgxMaskDirective,
-    NgxMaskPipe
+    NgxMaskPipe,
 
   ],
   exports: [
-    MaterialModule
+    MaterialModule,
+    
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
