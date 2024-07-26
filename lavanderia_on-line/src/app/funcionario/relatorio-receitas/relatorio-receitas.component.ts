@@ -1,7 +1,6 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { jsPDF } from 'jspdf';
-import 'jspdf-autotable';
-import { TitleService } from 'src/app/services/title.service';
+
 
 @Component({
   selector: 'app-relatorio-receitas',
@@ -10,11 +9,12 @@ import { TitleService } from 'src/app/services/title.service';
 })
 export class RelatorioReceitasComponent implements OnInit {
   ngOnInit(): void {
-    this.titleService.setTitle('Relatorio Receita');
-  }
+      
+  }   
+  
   public dataInicial: Date | null = null;
   public dataFinal: Date | null = null;
-  constructor(private titleService: TitleService) {}
+  constructor() {}
   receitas: any[] = [
       { data: '2023-10-02', valor: 100.00 },
       { data: '2023-10-02', valor: 150.00 },

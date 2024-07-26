@@ -62,23 +62,27 @@ const routes: Routes = [
       {
         path: 'relatorios',
         component: RelatoriosComponent,
-        title: 'Relatórios'
+        title: 'Relatórios',
+        children:[
+
+          {
+            path: 'relatorio-clientes',
+            component: RelatorioClientesComponent,
+            title: 'Relatório de Clientes'
+          },
+          {
+            path: 'relatorio-fieis',
+            component: RelatorioFieisComponent,
+            title: 'Relatório de Clientes Fiéis'
+          },
+          {
+            path: 'relatorio-receitas',
+            component: RelatorioReceitasComponent,
+            title: 'Relatórios de Receitas'
+          },
+        ]
       },
-      {
-        path: 'relatorio-clientes',
-        component: RelatorioClientesComponent,
-        title: 'Relatório de Clientes'
-      },
-      {
-        path: 'relatorio-fieis',
-        component: RelatorioFieisComponent,
-        title: 'Relatório de Clientes Fiéis'
-      },
-      {
-        path: 'relatorio-receitas',
-        component: RelatorioReceitasComponent,
-        title: 'Relatórios de Receitas'
-      },
+      
     ]
   }
 ];
