@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/internal/operators/map';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,9 @@ export class AuthenticationService {
   private readonly apiUrl = 'http://localhost:8080/api/usuarios';
   private currentUserSubject: BehaviorSubject<Usuario | null>;
   public currentUser: Observable<Usuario | null>;
+  
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     const localUser = this.isLocalStorageAvailable() ? JSON.parse(localStorage.getItem('currentUser')!) : null;
     this.currentUserSubject = new BehaviorSubject<Usuario | null>(localUser);
     this.currentUser = this.currentUserSubject.asObservable();
@@ -36,8 +38,11 @@ export class AuthenticationService {
   logout(): void {
     if (this.isLocalStorageAvailable()) {
       localStorage.removeItem('currentUser');
+      this.router.navigate(['/pagina-inicial']);
     }
     this.currentUserSubject.next(null);
+    
+
   }
 
   getUsuarioLogado(): Usuario | null {
@@ -47,6 +52,11 @@ export class AuthenticationService {
   getCurrentUserId(): string | null {
     const currentUser = this.getUsuarioLogado();
     return currentUser && currentUser.id !== undefined ? currentUser.id : null;
+  }
+
+  getRole(): string | null{
+    const currentUser = this.getUsuarioLogado();
+    return currentUser && currentUser.role.role !== undefined ? currentUser.role.role : null;
   }
 
   private isLocalStorageAvailable(): boolean {
