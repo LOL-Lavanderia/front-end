@@ -43,7 +43,6 @@
           <button *ngIf="order.status === 'Em Aberto'" class="btn btn-warning" (click)="confirmarRecolhimento(order)">Confirmar Recolhimento</button>
           <button *ngIf="order.status === 'Recolhido'" class="btn btn-success" (click)="confirmarLavagem(order)">Confirmar Lavagem</button>
           <button *ngIf="order.status === 'Pago'" class="btn btn-primary" (click)="finalizarPedido(order)">Finalizar Pedido</button>
-          <button *ngIf="order.status === 'Aguardando pagamento'" class="btn btn-success" (click)="pagarPedido(order)">Pagar Pedido</button>
         </div>
       </div>
       <table class="table table-striped mt-2">
