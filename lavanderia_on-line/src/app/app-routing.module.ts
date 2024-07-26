@@ -15,6 +15,7 @@ import { RelatorioClientesComponent } from './funcionario/relatorio-clientes/rel
 import { RelatorioFieisComponent } from './funcionario/relatorio-fieis/relatorio-fieis.component';
 import { RelatorioReceitasComponent } from './funcionario/relatorio-receitas/relatorio-receitas.component';
 import { authGuard } from './auth/auth.guard';
+import { VisualizarPedidosComponent } from './funcionario/visualizar-pedidos/visualizar-pedidos.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/autenticacao', pathMatch: 'full' },
@@ -43,13 +44,15 @@ const routes: Routes = [
             role: 'client'
         }
       },
-      //PRECISA SER CRIADO
-      // {
-      //   path: 'visualizar-pedidos',
-      //   component: VisualizarPedidosComponent,
-      //   title: 'Visualizar Pedido',
-    
-      // },
+      {
+        path: 'visualizar-pedidos',
+        component: VisualizarPedidosComponent,
+        title: 'Visualizar Pedido',
+        canActivate: [authGuard],
+        data:{
+            role: 'employee'
+        }
+      },
       {
         path: 'item-roupa',
         component: ItemRoupaComponent,
@@ -80,12 +83,20 @@ const routes: Routes = [
       {
         path: 'novo-pedido',
         component: NovoPedidoComponent,
-        title: 'Novo Pedido'
+        title: 'Novo Pedido',
+        canActivate: [authGuard],
+        data:{
+            role: 'client'
+        }
       },
       {
         path: 'consulta-pedido',
         component: ConsultaPedidosComponent,
-        title: 'Consulta Pedido'
+        title: 'Consulta Pedido',
+        canActivate: [authGuard],
+        data:{
+            role: 'client'
+        }
       },
       {
         path: 'relatorios',

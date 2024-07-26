@@ -35,7 +35,8 @@ import { RelatoriosComponent } from './funcionario/relatorios/relatorios.compone
 import { RelatorioReceitasComponent } from './funcionario/relatorio-receitas/relatorio-receitas.component';
 import { RelatorioClientesComponent } from './funcionario/relatorio-clientes/relatorio-clientes.component';
 import { RelatorioFieisComponent } from './funcionario/relatorio-fieis/relatorio-fieis.component';
-
+import { VisualizarPedidosComponent } from './funcionario/visualizar-pedidos/visualizar-pedidos.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { RelatorioFieisComponent } from './funcionario/relatorio-fieis/relatorio
     RelatorioReceitasComponent,
     RelatorioClientesComponent,
     RelatorioFieisComponent,
+    VisualizarPedidosComponent
 
   ],
   imports: [
@@ -77,10 +79,12 @@ import { RelatorioFieisComponent } from './funcionario/relatorio-fieis/relatorio
     ToastrModule.forRoot(),
     NgxMaskDirective,
     NgxMaskPipe,
+    DatePipe
 
   ],
   exports: [
     MaterialModule,
+    DatePipe
     
   ],
   providers: [
@@ -90,7 +94,8 @@ import { RelatorioFieisComponent } from './funcionario/relatorio-fieis/relatorio
     MatDatepickerModule,
     provideClientHydration(),
     provideAnimationsAsync(),
-    provideHttpClient(withFetch()) // Fix: Call the withFetch function directly
+    provideHttpClient(withFetch()), // Fix: Call the withFetch function directly,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

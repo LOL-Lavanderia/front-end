@@ -1,111 +1,109 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Order } from '../../shared/models/order';
 import { PedidoService } from '../../shared/services/pedidoservice/pedido.service.service';
-import { Pedido } from '../../shared/models/pedido/pedido.model';
-import { MatTableModule } from '@angular/material/table';
-import { MatIcon } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-visualizar-pedidos',
-  standalone: true,
   templateUrl: './visualizar-pedidos.component.html',
-  styleUrl: './visualizar-pedidos.component.css',
-  imports: [
-    MatTableModule,
-    MatIcon,
-    CommonModule
-  ]
+  styleUrls: ['./visualizar-pedidos.component.css'],
+  providers: [DatePipe],
 })
-export class VisualizarPedidosComponent {
-  pedidos: Pedido[] = [];
-  displayedColumns: string[] = ['id', 'createdAt', 'term', 'status', 'actions'];
+export class VisualizarPedidosComponent implements OnInit {
+  listOrder: Order[] = [];
+  filteredOrders: Order[] = [];
+  selectedFilter: string = '';
+  startDate: string;
+  endDate: string;
 
-  constructor(private router: Router, private pedidoService: PedidoService) { }
+  constructor(private pedidoService: PedidoService, private datePipe: DatePipe) {
+    const today = this.datePipe.transform(new Date(), 'yyyy-MM-dd')!;
+    this.startDate = today;
+    this.endDate = today;
+  }
 
   ngOnInit(): void {
-   this.loadPedidos();
+    this.loadOrders();
   }
 
-  loadPedidos(){
-    this.pedidoService.listAll().subscribe(data => {
-      this.pedidos = data;
-   }, error => {
-      console.error('Erro ao recarregar a lista de pedidos', error);
-   });
+  loadOrders(): void {
+    this.pedidoService.listAll().subscribe((orders) => {
+      this.listOrder = orders;
+      this.applyFilter();
+    });
   }
 
-  recolherPedido(id: number) {
-    
-    const pedido = this.pedidos.find(p => p.id === id);
-   
-    if (pedido) {
-      
-       pedido.status = 'Recolhido';
-   
-      
-       this.pedidoService.updatePedido(id, pedido).subscribe(
-         success => {
-         
-           this.loadPedidos();
-         },
-         error => {
-        
-           console.error('Erro ao recolher o pedido:', error);
-         }
-       );
+  applyFilter(): void {
+    if (this.selectedFilter === 'today') {
+      this.filterToday();
+    } else if (this.selectedFilter === 'dateRange') {
+      this.filterByDateRange();
     } else {
-   
-       console.error('Pedido não encontrado:', id);
+      this.filteredOrders = [...this.listOrder];
     }
-   }
+  }
 
-   solicitaPagamentoPedido(id: number) {
+  filterToday(): void {
+    const today = this.datePipe.transform(new Date(), 'yyyy-MM-dd')!;
+    this.filteredOrders = this.listOrder.filter(order => {
+      if (order.openDate) {
+        const openDate = this.datePipe.transform(order.openDate, 'yyyy-MM-dd');
+        return openDate === today;
+      }
+      return false;
+    });
+  }
 
-    const pedido = this.pedidos.find(p => p.id === id);
-   
-    if (pedido) {
-    
-       pedido.status = 'Aguardando Pagamento';
-   
-       this.pedidoService.updatePedido(id, pedido).subscribe(
-         success => {
-      
-           this.loadPedidos();
-         },
-         error => {
-          
-           console.error('Erro ao recolher o pedido:', error);
-         }
-       );
-    } else {
-      
-       console.error('Pedido não encontrado:', id);
+  filterByDateRange(): void {
+    if (this.startDate && this.endDate) {
+      this.filteredOrders = this.listOrder.filter(order => {
+        if (order.openDate) {
+          const openDate = this.datePipe.transform(order.openDate, 'yyyy-MM-dd');
+          return openDate! >= this.startDate && openDate! <= this.endDate;
+        }
+        return false;
+      });
     }
-   } 
+  }
 
-   finalizarPedido(id: number) {
+  confirmarRecolhimento(order: Order): void {
+    order.status = 'Recolhido';
+    this.pedidoService.createOrUpdatePedido(order, order.id).subscribe(() => {
+      alert(`Pedido Recolhido!\nNúmero de Pedido: ${order.id}`);
+      this.applyFilter();
+    });
+  }
 
-    const pedido = this.pedidos.find(p => p.id === id);
-   
-    if (pedido) {
-    
-       pedido.status = 'Finalizar Pedido';
-   
-       this.pedidoService.updatePedido(id, pedido).subscribe(
-         success => {
-      
-           this.loadPedidos();
-         },
-         error => {
-          
-           console.error('Erro ao recolher o pedido:', error);
-         }
-       );
-    } else {
-      
-       console.error('Pedido não encontrado:', id);
+  confirmarLavagem(order: Order): void {
+    order.status = 'Aguardando pagamento';
+    this.pedidoService.createOrUpdatePedido(order, order.id).subscribe(() => {
+      alert(`Pedido Lavado!\nNúmero de Pedido: ${order.id}`);
+      this.applyFilter();
+    });
+  }
+
+  finalizarPedido(order: Order): void {
+    order.status = 'Finalizado';
+    this.pedidoService.createOrUpdatePedido(order, order.id).subscribe(() => {
+      alert(`Pedido Finalizado!\nNúmero de Pedido: ${order.id}`);
+      this.applyFilter();
+    });
+  }
+
+  pagarPedido(order: Order): void {
+    order.status = 'Pago';
+    this.pedidoService.createOrUpdatePedido(order, order.id).subscribe(() => {
+      alert(`Pedido Pago!\nNúmero de Pedido: ${order.id}`);
+      this.applyFilter();
+    });
+  }
+
+
+
+  noMatchesFound(): boolean {
+    if (!this.selectedFilter) {
+      return false;
     }
-   } 
-  
+    return this.filteredOrders.length === 0;
+  }
 }
