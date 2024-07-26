@@ -15,7 +15,6 @@ import { RelatorioClientesComponent } from './funcionario/relatorio-clientes/rel
 import { RelatorioFieisComponent } from './funcionario/relatorio-fieis/relatorio-fieis.component';
 import { RelatorioReceitasComponent } from './funcionario/relatorio-receitas/relatorio-receitas.component';
 import { authGuard } from './auth/auth.guard';
-import { VisualizarPedidosComponent } from './funcionario/visualizar-pedidos/visualizar-pedidos.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/autenticacao', pathMatch: 'full' },
