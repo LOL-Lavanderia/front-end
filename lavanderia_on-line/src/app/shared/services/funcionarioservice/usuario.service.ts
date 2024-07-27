@@ -8,7 +8,7 @@ import { Usuario } from '../../models/usuario/usuario';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:3000/users/';
+  private apiUrl = 'http://localhost:8080/api/usuarios';
 
   constructor(private http: HttpClient) { }
 
@@ -26,7 +26,7 @@ export class UserService {
 
   updateUser(user: Usuario): Observable<any> {
     if (user.id)
-      return this.http.put(`${this.apiUrl}${user.id}`, user);
+      return this.http.put(`${this.apiUrl}/${user.id}`, user);
     else
       return this.http.post(`${this.apiUrl}`, user);
   }
