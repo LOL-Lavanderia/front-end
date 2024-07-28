@@ -26,12 +26,17 @@
   
         <mat-form-field class="full-width">
           <mat-label>CEP</mat-label>
-          <input matInput type="text" [(ngModel)]="endereco.cep" name="cep" required />
-        </mat-form-field>
+          <input matInput type="text" [(ngModel)]="endereco.cep" name="cep" required (keyup.enter)="getCep(endereco.cep)" />
+      </mat-form-field>
   
         <mat-form-field class="full-width">
           <mat-label>Logradouro</mat-label>
           <input matInput type="text" [(ngModel)]="endereco.logradouro" name="logradouro" required />
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Cidade</mat-label>
+          <input matInput type="text" [(ngModel)]="endereco.localidade" name="cidade" required />
         </mat-form-field>
   
         <mat-form-field class="full-width">
@@ -42,11 +47,6 @@
         <mat-form-field class="full-width">
           <mat-label>Número</mat-label>
           <input matInput type="text" [(ngModel)]="endereco.numero" name="numero" required />
-        </mat-form-field>
-  
-        <mat-form-field class="full-width">
-          <mat-label>Localidade</mat-label>
-          <input matInput type="text" [(ngModel)]="endereco.cidade" name="cidade" required />
         </mat-form-field>
   
         <button mat-raised-button color="accent" type="submit" [disabled]="!clienteForm.form.valid">Cadastrar</button>
