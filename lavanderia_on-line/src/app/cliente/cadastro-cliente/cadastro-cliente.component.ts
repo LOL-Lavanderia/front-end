@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from "@angular/forms";
 import { CadastroClienteService } from "../../shared/services/cadastro-clienteservice/cadastro-clienteservice";
 import { Enderecos, Telefones, Role, Usuario } from "../../shared/models/usuario/usuario";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cadastro-cliente',
@@ -11,7 +12,7 @@ import { Enderecos, Telefones, Role, Usuario } from "../../shared/models/usuario
 export class CadastroClienteComponent {
   public clienteForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private cadastroClienteService: CadastroClienteService) {
+  constructor(private formBuilder: FormBuilder, private cadastroClienteService: CadastroClienteService, private toastr: ToastrService,) {
     this.clienteForm = this.formBuilder.group({
       cpf: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]],
       nome: ['', [Validators.required, Validators.minLength(3)]],
@@ -102,13 +103,17 @@ export class CadastroClienteComponent {
     );
 
     console.log(newClient);
-    this.cadastroClienteService.createClient(newClient).subscribe(response => {
-      console.log('Cliente cadastrado com sucesso!', response);
-      // Limpa o formulário após o cadastro bem-sucedido
-      this.clienteForm.reset();
-    }, error => {
-      console.error('Erro ao cadastrar cliente', error);
-    });
+    this.cadastroClienteService.createClient(newClient).subscribe(
+      response => {
+        this.toastr.success('Cadastro realizado com sucesso! Senha encaminhada via e-mail.');
+        this.clienteForm.reset();
+      },
+      error => {
+        const errorMsg = error.error?.message || 'Erro ao cadastrar cliente';
+        this.toastr.error(errorMsg);
+      }
+    );
+
   }
 
   getCep(cep: string): void {
