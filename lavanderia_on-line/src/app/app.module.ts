@@ -84,7 +84,7 @@ import { DatePipe } from '@angular/common';
   ],
   exports: [
     MaterialModule,
-    DatePipe
+    DatePipe,
     
   ],
   providers: [

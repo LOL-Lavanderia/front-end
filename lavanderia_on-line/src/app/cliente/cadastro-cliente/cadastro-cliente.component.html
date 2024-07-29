@@ -1,55 +1,60 @@
-<form (ngSubmit)="onSubmit()" #clienteForm="ngForm">
-    <mat-toolbar color="primary">
-      <span class="title-center">Cadastro</span>
-    </mat-toolbar>
-    <mat-card class="auto-cadastro">
-      <div class="form">
-        <mat-form-field class="full-width">
-          <mat-label>CPF</mat-label>
-          <input matInput type="text" [(ngModel)]="cpf" name="cpf" required />
-        </mat-form-field>
-  
-        <mat-form-field class="full-width">
-          <mat-label>Nome</mat-label>
-          <input matInput type="text" [(ngModel)]="nome" name="name" required />
-        </mat-form-field>
-  
-        <mat-form-field class="full-width">
-          <mat-label>E-mail</mat-label>
-          <input matInput type="email" [(ngModel)]="email" name="email" required />
-        </mat-form-field>
-  
-        <mat-form-field class="full-width">
-          <mat-label>Telefone</mat-label>
-          <input matInput type="tel" [(ngModel)]="numero" name="numero" required />
-        </mat-form-field>
-  
-        <mat-form-field class="full-width">
-          <mat-label>CEP</mat-label>
-          <input matInput type="text" [(ngModel)]="endereco.cep" name="cep" required (keyup.enter)="getCep(endereco.cep)" />
+<form (ngSubmit)="onSubmit()" [formGroup]="clienteForm">
+  <mat-toolbar color="primary">
+    <span class="title-center">Cadastro</span>
+  </mat-toolbar>
+  <mat-card class="auto-cadastro">
+    <div class="form">
+      <mat-form-field class="full-width">
+        <mat-label>CPF</mat-label>
+        <input matInput type="text" formControlName="cpf" required />
+        <mat-error *ngIf="cpfInvalid">CPF inválido.</mat-error>
       </mat-form-field>
-  
-        <mat-form-field class="full-width">
-          <mat-label>Logradouro</mat-label>
-          <input matInput type="text" [(ngModel)]="endereco.logradouro" name="logradouro" required />
-        </mat-form-field>
 
-        <mat-form-field class="full-width">
-          <mat-label>Cidade</mat-label>
-          <input matInput type="text" [(ngModel)]="endereco.localidade" name="cidade" required />
-        </mat-form-field>
-  
-        <mat-form-field class="full-width">
-          <mat-label>Bairro</mat-label>
-          <input matInput type="text" [(ngModel)]="endereco.bairro" name="bairro" required />
-        </mat-form-field>
-  
-        <mat-form-field class="full-width">
-          <mat-label>Número</mat-label>
-          <input matInput type="text" [(ngModel)]="endereco.numero" name="numero" required />
-        </mat-form-field>
-  
-        <button mat-raised-button color="accent" type="submit" [disabled]="!clienteForm.form.valid">Cadastrar</button>
-      </div>
-    </mat-card>
-  </form>
+      <mat-form-field class="full-width">
+        <mat-label>Nome</mat-label>
+        <input matInput type="text" formControlName="nome" required />
+        <mat-error *ngIf="nomeInvalid">Nome inválido.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>E-mail</mat-label>
+        <input matInput type="email" formControlName="email" required />
+        <mat-error *ngIf="emailInvalid">E-mail inválido.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Telefone</mat-label>
+        <input matInput type="tel" formControlName="telefone" required [textMask]="{mask: telefoneMask}" />
+        <mat-error *ngIf="telefoneInvalid">Telefone inválido.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>CEP</mat-label>
+        <input matInput type="text" formControlName="cep" required [textMask]="{mask: cepMask}" (keyup.enter)="getCep(clienteForm.get('endereco.cep')?.value)" />
+        <mat-error *ngIf="cepInvalid">CEP inválido.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Logradouro</mat-label>
+        <input matInput type="text" formControlName="logradouro" required />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Cidade</mat-label>
+        <input matInput type="text" formControlName="localidade" required />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Bairro</mat-label>
+        <input matInput type="text" formControlName="bairro" required />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Número</mat-label>
+        <input matInput type="text" formControlName="numero" required />
+      </mat-form-field>
+
+      <button mat-raised-button color="accent" type="submit" [disabled]="clienteForm.invalid">Cadastrar</button>
+    </div>
+  </mat-card>
+</form>
