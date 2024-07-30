@@ -2,6 +2,9 @@
 <mat-nav-list>
   <ng-container *ngIf="isEmployee; else customerLinks">
     <!-- Links específicos para funcionários -->
+    <a mat-list-item routerLink="/pagina-inicial">
+      <mat-icon>home</mat-icon><span> Home</span>
+    </a>
     <a mat-list-item routerLink="/visualizar-pedidos">
       <mat-icon>view_list</mat-icon><span>Pedidos</span>
     </a>
@@ -20,6 +23,9 @@
   </ng-container>
   <ng-template #customerLinks>
     <!-- Links específicos para mat-list-item clientes -->
+    <a mat-list-item routerLink="/pagina-inicial">
+      <mat-icon>home</mat-icon><span> Home</span>
+    </a>
     <a mat-list-item routerLink="/listar-pedidos">
       <mat-icon>view_list</mat-icon><span> Meus Pedidos</span>
     </a>
@@ -28,9 +34,6 @@
     </a>
     <a mat-list-item routerLink="/consulta-pedido">
       <mat-icon>search</mat-icon><span> Consultar Pedidos</span>
-    </a>
-    <a mat-list-item>
-      <mat-icon>person</mat-icon><span> Meu Perfil</span>
     </a>
     <a mat-list-item (click)="logout()">
       <mat-icon>logout</mat-icon><span> Logout</span>

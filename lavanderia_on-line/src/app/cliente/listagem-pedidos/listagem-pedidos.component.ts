@@ -24,7 +24,7 @@ export class ListagemPedidosComponent implements OnInit {
   }
 
   loadOrders(): void {
-    this.pedidoService.listAll().subscribe((orders) => {
+    this.pedidoService.getOrdersByClientId(this.authService.getCurrentUserId()).subscribe((orders) => {
       this.listOrder = orders;
       this.applyFilter(); // Aplica o filtro após carregar os pedidos
     });

@@ -42,9 +42,9 @@ export class PedidoService {
     return this.listOrder.some(order => order.status === 'Em Aberto');
   }
 
-  getOrdersById(id: String): Observable<Order> {
-    return this.http.get<Order>(`${this.apiUrl}/${id}`);
-  }
+  getOrdersById(clienteId: String| null, pedidoId: String): Observable<Order> {
+    return this.http.get<Order>(`${this.apiUrl}/by-cliente/${clienteId}/pedido/${pedidoId}`);
+}
 
 
   updateOrder(order: Order): void {
@@ -67,6 +67,7 @@ export class PedidoService {
 
 
 
+  
 
   listAll(): Observable<Order[]> {
     return this.http.get<Order[]>(`${this.apiUrl}`);
@@ -74,7 +75,9 @@ export class PedidoService {
   listOpenOrders(): Observable<Order[]> {
     return this.http.get<Order[]>(`${this.apiUrl}?status=Em Aberto`);
   }
-
+  getOrdersByClientId(clientId: string | null): Observable<Order[]>{
+    return this.http.get<Order[]>(`${this.apiUrl}/by-cliente/${clientId}`);
+  }
   deletePedido(id: number): Observable<void> {
     console.log(`${this.apiUrl}pedido/${id}`);
     return this.http.delete<void>(`${this.apiUrl}${id}`);
@@ -89,7 +92,7 @@ export class PedidoService {
     }
   }
 
-  getPedidobyId(id: number): Observable<Order>{
+  getPedidobyId(clientId: string, id: number): Observable<Order>{
     return this.http.get<Order>(`${this.apiUrl}pedido/${id}`)
   }
 

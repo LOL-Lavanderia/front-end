@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Order } from '../../shared/models/order';
 import { PedidoService } from '../../shared/services/pedidoservice/pedido.service.service';
+import { AuthenticationService } from '../../shared/services/authenticationservice/authentication.service';
 
 @Component({
   selector: 'app-consulta-pedido',
@@ -11,7 +12,7 @@ export class ConsultaPedidosComponent {
   pedidoNumero: number | undefined;
   pedidos: Order[] = [];
 
-  constructor(private orderService: PedidoService) { }
+  constructor(private orderService: PedidoService, private authService: AuthenticationService) { }
   cancelarPedido(order: Order): void {
     order.status = 'Cancelado';
     this.orderService.createOrUpdatePedido(order, order.id).subscribe(() => {
@@ -26,7 +27,7 @@ export class ConsultaPedidosComponent {
   }
   consultarPedido() {
     if (this.pedidoNumero) {
-      this.orderService.getOrdersById(this.pedidoNumero.toString()).subscribe((pedido) => {
+      this.orderService.getOrdersById(this.authService.getCurrentUserId(), this.pedidoNumero.toString()).subscribe((pedido) => {
         if (pedido) {
           this.pedidos = [pedido]; // Ensuring pedidos is an array
         } else {

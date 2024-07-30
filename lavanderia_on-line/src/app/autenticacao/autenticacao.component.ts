@@ -55,7 +55,7 @@ export class AutenticacaoComponent {
         },
         error => {
           console.error('Login failed:', error);
-          this.message = 'Erro ao tentar logar. Tente novamente mais tarde.';
+          this.message = 'Usuário/Senha inválidos.';
           this.loading = false;
         }
       );

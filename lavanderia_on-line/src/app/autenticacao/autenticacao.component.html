@@ -4,16 +4,17 @@
 
 <mat-card class="login-card">
   <form #formLogin="ngForm" (ngSubmit)="onLogin(formLogin)">
-    <mat-form-field>
+    <mat-form-field class="full-width">
       <input matInput placeholder="Email" [(ngModel)]="email" name="email" required email>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="full-width">
       <input matInput placeholder="Senha" [(ngModel)]="password" name="password" required type="password">
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit" [disabled]="loading">Login</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="loading" class="full-width">Login</button>
     <div *ngIf="message" class="error-message">{{ message }}</div>
     <mat-spinner *ngIf="loading"></mat-spinner>
   </form>
   <div class="center-text">
     <a href="/cadastro" (click)="autoCadastro($event)">Cadastre-se aqui</a>
   </div>
+</mat-card>
