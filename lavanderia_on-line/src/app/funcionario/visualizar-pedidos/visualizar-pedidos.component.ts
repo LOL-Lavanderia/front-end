@@ -28,7 +28,7 @@ export class VisualizarPedidosComponent implements OnInit {
 
   loadOrders(): void {
     this.pedidoService.listAll().subscribe((orders) => {
-      this.listOrder = orders;
+      this.listOrder = orders.sort((a, b) => new Date(b.closeDate).getTime() - new Date(a.closeDate).getTime());
       this.applyFilter();
     });
     this.sortOrdersByCloseDateDesc();
@@ -48,7 +48,7 @@ export class VisualizarPedidosComponent implements OnInit {
     } else if (this.selectedFilter === 'dateRange') {
       this.filterByDateRange();
     } else {
-      this.filteredOrders = [...this.listOrder.sort((a, b) => new Date(b.openDate).getTime() - new Date(a.openDate).getTime())];
+      this.filteredOrders = [...this.listOrder.sort((a, b) => new Date(b.closeDate).getTime() - new Date(a.closeDate).getTime())];
     }
   }
 
