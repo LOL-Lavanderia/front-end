@@ -52,6 +52,7 @@
             <th>Valor</th>
             <th>Prazo</th>
             <th>Criado em:</th>
+            <th>Ultima atualização:</th>
             <th *ngIf="order.status === 'Finalizado'">Finalizado em:</th>
           </tr>
         </thead>
@@ -61,7 +62,7 @@
             <td>R$ {{ order.value }},00</td>
             <td>{{ order.time }} minutos</td>
             <td *ngIf="order.openDate">{{ order.openDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
-            <td *ngIf="order.status === 'Finalizado' && order.closeDate">{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
+            <td *ngIf="order.closeDate">{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
           </tr>
         </tbody>
       </table>

@@ -51,20 +51,22 @@
 		  </div>
 		  <table class="table table-striped">
 			<thead>
-			  <tr>
-				<th>Status</th>
-				<th>Valor</th>
-				<th>Prazo</th>
-				<th>Criado em:</th>
-			  </tr>
+				<tr>
+					<th>Status</th>
+					<th>Valor</th>
+					<th>Prazo</th>
+					<th>Criado em:</th>
+					<th>Ultima atualização:</th>
+				</tr>
 			</thead>
 			<tbody>
-			  <tr>
-				<td>{{ order.status }}</td>
-				<td>R$ {{ order.value }},00</td>
-				<td>{{ order.time }} minutos</td>
-				<td>{{ order.openDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
-			  </tr>
+				<tr>
+					<td>{{ order.status }}</td>
+					<td>R$ {{ order.value }},00</td>
+					<td>{{ order.time }} minutos</td>
+					<td>{{ order.openDate | date: 'dd/MM/yyyy - HH:mm'}}</td>
+					<td>{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm'}}</td>
+				</tr>
 			</tbody>
 		  </table>
 		  <table class="table">
@@ -98,7 +100,7 @@
 				<th>Valor</th>
 				<th>Prazo</th>
 				<th>Criado em:</th>
-				<th *ngIf="order.status === 'Finalizado'">Finalizado em:</th>
+				<th>Ultima atualização:</th>
 			  </tr>
 			</thead>
 			<tbody>
@@ -107,7 +109,7 @@
 				<td>R$ {{ order.value }},00</td>
 				<td>{{ order.time }} minutos</td>
 				<td>{{ order.openDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
-				<td *ngIf="order.status === 'Finalizado'">{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
+				<td>{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
 			  </tr>
 			</tbody>
 		  </table>

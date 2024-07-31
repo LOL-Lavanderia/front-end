@@ -86,6 +86,7 @@ export class PedidoService {
   createOrUpdatePedido(order: Order, id: string | undefined): Observable<Order> {
     if (id) {
       console.log("enviando pra = ", `${this.apiUrl}/${order.id}`);
+      order.closeDate = new Date();
       return this.http.put<Order>(`${this.apiUrl}/${order.id}`, order);
     } else {
       return this.http.post<Order>(`${this.apiUrl}`, order);

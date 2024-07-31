@@ -90,7 +90,7 @@ ngOnInit(): void {
   sendOrder(): void {
     this.showOrcamento = false;
     this.pedidoService.createOrUpdatePedido(this.newOrder,undefined).pipe().subscribe(() => {
-      this.toastr.success(`Orçamento Enviado!\nNúmero de Pedido: ${this.newOrder.id}`);
+      this.toastr.success(`Orçamento Enviado!`);
     });
 
     this.listaDeRoupas.forEach(item => item.quantity = 0);
@@ -103,7 +103,7 @@ ngOnInit(): void {
     this.showOrcamento = false;
     this.newOrder.status = 'Rejeitado';
     this.pedidoService.createOrUpdatePedido(this.newOrder,undefined).pipe().subscribe(() => {
-      this.toastr.warning(`Orçamento Rejeitado!\nNúmero de Pedido: ${this.newOrder.id}`);
+      this.toastr.warning(`Orçamento Rejeitado!`);
     });
 
     this.listaDeRoupas.forEach(item => item.quantity = 0);

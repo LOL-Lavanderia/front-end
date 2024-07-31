@@ -26,6 +26,7 @@
 							<th>Valor</th>
 							<th>Prazo</th>
 							<th>Criado em:</th>
+							<th>Ultima atualização:</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -34,6 +35,7 @@
 							<td>R$ {{ order.value }},00</td>
 							<td>{{ order.time }} minutos</td>
 							<td>{{ order.openDate | date: 'dd/MM/yyyy - HH:mm'}}</td>
+							<td>{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm'}}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -70,6 +72,7 @@
 							<th>Valor</th>
 							<th>Prazo</th>
 							<th>Criado em:</th>
+							<th>Ultima atualização:</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -78,6 +81,7 @@
 							<td>R$ {{ order.value }},00</td>
 							<td>{{ order.time }} minutos</td>
 							<td>{{ order.openDate | date: 'dd/MM/yyyy - HH:mm'}}</td>
+							<td>{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm'}}</td>
 						</tr>
 					</tbody>
 				</table>

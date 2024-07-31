@@ -31,6 +31,15 @@ export class VisualizarPedidosComponent implements OnInit {
       this.listOrder = orders;
       this.applyFilter();
     });
+    this.sortOrdersByCloseDateDesc();
+  }
+
+  sortOrdersByCloseDateDesc(): void {
+    this.listOrder.sort((a, b) => {
+      const dateA = new Date(a.closeDate).getTime();
+      const dateB = new Date(b.closeDate).getTime();
+      return dateB - dateA; // Ordena de forma decrescente
+    });
   }
 
   applyFilter(): void {
@@ -39,7 +48,7 @@ export class VisualizarPedidosComponent implements OnInit {
     } else if (this.selectedFilter === 'dateRange') {
       this.filterByDateRange();
     } else {
-      this.filteredOrders = [...this.listOrder];
+      this.filteredOrders = [...this.listOrder.sort((a, b) => new Date(b.openDate).getTime() - new Date(a.openDate).getTime())];
     }
   }
 

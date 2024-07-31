@@ -27,6 +27,15 @@ export class ListagemPedidosComponent implements OnInit {
     this.pedidoService.getOrdersByClientId(this.authService.getCurrentUserId()).subscribe((orders) => {
       this.listOrder = orders;
       this.applyFilter(); // Aplica o filtro após carregar os pedidos
+      this.sortOrdersByCloseDateDesc();
+    });
+  }
+
+  sortOrdersByCloseDateDesc(): void {
+    this.listOrder.sort((a, b) => {
+      const dateA = new Date(a.closeDate).getTime();
+      const dateB = new Date(b.closeDate).getTime();
+      return dateB - dateA; // Ordena de forma decrescente
     });
   }
 
