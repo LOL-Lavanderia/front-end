@@ -33,7 +33,7 @@
 
 
       <p class="card-text">Valor Total: R$ {{ value }},00</p>
-      <p class="card-text">Prazo de Entrega: {{ time }} minutos</p>
+      <p class="card-text">Prazo de Entrega: {{ time > 1 ? time + ' dias' : time + ' dia' }}</p>
       <button class="btn btn-success" (click)="sendOrder()">Aprovar Orçamento</button>
       <button class="btn btn-danger ml-2" (click)="declineOrder()">Recusar Orçamento</button>
     </mat-card-content>

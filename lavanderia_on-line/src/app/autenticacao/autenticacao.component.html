@@ -1,23 +1,32 @@
-<mat-toolbar color="primary">
-  <span class="title-center">LOL - Lavanderia On-line</span>
-</mat-toolbar>
+<div class="painel">
+<div class="container">
+  <div class="card">
+    <form #formLogin="ngForm" (ngSubmit)="onLogin(formLogin)">
+      <div class="formulario">
+        <h2>LOL - Lavanderia</h2>
+        <h3>BEM-VINDO</h3>
 
-<mat-card class="login-card">
-  <form class="form" (ngSubmit)="onLogin()">
-    <mat-form-field class="full-width">
-      <mat-label>E-mail</mat-label>
-      <input type="email" matInput [(ngModel)]="email" name="email" placeholder="Ex. pat@example.com" required>
-    </mat-form-field>
+        <div class="alert alert-danger" *ngIf="message">{{ message }}</div>
+        <mat-form-field>
+          <input matInput placeholder="Usuário" [(ngModel)]="email" name="email" required email>
+        </mat-form-field>
 
-    <mat-form-field class="full-width">
-      <mat-label>Senha</mat-label>
-      <input type="password" matInput [(ngModel)]="password" name="password" required>
-    </mat-form-field>
+        <mat-form-field>
+          <input matInput [type]="passwordVisible ? 'text' : 'password'" placeholder="Senha" [(ngModel)]="password"
+            name="password" required>
+          <span class="password-toggle" (click)="togglePasswordVisibility()">
+            <img [src]="passwordVisible ? 'assets/img/eye-open.svg' : 'assets/img/eye-closed.svg'" alt="Toggle Password"
+              class="eye-icon">
+          </span>
+        </mat-form-field>
 
-    <button mat-raised-button color="warn" type="submit">Fazer login</button>
-
-  </form>
-  <div class="center-text">
-    <a href="/cadastro" (click)="autoCadastro()">Cadastra-se aqui</a>
+        <div class="botoes">
+          <button mat-raised-button color="primary" type="submit" [disabled]="loading">Fazer Login</button>
+          <button mat-raised-button class="cadastre" (click)="openDialog('0ms', '0ms')">Cadastre-se</button>
+        </div>
+        <mat-spinner *ngIf="loading"></mat-spinner>
+      </div>
+    </form>
   </div>
-</mat-card>
+</div>
+</div>

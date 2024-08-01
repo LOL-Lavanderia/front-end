@@ -21,7 +21,7 @@ export interface Enderecos {
   logradouro: string;
   numero: string;
   bairro: string;
-  cidade: string;
+  localidade: string;
   cep: number;
   tipo: number;
 }

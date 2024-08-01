@@ -45,7 +45,7 @@ export class ItemRoupaComponent implements OnInit {
     });
     
     dialogRef.afterClosed().subscribe(result => {
-      // Verificar se há resultado ou mudanças significativas
+      this.carregarRoupas();
       if (result) {
         this.carregarRoupas();
       }

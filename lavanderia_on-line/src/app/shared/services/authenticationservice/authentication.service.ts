@@ -1,66 +1,76 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../../models/usuario/usuario';
-import { Observable } from 'rxjs/internal/Observable';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/internal/operators/map';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Observable, of, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { map, catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
+
+const LS_CHAVE: string = "usuarioLogado";
 
 @Injectable({
   providedIn: 'root'
 })
-// export type Client = { role: "client", cpf: string, address: Address[], phone: Phone[] };
 export class AuthenticationService {
   private readonly apiUrl = 'http://localhost:8080/api/usuarios';
-  
-  private currentUserSubject: BehaviorSubject<Usuario | null>;
-  public currentUser: Observable<Usuario | null>;
 
-  constructor(private http: HttpClient) {
-    const localUser = this.isLocalStorageAvailable() ? JSON.parse(localStorage.getItem('currentUser')!) : null;
-    this.currentUserSubject = new BehaviorSubject<Usuario | null>(localUser);
-    this.currentUser = this.currentUserSubject.asObservable();
-  }
+  constructor(private http: HttpClient, private router: Router) {}
 
-  login(email: string, password: string): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.apiUrl}/login`, { email, password })
-      .pipe(map(user => {
-        if (user) {
-          if (this.isLocalStorageAvailable()) {
-            localStorage.setItem('currentUser', JSON.stringify(user));
+  login(email: string, password: string): Observable<Usuario | null> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      observe: 'response' as const
+    };
+
+    return this.http.post<Usuario>(`${this.apiUrl}/login`, { email, password }, httpOptions)
+      .pipe(
+        map((resp: HttpResponse<Usuario>) => {
+          if (resp.status === 200) {
+            return resp.body;
+          } else {
+            return null;
           }
-          this.currentUserSubject.next(user);
-        }
-        return user;
-      }));
+        }),
+        catchError(err => {
+          if (err.status === 401) {
+            return of(null);
+          } else {
+            return throwError(() => err);
+          }
+        })
+      );
   }
 
-  logout(): void {
-    if (this.isLocalStorageAvailable()) {
-      localStorage.removeItem('currentUser');
+  public get usuarioLogado(): Usuario | null {
+    if (typeof localStorage !== 'undefined') {
+      let usu = localStorage.getItem(LS_CHAVE);
+      return usu ? JSON.parse(usu) : null;
     }
-    this.currentUserSubject.next(null);
+    return null;
   }
 
-  getUsuarioLogado(): Usuario | null {
-    return this.currentUserSubject.value;
+  public set usuarioLogado(usuario: Usuario | null) {
+    if (typeof localStorage !== 'undefined') {
+      if (usuario) {
+        localStorage.setItem(LS_CHAVE, JSON.stringify(usuario));
+      } else {
+        localStorage.removeItem(LS_CHAVE);
+      }
+    }
+  }
+
+  logout() {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem(LS_CHAVE);
+    }
   }
 
   getCurrentUserId(): string | null {
-    const currentUser = this.getUsuarioLogado();
-    return currentUser && currentUser.id !== undefined ? currentUser.id : null;
+    return this.usuarioLogado && this.usuarioLogado.id !== undefined ? this.usuarioLogado.id : null;
   }
 
-  private isLocalStorageAvailable(): boolean {
-    try {
-      const test = '__localStorageTest__';
-      localStorage.setItem(test, test);
-      localStorage.removeItem(test);
-      return true;
-    } catch (e) {
-      return false;
-    }
+  getRole(): string | null {
+    return this.usuarioLogado && this.usuarioLogado.role.role !== undefined ? this.usuarioLogado.role.role : null;
   }
-
 }
-
-

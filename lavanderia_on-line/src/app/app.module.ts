@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -10,7 +9,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
@@ -35,13 +33,13 @@ import { RelatoriosComponent } from './funcionario/relatorios/relatorios.compone
 import { RelatorioReceitasComponent } from './funcionario/relatorio-receitas/relatorio-receitas.component';
 import { RelatorioClientesComponent } from './funcionario/relatorio-clientes/relatorio-clientes.component';
 import { RelatorioFieisComponent } from './funcionario/relatorio-fieis/relatorio-fieis.component';
-
+import { VisualizarPedidosComponent } from './funcionario/visualizar-pedidos/visualizar-pedidos.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    DashboardComponent,
     MainComponent,
     ListagemPedidosComponent,
     CadastroClienteComponent,
@@ -56,6 +54,8 @@ import { RelatorioFieisComponent } from './funcionario/relatorio-fieis/relatorio
     RelatorioReceitasComponent,
     RelatorioClientesComponent,
     RelatorioFieisComponent,
+    VisualizarPedidosComponent
+
   ],
   imports: [
     BrowserModule,
@@ -75,11 +75,14 @@ import { RelatorioFieisComponent } from './funcionario/relatorio-fieis/relatorio
     MatDatepickerModule,
     ToastrModule.forRoot(),
     NgxMaskDirective,
-    NgxMaskPipe
+    NgxMaskPipe,
+    DatePipe
 
   ],
   exports: [
-    MaterialModule
+    MaterialModule,
+    DatePipe,
+    
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
@@ -88,7 +91,8 @@ import { RelatorioFieisComponent } from './funcionario/relatorio-fieis/relatorio
     MatDatepickerModule,
     provideClientHydration(),
     provideAnimationsAsync(),
-    provideHttpClient(withFetch()) // Fix: Call the withFetch function directly
+    provideHttpClient(withFetch()), // Fix: Call the withFetch function directly,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

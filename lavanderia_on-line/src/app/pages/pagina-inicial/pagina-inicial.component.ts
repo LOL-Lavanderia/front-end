@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Order } from '../../shared/models/order';
-import { PedidoService } from '../../shared/services/pedidoservice/pedido.service.service';
+import { Order } from '../../shared/models/order'; 
+import { PedidoService } from '../../shared/services/pedidoservice/pedido.service.service'; 
+import { AuthenticationService } from '../../shared/services/authenticationservice/authentication.service'; 
 
 @Component({
   selector: 'app-pagina-inicial',
@@ -11,44 +12,35 @@ export class PaginaInicialComponent implements OnInit {
 
   listOrder: Order[] = [];
   isEmployee: boolean = false;
-  selectedOrderStatus: string = '';
 
-  constructor(public pedidoService: PedidoService) { }
+  constructor(public pedidoService: PedidoService, public authService: AuthenticationService) { }
 
   ngOnInit(): void {
     this.loadOrders();
-    // Comentei o código relacionado ao authService para simplificar
-    /*
-    this.listOrder = this.pedidoService.listOrder;
-    this.listOrder.sort((a, b) => {
-       const dateA = new Date(a.openDate);
-       const dateB = new Date(b.openDate);
-       return dateB.getTime() - dateA.getTime();
-    });
-
-    // Verificar se o usuário é um funcionário
-    if (this.authService.isEmployee()) {
-       // Filtrar todos os pedidos abertos
-       this.listOrder = this.listOrder.filter(order => order.status === 'Abertos');
-    } else {
-       // Supondo que o usuário seja um cliente, filtrar apenas os pedidos abertos desse cliente
-       // Substitua 'clienteId' pelo ID real do cliente
-       const clienteId = this.authService.getCurrentUserId();
-       this.listOrder = this.listOrder.filter(order => order.status === 'Abertos' && order.clientId === clienteId);
-    }
-    */
   }
 
   loadOrders(): void {
-    this.pedidoService.listOpenOrders().pipe().subscribe((orders) => {
-      this.listOrder = orders;
+    this.pedidoService.listOpenOrders().subscribe((orders: Order[]) => {
+      let filteredOrders = orders.filter(order => order.status === 'Em Aberto'); 
+      
+      if (this.authService.getRole() === 'employee') {
+        this.listOrder = filteredOrders;
+        this.isEmployee = true;
+      } else {
+        const clienteId = this.authService.getCurrentUserId(); 
+        this.listOrder = filteredOrders.filter(order => order.clienteId === clienteId);
+      }
+      
+      // Ordena os pedidos por data
+      this.listOrder.sort((a, b) => new Date(b.openDate).getTime() - new Date(a.openDate).getTime());
     });
   }
 
   confirmarRecolhimento(order: Order): void {
     order.status = 'Recolhido';
-    this.pedidoService.createOrUpdatePedido( order, order.id).subscribe(() => {
+    this.pedidoService.createOrUpdatePedido(order, order.id).subscribe(() => {
       alert(`Pedido Recolhido!\nNúmero de Pedido: ${order.id}`);
+      this.loadOrders();
     });
   }
 
@@ -56,7 +48,12 @@ export class PaginaInicialComponent implements OnInit {
     order.status = 'Cancelado';
     this.pedidoService.createOrUpdatePedido(order, order.id).subscribe(() => {
       alert(`Pedido Cancelado!\nNúmero de Pedido: ${order.id}`);
+      this.loadOrders();
     });
   }
 
+  noMatchesFound(): boolean {
+    const openOrders = this.listOrder.filter(order => order.status === 'Em Aberto');
+    return openOrders.length === 0;
+  }
 }
