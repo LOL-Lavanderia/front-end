@@ -17,11 +17,11 @@ export class UserService {
   }
 
   deleteUser(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
   getUserById(id: string): Observable<Usuario>{
-    return this.http.get<Usuario>(`${this.apiUrl}${id}`);
+    return this.http.get<Usuario>(`${this.apiUrl}/${id}`);
   }
 
   updateUser(user: Usuario): Observable<any> {
