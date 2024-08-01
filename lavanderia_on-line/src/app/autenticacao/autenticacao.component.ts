@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../shared/services/authenticationservice/authentication.service';
 import { Usuario } from '../shared/models/usuario/usuario';
@@ -32,7 +32,7 @@ import { ToastrService } from 'ngx-toastr';
     CommonModule
   ]
 })
-export class AutenticacaoComponent {
+export class AutenticacaoComponent implements OnInit {
   usuario: Usuario = new Usuario(undefined, '', '', '', { role: 'client', cpf: '', enderecos: [], telefones: [] });
   email: string = '';
   password: string = '';
@@ -42,10 +42,19 @@ export class AutenticacaoComponent {
 
   constructor(
     private toastr: ToastrService,
-    private authService: AuthenticationService, private router: Router, public dialog: MatDialog) {
-      //toastr top and center
-      this.toastr.toastrConfig.positionClass = 'toast-top-center';
+    private authService: AuthenticationService, 
+    private router: Router, 
+    public dialog: MatDialog
+  ) {
+    //toastr top and center
+    this.toastr.toastrConfig.positionClass = 'toast-top-center';
+  }
+
+  ngOnInit(): void {
+    if (this.authService.usuarioLogado) {
+      this.router.navigate(['/']);
     }
+  }
 
   togglePasswordVisibility() {
     this.passwordVisible = !this.passwordVisible;
@@ -61,7 +70,7 @@ export class AutenticacaoComponent {
           if (usu != null) {
             this.authService.usuarioLogado = usu;
             this.loading = false;
-            this.router.navigate(['/pagina-inicial']);
+            this.router.navigate(['/']);
           } else {
             this.message = 'Usuário/Senha inválidos.';
             this.loading = false;
