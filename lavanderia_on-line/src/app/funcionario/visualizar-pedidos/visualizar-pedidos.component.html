@@ -60,7 +60,7 @@
           <tr>
             <td>{{ order.status }}</td>
             <td>R$ {{ order.value }},00</td>
-            <td>{{ order.time }} minutos</td>
+            <td>{{ order.time }} dias</td>
             <td *ngIf="order.openDate">{{ order.openDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
             <td *ngIf="order.closeDate">{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
           </tr>

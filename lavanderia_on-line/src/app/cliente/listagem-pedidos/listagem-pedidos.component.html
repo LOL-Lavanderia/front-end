@@ -63,7 +63,7 @@
 				<tr>
 					<td>{{ order.status }}</td>
 					<td>R$ {{ order.value }},00</td>
-					<td>{{ order.time }} minutos</td>
+					<td>{{ order.time > 1 ? order.time + ' dias' : order.time + ' dia' }}</td>
 					<td>{{ order.openDate | date: 'dd/MM/yyyy - HH:mm'}}</td>
 					<td>{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm'}}</td>
 				</tr>
@@ -107,7 +107,7 @@
 			  <tr>
 				<td>{{ order.status }}</td>
 				<td>R$ {{ order.value }},00</td>
-				<td>{{ order.time }} minutos</td>
+				<td>{{ order.time > 1 ? order.time + ' dias' : order.time + ' dia' }}</td>
 				<td>{{ order.openDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
 				<td>{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
 			  </tr>

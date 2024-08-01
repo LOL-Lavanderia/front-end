@@ -39,7 +39,7 @@
                         <tr>
                             <td>{{ pedido.status }}</td>
                             <td>R$ {{ pedido.value }},00</td>
-                            <td>{{ pedido.time }} minutos</td>
+                            <td>{{ pedido.time > 1 ? pedido.time + ' dias' : pedido.time + ' dia' }}</td>
                             <td>{{ pedido.openDate | date: 'dd/MM/yyyy - HH:mm'}}</td>
                             <td>{{ pedido.closeDate | date: 'dd/MM/yyyy - HH:mm'}} </td>
                         </tr>
