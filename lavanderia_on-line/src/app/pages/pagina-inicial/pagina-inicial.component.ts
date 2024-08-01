@@ -21,13 +21,13 @@ export class PaginaInicialComponent implements OnInit {
 
   loadOrders(): void {
     this.pedidoService.listOpenOrders().subscribe((orders: Order[]) => {
-      let filteredOrders = orders.filter(order => order.status === 'Em Aberto'); // Filtra todos os pedidos em aberto assim que são recebidos
+      let filteredOrders = orders.filter(order => order.status === 'Em Aberto'); 
       
       if (this.authService.getRole() === 'employee') {
         this.listOrder = filteredOrders;
         this.isEmployee = true;
       } else {
-        const clienteId = this.authService.getCurrentUserId(); // Certifique-se de que getCurrentUserId retorna o ID correto
+        const clienteId = this.authService.getCurrentUserId(); 
         this.listOrder = filteredOrders.filter(order => order.clienteId === clienteId);
       }
       
@@ -40,6 +40,7 @@ export class PaginaInicialComponent implements OnInit {
     order.status = 'Recolhido';
     this.pedidoService.createOrUpdatePedido(order, order.id).subscribe(() => {
       alert(`Pedido Recolhido!\nNúmero de Pedido: ${order.id}`);
+      this.loadOrders();
     });
   }
 
@@ -47,6 +48,12 @@ export class PaginaInicialComponent implements OnInit {
     order.status = 'Cancelado';
     this.pedidoService.createOrUpdatePedido(order, order.id).subscribe(() => {
       alert(`Pedido Cancelado!\nNúmero de Pedido: ${order.id}`);
+      this.loadOrders();
     });
+  }
+
+  noMatchesFound(): boolean {
+    const openOrders = this.listOrder.filter(order => order.status === 'Em Aberto');
+    return openOrders.length === 0;
   }
 }
