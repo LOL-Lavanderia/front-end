@@ -15,11 +15,10 @@ export const authGuard: CanActivateFn = (route, state) => {
       router.navigate(['/pagina-inicial'], { queryParams: { error: "Você não tem permissão para acessar " + url } });
       return false;
     }
-  
-  // em qualquer outro caso, permite o acesso
-  return true;
+      return true;
+  } else {
+    // Redireciona para a página de autenticação se não estiver logado
+    router.navigate(['/autenticacao'], { queryParams: { returnUrl: url } });
+    return false;
   }
-// Se não está logado, vai para login
-
-return false;
 };
