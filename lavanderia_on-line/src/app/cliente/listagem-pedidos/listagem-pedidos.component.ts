@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Order } from '../../shared/models/order';
 import { PedidoService } from '../../shared/services/pedidoservice/pedido.service.service';
 import { AuthenticationService } from '../../shared/services/authenticationservice/authentication.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-listagem-pedidos',
@@ -14,7 +15,7 @@ export class ListagemPedidosComponent implements OnInit {
   isEmployee: boolean = false;
   selectedOrderStatus: string = '';
 
-  constructor(private pedidoService: PedidoService, public authService: AuthenticationService) { }
+  constructor(private pedidoService: PedidoService, public authService: AuthenticationService, private tostr: ToastrService) { }
 
   ngOnInit(): void {
     if (this.authService.getRole() === 'employee') {
@@ -55,7 +56,7 @@ export class ListagemPedidosComponent implements OnInit {
     order.status = 'Recolhido';
     this.pedidoService.createOrUpdatePedido(order, order.id.toString()).subscribe(() => {
       alert(`Pedido Recolhido!\nNúmero de Pedido: ${order.id}`);
-      this.loadOrders(); // Recarrega pedidos após a atualização
+      this.loadOrders();
     });
   }
 
@@ -63,7 +64,7 @@ export class ListagemPedidosComponent implements OnInit {
     order.status = 'Aguardando pagamento';
     this.pedidoService.createOrUpdatePedido(order, order.id.toString()).subscribe(() => {
       alert(`Pedido Lavado!\nNúmero de Pedido: ${order.id}`);
-      this.loadOrders(); // Recarrega pedidos após a atualização
+      this.loadOrders();
     });
   }
 
@@ -71,7 +72,7 @@ export class ListagemPedidosComponent implements OnInit {
     order.status = 'Finalizado';
     this.pedidoService.createOrUpdatePedido(order, order.id.toString()).subscribe(() => {
       alert(`Pedido Finalizado!\nNúmero de Pedido: ${order.id}`);
-      this.loadOrders(); // Recarrega pedidos após a atualização
+      this.loadOrders();
     });
   }
 
@@ -79,15 +80,20 @@ export class ListagemPedidosComponent implements OnInit {
     order.status = 'Pago';
     this.pedidoService.createOrUpdatePedido(order, order.id.toString()).subscribe(() => {
       alert(`Pedido Pago!\nNúmero de Pedido: ${order.id}`);
-      this.loadOrders(); // Recarrega pedidos após a atualização
+      this.loadOrders();
     });
   }
 
   cancelarPedido(order: Order): void {
-    order.status = 'Cancelado';
-    this.pedidoService.createOrUpdatePedido(order, order.id.toString()).subscribe(() => {
-      alert(`Pedido Cancelado!\nNúmero de Pedido: ${order.id}`);
-      this.loadOrders(); // Recarrega pedidos após a atualização
-    });
-  }
-}
+    if(confirm('Deseja realmente cancelar o pedido?')) {
+      order.status = 'Cancelado';
+      this.pedidoService.createOrUpdatePedido(order, order.id.toString()).subscribe(() => {
+        alert(`Pedido Cancelado!\nNúmero de Pedido: ${order.id}`);
+        this.loadOrders();
+      });
+    }
+    else{
+      this.tostr.info('Operação cancelada');
+    }
+
+  }}
