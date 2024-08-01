@@ -12,7 +12,7 @@ const LS_CHAVE: string = "usuarioLogado";
 })
 export class AuthenticationService {
   private readonly apiUrl = 'http://localhost:8080/api/usuarios';
-  
+
   constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, password: string): Observable<Usuario | null> {
@@ -25,7 +25,7 @@ export class AuthenticationService {
 
     return this.http.post<Usuario>(`${this.apiUrl}/login`, { email, password }, httpOptions)
       .pipe(
-        map( (resp:HttpResponse<Usuario>)  => {
+        map((resp: HttpResponse<Usuario>) => {
           if (resp.status === 200) {
             return resp.body;
           } else {
@@ -42,17 +42,28 @@ export class AuthenticationService {
       );
   }
 
-  public get usuarioLogado(): Usuario {
-    let usu = localStorage.getItem(LS_CHAVE);
-    return usu ? JSON.parse(usu) : null;
+  public get usuarioLogado(): Usuario | null {
+    if (typeof localStorage !== 'undefined') {
+      let usu = localStorage.getItem(LS_CHAVE);
+      return usu ? JSON.parse(usu) : null;
+    }
+    return null;
   }
 
-  public set usuarioLogado(usuario: Usuario) {
-    localStorage.setItem(LS_CHAVE, JSON.stringify(usuario));
+  public set usuarioLogado(usuario: Usuario | null) {
+    if (typeof localStorage !== 'undefined') {
+      if (usuario) {
+        localStorage.setItem(LS_CHAVE, JSON.stringify(usuario));
+      } else {
+        localStorage.removeItem(LS_CHAVE);
+      }
+    }
   }
 
   logout() {
-    localStorage.removeItem(LS_CHAVE);
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem(LS_CHAVE);
+    }
   }
 
   getCurrentUserId(): string | null {

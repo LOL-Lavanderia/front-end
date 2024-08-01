@@ -1,14 +1,31 @@
-.title-center {
-    flex: 1 1 auto;
-    text-align: center;
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 15px;
 }
-
-.auto-cadastro {
-    background-color: white;
-    margin: 2% 25%;
-    padding: 2% 2% 1%;
-}
-
-.full-width {
+  
+  .full-width {
     width: 100%;
-}
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .mat-toolbar {
+    justify-content: center;
+  }
+  
+  .mat-card {
+    padding: 24px;
+    margin: 24px auto;
+    max-width: 600px;
+  }
+  
+  button {
+    align-self: flex-end;
+  }
+  

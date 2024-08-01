@@ -1,23 +1,55 @@
-.title-center {
-  flex: 1 1 auto;
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  
+}
+
+.card {
+  background: linear-gradient(-45deg, #dcd7e0, #fff);
+  padding: 40px;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  width: 400px;
+}
+
+.eye-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.botoes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+h3 ,h2{
   text-align: center;
+  margin-bottom: 40px;
+  font-weight: bold;
 }
 
-.login-card {
-  background-color: white;
-  margin: 5% 25%;
-  padding: 2%;
-}
-
-.form {
-  width: 100%;
-}
-
-.full-width {
-  width: 100%;
-}
-
-.center-text {
-  text-align: left; 
-  margin-top: 15px;
+.painel{
+  background: #876cb0!important;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
 }
