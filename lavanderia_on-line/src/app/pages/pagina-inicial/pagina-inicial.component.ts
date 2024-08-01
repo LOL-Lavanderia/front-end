@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Order } from '../../shared/models/order'; // Verifique se o caminho está correto
-import { PedidoService } from '../../shared/services/pedidoservice/pedido.service.service'; // Verifique se o caminho está correto
-import { AuthenticationService } from '../../shared/services/authenticationservice/authentication.service'; // Verifique se o caminho está correto
+import { Order } from '../../shared/models/order'; 
+import { PedidoService } from '../../shared/services/pedidoservice/pedido.service.service'; 
+import { AuthenticationService } from '../../shared/services/authenticationservice/authentication.service'; 
 
 @Component({
   selector: 'app-pagina-inicial',
