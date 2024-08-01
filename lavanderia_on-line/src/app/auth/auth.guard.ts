@@ -20,10 +20,6 @@ export const authGuard: CanActivateFn = (route, state) => {
   return true;
   }
 // Se não está logado, vai para login
-router.navigate(['/autenticacao'], {
-  queryParams: {
-    error: "Deve fazer o login antes de acessar " + url
-  }
-});
+
 return false;
 };

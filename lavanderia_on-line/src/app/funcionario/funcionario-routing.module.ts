@@ -10,7 +10,20 @@ import { PaginaInicialComponent } from "../pages/pagina-inicial/pagina-inicial.c
 import { ManterFuncionarioComponent } from "./manter-funcionario/manter-funcionario.component";
 
 export const funcionarioRoutes: Routes = [
-  
+    {
+        path: '',
+        redirectTo: '/inicial-funcionario',
+        pathMatch: 'full'
+    },
+    {
+    path: 'inicial-funcionario',
+    component: PaginaInicialComponent,
+    title: 'Pagina Inicial',
+    canActivate: [authGuard],
+      data:{
+          role: 'employee'
+      }
+    },
       {
         path: 'visualizar-pedidos',
         component: VisualizarPedidosComponent,
@@ -27,15 +40,6 @@ export const funcionarioRoutes: Routes = [
         canActivate: [authGuard],
         data:{
             role: 'employee'
-        }
-      },
-      {
-      path: 'pagina-inicial',
-      component: PaginaInicialComponent,
-      title: 'Pagina Inicial',
-      canActivate: [authGuard],
-        data:{
-            role: 'client, employee'
         }
       },
       {

@@ -6,7 +6,20 @@ import { ListagemPedidosComponent } from "./listagem-pedidos/listagem-pedidos.co
 import { PaginaInicialComponent } from "../pages/pagina-inicial/pagina-inicial.component";
 
 export const clienteRoutes: Routes = [
-   
+    {
+        path: '',
+        redirectTo: '/inicial-cliente',
+        pathMatch: 'full'
+    },
+    {
+        path: 'inicial-cliente',
+        component: PaginaInicialComponent,
+        title: 'Pagina Inicial',
+        canActivate: [authGuard],
+        data: {
+            role: 'client'
+        }
+    },
     {
         path: 'listar-pedidos',
         component: ListagemPedidosComponent,
@@ -34,6 +47,6 @@ export const clienteRoutes: Routes = [
             role: 'client'
         }
     },
-    
+
 
 ]

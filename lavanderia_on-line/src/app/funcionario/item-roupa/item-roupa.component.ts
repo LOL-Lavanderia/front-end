@@ -53,8 +53,11 @@ export class ItemRoupaComponent implements OnInit {
   }
 
   deleteRoupa(roupa: Roupa): void {
+    if(confirm(`Deseja realmente excluir a roupa ${roupa.name}?`)) {
       this.roupaService.removerRoupa(roupa.id!).subscribe(() => {
       this.roupas = this.roupas.filter(r => r.id !== roupa.id!);
+      this.carregarRoupas();
     });
+  }
   }
 }
