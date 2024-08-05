@@ -11,9 +11,10 @@ export class RelatorioService {
 
   constructor(private http: HttpClient) { }
 
-  gerarRelatorio(dataInicio:String, dataFim: String): Observable<RelatorioReceitaResponse> {
+  gerarRelatorioDeReceitas(dataInicio:String, dataFim: String): Observable<RelatorioReceitaResponse> {
     
       const params = `dataInicio=${dataInicio}&dataFim=${dataFim}`;
       return this.http.get<RelatorioReceitaResponse>(`${this.apiUrl}?${params}`);
     }
+      
 }

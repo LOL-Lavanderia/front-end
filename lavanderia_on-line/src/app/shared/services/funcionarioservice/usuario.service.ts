@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Usuario } from '../../models/usuario/usuario';
 
 @Injectable({
@@ -29,5 +29,9 @@ export class UserService {
       return this.http.put(`${this.apiUrl}/${user.id}`, user);
     else
       return this.http.post(`${this.apiUrl}`, user);
+  }
+
+  getUsersByRole(role: string): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(`${this.apiUrl}/byRole/${role}`);
   }
 }
