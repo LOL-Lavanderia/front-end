@@ -3,6 +3,7 @@ import { Usuario } from "./usuario/usuario";
 export interface PedidoDTO {
     id: number;
     value: number;
+    openDate: Date;
   }
   
   export interface RelatorioReceitaResponse {
