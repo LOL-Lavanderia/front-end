@@ -9,6 +9,7 @@ export class Order {
 	openDate: Date = new Date();
 	roupas: Roupa[] = [];
 	clienteId: string = '';
+	nomeCliente: string ='';
 
 	constructor(time: number, value: number) {
 
@@ -24,5 +25,9 @@ export class Order {
 	}
 	setclienteId(id: string){
 		this.clienteId = id;
+	}
+
+	setNomeCliente(nome: string){
+		this.nomeCliente = nome;
 	}
 }

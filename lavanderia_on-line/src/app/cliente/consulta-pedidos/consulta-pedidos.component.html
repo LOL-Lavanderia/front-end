@@ -16,7 +16,8 @@
                   'background-yellow': pedido.status === 'Em Aberto'
                 }">
                 <div class="d-flex justify-content-between">
-                    <h2>Pedido {{ pedido.id }}</h2>
+                    <h2>Cliente: {{ pedido.nomeCliente }}</h2>
+					<h2>Pedido {{ pedido.id }}</h2>
                     <div class="justify-content-between">
                         <button *ngIf="pedido.status === 'Em Aberto'" class="btn btn-danger"
                             (click)="cancelarPedido(pedido)">Cancelar

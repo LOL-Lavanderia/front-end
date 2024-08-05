@@ -42,6 +42,7 @@
 	  }">
 		<ng-container *ngIf="isEmployee; else customerLinks">
 		  <div class="d-flex justify-content-between">
+			<h2>Cliente: {{ order.nomeCliente }}</h2>
 			<h2>Pedido {{ order.id }}</h2>
 			<div>
 			  <button *ngIf="order.status === 'Em Aberto'" class="btn btn-warning" (click)="confirmarRecolhimento(order)">Confirmar Recolhimento</button>
@@ -52,22 +53,24 @@
 		  <table class="table table-striped">
 			<thead>
 				<tr>
-					<th>Status</th>
-					<th>Valor</th>
-					<th>Prazo</th>
-					<th>Criado em:</th>
-					<th>Ultima atualização:</th>
+				  <th>Status</th>
+				  <th>Valor</th>
+				  <th>Prazo</th>
+				  <th>Criado em:</th>
+				  <th *ngIf="order.status !== 'Finalizado'">Ultima atualização:</th>
+				  <th *ngIf="order.status === 'Finalizado'">Finalizado em:</th>
 				</tr>
-			</thead>
-			<tbody>
+			  </thead>
+			  <tbody>
 				<tr>
-					<td>{{ order.status }}</td>
-					<td>R$ {{ order.value }},00</td>
-					<td>{{ order.time > 1 ? order.time + ' dias' : order.time + ' dia' }}</td>
-					<td>{{ order.openDate | date: 'dd/MM/yyyy - HH:mm'}}</td>
-					<td>{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm'}}</td>
+				  <td>{{ order.status }}</td>
+				  <td>R$ {{ order.value }},00</td>
+				  <td>{{ order.time }} dias</td>
+				  <td *ngIf="order.openDate">{{ order.openDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
+				  <td *ngIf="order.status !== 'Finalizado'">{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
+				  <td *ngIf="order.status === 'Finalizado'">{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
 				</tr>
-			</tbody>
+			  </tbody>
 		  </table>
 		  <table class="table">
 			<thead>
@@ -87,6 +90,7 @@
   
 		<ng-template #customerLinks>
 		  <div class="d-flex justify-content-between">
+			<h2>Cliente: {{ order.nomeCliente }}</h2>
 			<h2>Pedido {{ order.id }}</h2>
 			<div class="justify-content-between">
 			  <button *ngIf="order.status === 'Em Aberto'" class="btn btn-danger" (click)="cancelarPedido(order)">Cancelar Pedido</button>
@@ -95,23 +99,25 @@
 		  </div>
 		  <table class="table table-striped">
 			<thead>
-			  <tr>
-				<th>Status</th>
-				<th>Valor</th>
-				<th>Prazo</th>
-				<th>Criado em:</th>
-				<th>Ultima atualização:</th>
-			  </tr>
-			</thead>
-			<tbody>
-			  <tr>
-				<td>{{ order.status }}</td>
-				<td>R$ {{ order.value }},00</td>
-				<td>{{ order.time > 1 ? order.time + ' dias' : order.time + ' dia' }}</td>
-				<td>{{ order.openDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
-				<td>{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
-			  </tr>
-			</tbody>
+				<tr>
+				  <th>Status</th>
+				  <th>Valor</th>
+				  <th>Prazo</th>
+				  <th>Criado em:</th>
+				  <th *ngIf="order.status !== 'Finalizado'">Ultima atualização:</th>
+				  <th *ngIf="order.status === 'Finalizado'">Finalizado em:</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+				  <td>{{ order.status }}</td>
+				  <td>R$ {{ order.value }},00</td>
+				  <td>{{ order.time }} dias</td>
+				  <td *ngIf="order.openDate">{{ order.openDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
+				  <td *ngIf="order.status !== 'Finalizado'">{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
+				  <td *ngIf="order.status === 'Finalizado'">{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
+				</tr>
+			  </tbody>
 		  </table>
 		  <table class="table">
 			<thead>

@@ -38,6 +38,7 @@
            'background-yellow': order.status === 'Em Aberto'
          }">
       <div class="d-flex justify-content-between">
+        <h2>Cliente: {{ order.nomeCliente }}</h2>
         <h2>Pedido {{ order.id }}</h2>
         <div>
           <button *ngIf="order.status === 'Em Aberto'" class="btn btn-warning" (click)="confirmarRecolhimento(order)">Confirmar Recolhimento</button>
@@ -52,7 +53,7 @@
             <th>Valor</th>
             <th>Prazo</th>
             <th>Criado em:</th>
-            <th>Ultima atualização:</th>
+            <th *ngIf="order.status !== 'Finalizado'">Ultima atualização:</th>
             <th *ngIf="order.status === 'Finalizado'">Finalizado em:</th>
           </tr>
         </thead>
@@ -62,7 +63,8 @@
             <td>R$ {{ order.value }},00</td>
             <td>{{ order.time }} dias</td>
             <td *ngIf="order.openDate">{{ order.openDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
-            <td *ngIf="order.closeDate">{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
+            <td *ngIf="order.status !== 'Finalizado'">{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
+            <td *ngIf="order.status === 'Finalizado'">{{ order.closeDate | date: 'dd/MM/yyyy - HH:mm' }}</td>
           </tr>
         </tbody>
       </table>
