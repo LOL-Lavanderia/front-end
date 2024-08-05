@@ -9,6 +9,7 @@ import { LocalStorageService } from '../../../local-storage.service';
   providedIn: 'root'
 })
 export class PedidoService {
+  
 
   private apiUrl = 'http://localhost:8080/api/pedidos';
   //private apiUrl = 'http://localhost:3000/orders';
@@ -96,7 +97,5 @@ export class PedidoService {
   getPedidobyId(clientId: string, id: number): Observable<Order>{
     return this.http.get<Order>(`${this.apiUrl}pedido/${id}`)
   }
-
-
 
 }

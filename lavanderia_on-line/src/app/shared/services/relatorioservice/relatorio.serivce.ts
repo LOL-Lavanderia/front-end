@@ -7,14 +7,18 @@ import { RelatorioReceitaResponse } from '../../models/relatorios';
 })
 export class RelatorioService {
 
-  private apiUrl = 'http://localhost:8080/api/relatorios/receita';
+  private apiUrl = 'http://localhost:8080/api/relatorios'
 
   constructor(private http: HttpClient) { }
 
   gerarRelatorioDeReceitas(dataInicio:String, dataFim: String): Observable<RelatorioReceitaResponse> {
     
       const params = `dataInicio=${dataInicio}&dataFim=${dataFim}`;
-      return this.http.get<RelatorioReceitaResponse>(`${this.apiUrl}?${params}`);
+      return this.http.get<RelatorioReceitaResponse>(`${this.apiUrl}/receita?${params}`);
     }
-      
+  
+  getClientesFieis(): Observable<any[]> {
+      return this.http.get<any[]>(`${this.apiUrl}/clientes-fieis`);
+  }
+    
 }

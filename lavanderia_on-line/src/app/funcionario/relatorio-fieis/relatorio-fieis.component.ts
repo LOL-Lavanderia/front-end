@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidoService } from '../../shared/services/pedidoservice/pedido.service.service';
 import jsPDF from 'jspdf';
+import { RelatorioService } from '../../shared/services/relatorioservice/relatorio.serivce';
 
 @Component({
   selector: 'app-relatorio-fieis',
@@ -12,35 +13,17 @@ export class RelatorioFieisComponent implements OnInit {
 
   constructor(
     // private authService: AuthService,
-     private pedidoService: PedidoService) { }
+     private relatorioService: RelatorioService) { }
 
   ngOnInit(): void {
-
-          
-
-      // const clientes = this.authService.getUsersByRole('cliente');
-      const pedidos = [
-          { clientId: 3, value: 500 },
-          { clientId: 4, value: 800 },
-          { clientId: 5, value: 300 },
-      ];
-
-      const clientesInfo: { [key: number]: any } = {};
-
-      // for (const cliente of clientes) {
-      //     const clientePedidos = pedidos.filter(pedido => pedido.clientId === cliente.id);
-      //     const receitaTotal = clientePedidos.reduce((total, pedido) => total + pedido.value, 0);
-      //     const numPedidos = clientePedidos.length;
-
-      //     if (cliente.id !== undefined) {
-      //         clientesInfo[cliente.id] = { name: cliente.name, numPedidos, receitaTotal };
-      //     }
-      // }
-
-      const clientesOrdenados = Object.values(clientesInfo).sort((a, b) => b.receitaTotal - a.receitaTotal);
-
-      this.clientesFieis = clientesOrdenados.slice(0, 3);
+    this.gerarRelatorio();
   }
+  gerarRelatorio(){
+    this.relatorioService.getClientesFieis().subscribe(clientes => {
+      this.clientesFieis = clientes;
+    });
+  }
+
 
   generatePDF() {
       const doc = new jsPDF();
@@ -48,8 +31,8 @@ export class RelatorioFieisComponent implements OnInit {
       doc.text('Relatório de Clientes Fiéis', 10, 10);
 
       const data = this.clientesFieis.map(cliente => [
-          cliente.name,
-          cliente.numPedidos,
+          cliente.nomeCliente,
+          cliente.quantidadePedidos,
           `R$ ${cliente.receitaTotal.toFixed(2)}`
       ]);
 
