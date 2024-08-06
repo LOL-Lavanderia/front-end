@@ -35,6 +35,17 @@ import { RelatorioClientesComponent } from './funcionario/relatorio-clientes/rel
 import { RelatorioFieisComponent } from './funcionario/relatorio-fieis/relatorio-fieis.component';
 import { VisualizarPedidosComponent } from './funcionario/visualizar-pedidos/visualizar-pedidos.component';
 import { DatePipe } from '@angular/common';
+import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
+
+export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
+  align: "right",
+  allowNegative: true,
+  decimal: ",",
+  precision: 2,
+  prefix: "R$ ",
+  suffix: "",
+  thousands: "."
+};
 
 @NgModule({
   declarations: [
@@ -76,18 +87,19 @@ import { DatePipe } from '@angular/common';
     ToastrModule.forRoot(),
     NgxMaskDirective,
     NgxMaskPipe,
+    CurrencyMaskModule,
     DatePipe
-
   ],
   exports: [
     MaterialModule,
     DatePipe,
-    
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
+    {provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig},
+
     //provideEnvironmentNgxMask(),
-    provideNgxMask(),
+    //provideNgxMask(),
     MatDatepickerModule,
     provideClientHydration(),
     provideAnimationsAsync(),
