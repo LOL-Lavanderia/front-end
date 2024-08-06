@@ -13,7 +13,7 @@ import { ModalRoupaComponent } from './modal-roupa/modal-roupa/modal-roupa.compo
 export class ItemRoupaComponent implements OnInit {
 
   roupas: Roupa[] = [];
-  displayedColumns: string[] = ['id', 'name', 'time', 'price', 'actions'];
+  displayedColumns: string[] = ['name', 'price', 'time', 'actions'];
 
   constructor(
      private router: Router, 

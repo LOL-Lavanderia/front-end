@@ -44,13 +44,13 @@ ngOnInit(): void {
 
   calculateTime(): void {
     if (this.listaDeRoupas.length > 0) {
-      let short = this.listaDeRoupas[0].time ?? 0;
+      let longer = this.listaDeRoupas[0].time ?? 0;
       for (const element of this.listaDeRoupas) {
         if (element.time !== undefined && element.quantity! > 0) {
-          short = Math.min(element.time, short);
+          longer = Math.max(element.time, longer);
         }
       }
-      this.time = short;
+      this.time = longer;
     }
   }
 

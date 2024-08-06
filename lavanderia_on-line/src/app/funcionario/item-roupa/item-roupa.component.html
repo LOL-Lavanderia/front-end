@@ -5,22 +5,10 @@
   </button>
 <mat-table [dataSource]="roupas">
 
-  <!-- Id Column -->
-  <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-    <mat-cell *matCellDef="let roupa"> {{roupa.id}} </mat-cell>
-  </ng-container>
-
   <!-- Name Column -->
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
     <mat-cell *matCellDef="let roupa"> {{roupa.name}} </mat-cell>
-  </ng-container>
-
-  <!-- Term Column -->
-  <ng-container matColumnDef="time">
-    <mat-header-cell *matHeaderCellDef> Prazo </mat-header-cell>
-    <mat-cell *matCellDef="let roupa"> {{roupa.time}} </mat-cell>
   </ng-container>
 
   <!-- Quantity Column -->
@@ -28,6 +16,12 @@
     <mat-header-cell *matHeaderCellDef> Valor </mat-header-cell>
     <mat-cell *matCellDef="let roupa"> {{roupa.price}} </mat-cell>
   </ng-container>
+
+    <!-- Term Column -->
+    <ng-container matColumnDef="time">
+      <mat-header-cell *matHeaderCellDef> Prazo </mat-header-cell>
+      <mat-cell *matCellDef="let roupa"> {{roupa.time}} </mat-cell>
+    </ng-container>
 
   <!-- Actions Column -->
   <ng-container matColumnDef="actions">

@@ -70,12 +70,6 @@ get valor() { return this.roupaForm.get('valor'); }
 get prazo() { return this.roupaForm.get('prazo'); }
 
 closeModal() {
-  if (this.roupaForm.dirty) {
-    if (confirm('Deseja sair sem salvar?')) {
-      this.dialogRef.close();
-    }
-  }
-  else
   this.dialogRef.close();
 }
 }
