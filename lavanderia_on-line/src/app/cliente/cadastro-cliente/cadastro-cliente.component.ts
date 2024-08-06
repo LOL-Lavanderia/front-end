@@ -23,7 +23,8 @@ export class CadastroClienteComponent {
         logradouro: ['', Validators.required],
         numero: ['', Validators.required],
         bairro: ['', Validators.required],
-        localidade: ['', Validators.required]
+        localidade: ['', Validators.required],
+        uf: ['',Validators.required]
       })
     });
   }
@@ -77,7 +78,7 @@ export class CadastroClienteComponent {
       bairro: this.clienteForm.get('endereco.bairro')?.value,
       localidade: this.clienteForm.get('endereco.localidade')?.value,
       cep: parseInt(this.clienteForm.get('endereco.cep')?.value.replace(/\D/g, ''), 10),
-      tipo: 0
+      uf: this.clienteForm.get('endereco.uf')?.value
     };
 
     const telefoneFormatado = this.clienteForm.get('telefone')?.value.replace(/\D/g, '');
@@ -125,6 +126,7 @@ export class CadastroClienteComponent {
             bairro: data.bairro,
             localidade: data.localidade,
             cep: data.cep,
+            uf:data.uf,
           }
         });
       },

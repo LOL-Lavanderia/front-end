@@ -23,7 +23,7 @@ export interface Enderecos {
   bairro: string;
   localidade: string;
   cep: number;
-  tipo: number;
+  uf:string;
 }
 
 export interface Telefones {
