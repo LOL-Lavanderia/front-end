@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../shared/services/funcionarioservice/usuario.service';
 import { ToastrService } from 'ngx-toastr';
 import { DialogRef } from '@angular/cdk/dialog';
+import { AuthenticationService } from '../../../shared/services/authenticationservice/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal-funcionario',
@@ -15,7 +17,7 @@ export class ModalFuncionarioComponent implements OnInit {
     employeeForm: FormGroup;
 
   constructor(private fb: FormBuilder, private userService: UserService, private dialogRef: DialogRef, private toastr: ToastrService,
-    @Inject(MAT_DIALOG_DATA) public data: Usuario
+    @Inject(MAT_DIALOG_DATA) public data: Usuario, private authService: AuthenticationService, private router:Router
   ) {
     this.employeeForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -52,8 +54,18 @@ export class ModalFuncionarioComponent implements OnInit {
         const formObj = this.employeeForm.value;
         const employee = new Usuario(this.data.id, formObj.email, formObj.name, formObj.password, { role: 'employee', birthDate: formObj.birthDate });
         this.userService.updateUser(employee).pipe().subscribe(() => {
-          this.toastr.success('Funcionário atualizado com sucesso!');
-          this.closeModal();
+            if(this.authService.usuarioLogado?.email !==this.data.email){
+                this.toastr.success('Funcionário atualizado com sucesso!');
+                this.closeModal();
+            }else{
+              this.toastr.success('Dados atualizados com sucesso, realize seu login novamente!');
+              this.closeModal();
+              this.authService.logout();
+              this.router.navigate(['/autenticacao'])
+              }
+        },error => {
+          const errorMsg = error.error?.message || 'Erro ao atualizar funcionario';
+          this.toastr.error(errorMsg);
         });
 
       }
@@ -63,6 +75,9 @@ export class ModalFuncionarioComponent implements OnInit {
         this.userService.updateUser(employee).pipe().subscribe(() => {
           this.toastr.success('Funcionário criado com sucesso!');
           this.dialogRef.close();
+        },error => {
+          const errorMsg = error.error?.message || 'Erro ao cadastrar funcioanario';
+          this.toastr.error(errorMsg);
         });
       }
     }
@@ -79,12 +94,7 @@ export class ModalFuncionarioComponent implements OnInit {
   get birthDate() { return this.employeeForm.get('birthDate'); }
 
   closeModal() {
-    if (this.employeeForm.dirty) {
-      if (confirm('Deseja sair sem salvar?')) {
-        this.dialogRef.close();
-      }
-    }
-    else
     this.dialogRef.close();
+   
   }
 }
