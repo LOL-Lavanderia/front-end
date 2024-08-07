@@ -43,22 +43,26 @@ export class RelatorioClientesComponent implements OnInit {
             enderecosStr += `${endereco.logradouro}, ${endereco.numero} - ${endereco.bairro}, ${endereco.localidade}, ${endereco.cep}\n`;
           });
   
-          // Concatenate all phones into a single string
+          // Format phone numbers to have parentheses around the first two digits
           cliente.role.telefones.forEach(telefone => {
-            telefonesStr += `${telefone.numero}\n`;
+            // Converte o número de telefone para string antes de adicionar parênteses
+            telefonesStr += `(${telefone.numero.toString().slice(0, 2)}) ${telefone.numero.toString().slice(2)}\n`;
           });
   
-          // Return an array containing the client's name, email, CPF, addresses, and phones
+          // Formata o CPF para incluir pontos e traços
+          const cpfFormatado = cliente.role.cpf.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1})$/, '$1-$2');
+  
+          // Retorna um array contendo o nome, email, CPF formatado, endereços e telefones formatados
           return [
             cliente.nome,
             cliente.email,
-            cliente.role.cpf,
-            enderecosStr.trim(), // Trim to remove the trailing newline
-            telefonesStr.trim() // Trim to remove the trailing newline
+            cpfFormatado,
+            enderecosStr.trim(), // Remove o caractere de nova linha final
+            telefonesStr.trim() // Remove o caractere de nova linha final
           ];
         }
   
-        return []; // Return an empty array for non-client roles
+        return []; // Retorna um array vazio para roles não-clientes
       });
   
     const columns = ['Nome', 'Email', 'CPF', 'Endereços', 'Telefones'];
@@ -66,10 +70,10 @@ export class RelatorioClientesComponent implements OnInit {
     // @ts-ignore
     doc.autoTable({
       head: [columns],
-      body: data.filter(row => row.length > 0), // Filter out any empty rows
+      body: data.filter(row => row.length > 0), // Filtras linhas vazias
       startY: 20
     });
   
     doc.save('relatorio_clientes.pdf');
-  }  
+  }
 }
