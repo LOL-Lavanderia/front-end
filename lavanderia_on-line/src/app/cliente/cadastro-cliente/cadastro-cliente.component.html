@@ -21,11 +21,6 @@
           <input matInput type="text" formControlName="nome" required />
           <mat-error *ngIf="nomeInvalid">Nome é obrigatório e deve ter pelo menos 3 caracteres.</mat-error>
         </mat-form-field>
-        
-        <mat-form-field class="full-width">
-          <mat-label>Estado</mat-label>
-          <input matInput type="text" formControlName="uf" required />
-        </mat-form-field>
 
         <mat-form-field>
           <mat-label>E-mail</mat-label>
@@ -50,6 +45,11 @@
           <mat-form-field>
             <mat-label>Logradouro</mat-label>
             <input matInput type="text" formControlName="logradouro" required />
+          </mat-form-field>
+          
+          <mat-form-field class="full-width">
+            <mat-label>Estado</mat-label>
+            <input matInput type="text" formControlName="uf" required />
           </mat-form-field>
 
           <mat-form-field>

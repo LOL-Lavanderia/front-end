@@ -92,8 +92,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
     {provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig},
 
-    //provideEnvironmentNgxMask(),
-    //provideNgxMask(),
+    provideEnvironmentNgxMask(),
+    provideNgxMask(),
     MatDatepickerModule,
     provideClientHydration(),
     provideAnimationsAsync(),
