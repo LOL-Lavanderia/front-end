@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Order } from '../../shared/models/order';
 import { PedidoService } from '../../shared/services/pedidoservice/pedido.service.service';
 import { DatePipe } from '@angular/common';
+import moment from 'moment';
 
 @Component({
   selector: 'app-visualizar-pedidos',
@@ -13,14 +14,10 @@ export class VisualizarPedidosComponent implements OnInit {
   listOrder: Order[] = [];
   filteredOrders: Order[] = [];
   selectedFilter: string = '';
-  startDate: string;
-  endDate: string;
+  startDate: Date | null = new Date();
+  endDate: Date | null = new Date();
 
-  constructor(private pedidoService: PedidoService, private datePipe: DatePipe) {
-    const today = this.datePipe.transform(new Date(), 'yyyy-MM-dd')!;
-    this.startDate = today;
-    this.endDate = today;
-  }
+  constructor(private pedidoService: PedidoService, private datePipe: DatePipe) {}
 
   ngOnInit(): void {
     this.loadOrders();
@@ -53,10 +50,10 @@ export class VisualizarPedidosComponent implements OnInit {
   }
 
   filterToday(): void {
-    const today = this.datePipe.transform(new Date(), 'yyyy-MM-dd')!;
+    const today = moment().format('YYYY-MM-DD');
     this.filteredOrders = this.listOrder.filter(order => {
       if (order.openDate) {
-        const openDate = this.datePipe.transform(order.openDate, 'yyyy-MM-dd');
+        const openDate = moment(order.openDate).format('YYYY-MM-DD');
         return openDate === today;
       }
       return false;
@@ -65,14 +62,26 @@ export class VisualizarPedidosComponent implements OnInit {
 
   filterByDateRange(): void {
     if (this.startDate && this.endDate) {
+      const start = moment(this.startDate).format('YYYY-MM-DD');
+      const end = moment(this.endDate).format('YYYY-MM-DD');
       this.filteredOrders = this.listOrder.filter(order => {
         if (order.openDate) {
-          const openDate = this.datePipe.transform(order.openDate, 'yyyy-MM-dd');
-          return openDate! >= this.startDate && openDate! <= this.endDate;
+          const openDate = moment(order.openDate).format('YYYY-MM-DD');
+          return openDate >= start && openDate <= end;
         }
         return false;
       });
     }
+  }
+
+  onStartDateChange(event: any): void {
+    this.startDate = event.value;
+    this.applyFilter();
+  }
+
+  onEndDateChange(event: any): void {
+    this.endDate = event.value;
+    this.applyFilter();
   }
 
   confirmarRecolhimento(order: Order): void {
@@ -106,8 +115,6 @@ export class VisualizarPedidosComponent implements OnInit {
       this.applyFilter();
     });
   }
-
-
 
   noMatchesFound(): boolean {
     if (!this.selectedFilter) {

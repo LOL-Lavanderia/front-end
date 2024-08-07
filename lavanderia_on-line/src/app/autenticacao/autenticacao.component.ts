@@ -17,36 +17,24 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-autenticacao',
-  standalone: true,
   templateUrl: './autenticacao.component.html',
-  styleUrls: ['./autenticacao.component.css'],
-  imports: [
-    MatButtonModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatToolbarModule,
-    MatCardModule,
-    FormsModule,
-    MatProgressSpinnerModule,
-    CommonModule
-  ]
+  styleUrls: ['./autenticacao.component.css']
 })
 export class AutenticacaoComponent implements OnInit {
+  autocad = false;
   usuario: Usuario = new Usuario(undefined, '', '', '', { role: 'client', cpf: '', enderecos: [], telefones: [] });
   email: string = '';
   password: string = '';
   loading: boolean = false;
   message: string = '';
   public passwordVisible: boolean = false;
-
+  public isDisabled: boolean = false;  
   constructor(
     private toastr: ToastrService,
     private authService: AuthenticationService, 
     private router: Router, 
     public dialog: MatDialog
   ) {
-    //toastr top and center
     this.toastr.toastrConfig.positionClass = 'toast-top-center';
   }
 
@@ -89,16 +77,15 @@ export class AutenticacaoComponent implements OnInit {
     }
   }
 
-  autoCadastro(event: Event) {
-    event.preventDefault();
-    this.router.navigate(['/cadastro']);
+  botaoAutoCadastro() {
+    this.email = '';
+    this.password = '';
+    this.isDisabled = true;
+    this.autocad = true;
   }
 
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(CadastroClienteComponent, {
-      width: '600px',
-      enterAnimationDuration,
-      exitAnimationDuration,
-    });
+  handleClose(event: boolean) {
+    this.autocad = event;
+    this.isDisabled = false;
   }
 }

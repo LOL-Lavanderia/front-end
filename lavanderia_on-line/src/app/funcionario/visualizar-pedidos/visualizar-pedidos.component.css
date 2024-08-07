@@ -29,3 +29,9 @@
 .container{
 	color: black
 }
+
+.receita {
+    color: aliceblue;
+    background-color: #1A5280;
+	padding-top: 10px;
+}

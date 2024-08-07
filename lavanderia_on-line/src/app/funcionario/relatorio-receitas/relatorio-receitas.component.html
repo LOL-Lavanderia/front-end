@@ -1,13 +1,24 @@
 <div class="container mt-4">
     <h1>Relatórios de Receitas</h1>
     <div>
-        Data inicial
-        <input type="date" class="mr-5" [(ngModel)]="dataInicial">
-        Data Final
-        <input type="date" class="mr-5" [(ngModel)]="dataFinal">
-        <button class="btn btn-primary margin_right=10" type="button" (click)="gerarRelatorio()">
-            Gerar Relatório
-        </button>
+      <mat-form-field appearance="fill" class="mr-5">
+        <mat-label>Data Inicial</mat-label>
+        <input matInput [matDatepicker]="picker1" [(ngModel)]="dataInicial" placeholder="dd/mm/yyyy" (dateChange)="onDataInicialChange($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="mr-5">
+        <mat-label>Data Final</mat-label>
+        <input matInput [matDatepicker]="picker2" [(ngModel)]="dataFinal" placeholder="dd/mm/yyyy" (dateChange)="onDataFinalChange($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+  
+      <button mat-fab extended class="receita" type="button" (click)="gerarRelatorio()">
+        Gerar Relatório
+      </button>
     </div>
-</div>
-
+    <div *ngIf="mensagemErro" class="text-danger mt-2">{{ mensagemErro }}</div>
+  </div>
+  

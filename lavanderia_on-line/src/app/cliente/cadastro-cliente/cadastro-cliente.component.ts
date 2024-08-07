@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from "@angular/forms";
 import { CadastroClienteService } from "../../shared/services/cadastro-clienteservice/cadastro-clienteservice";
 import { Enderecos, Telefones, Role, Usuario } from "../../shared/models/usuario/usuario";
@@ -11,6 +11,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CadastroClienteComponent {
   public clienteForm: FormGroup;
+  @Output() closeCadastro = new EventEmitter<boolean>();
+  loading: boolean = false;
+
+  onClose() {
+    this.closeCadastro.emit(false);
+  }
 
   constructor(private formBuilder: FormBuilder, private cadastroClienteService: CadastroClienteService, private toastr: ToastrService,) {
     this.clienteForm = this.formBuilder.group({
@@ -104,14 +110,17 @@ export class CadastroClienteComponent {
     );
 
     console.log(newClient);
+    this.loading = true;
     this.cadastroClienteService.createClient(newClient).subscribe(
       response => {
         this.toastr.success('Cadastro realizado com sucesso! Senha encaminhada via e-mail.');
         this.clienteForm.reset();
+        this.closeCadastro.emit(false);
       },
       error => {
         const errorMsg = error.error?.message || 'Erro ao cadastrar cliente';
         this.toastr.error(errorMsg);
+        this.loading = false;
       }
     );
 

@@ -19,11 +19,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
   declarations: [],
   imports: [
+    MatNativeDateModule,
     MatDatepickerModule,
     MatSelectModule,
     MatTableModule,
@@ -38,15 +41,16 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatDialogModule,
     MatInputModule,
     MatGridListModule,
-    MatCardModule,
     MatMenuModule,
     MatSidenavModule,
     MatListModule,
     MatToolbarModule,
     FormsModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule
     ],
   exports: [
+    MatProgressSpinnerModule,
     MatDatepickerModule,
     MatFormFieldModule,
     MatSelectModule,

@@ -34,8 +34,10 @@ import { RelatorioReceitasComponent } from './funcionario/relatorio-receitas/rel
 import { RelatorioClientesComponent } from './funcionario/relatorio-clientes/relatorio-clientes.component';
 import { RelatorioFieisComponent } from './funcionario/relatorio-fieis/relatorio-fieis.component';
 import { VisualizarPedidosComponent } from './funcionario/visualizar-pedidos/visualizar-pedidos.component';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
+import { AutenticacaoComponent } from './autenticacao/autenticacao.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "right",
@@ -65,25 +67,17 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     RelatorioReceitasComponent,
     RelatorioClientesComponent,
     RelatorioFieisComponent,
-    VisualizarPedidosComponent
-
+    VisualizarPedidosComponent,
+    AutenticacaoComponent,
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatGridListModule,
-    MatCardModule,
-    MatMenuModule,
-    MaterialModule,
-    MatNativeDateModule,
-    MatDatepickerModule,
     ToastrModule.forRoot(),
     NgxMaskDirective,
     NgxMaskPipe,
@@ -92,7 +86,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   ],
   exports: [
     MaterialModule,
-    DatePipe,
+    
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},

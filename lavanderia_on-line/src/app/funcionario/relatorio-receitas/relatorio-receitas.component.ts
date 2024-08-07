@@ -5,46 +5,55 @@ import { PedidoDTO, RelatorioReceitaResponse } from '../../shared/models/relator
 import moment from 'moment';
 import 'jspdf-autotable';
 
-
-
 @Component({
   selector: 'app-relatorio-receitas',
   templateUrl: './relatorio-receitas.component.html',
-  styleUrl: './relatorio-receitas.component.css'
+  styleUrls: ['./relatorio-receitas.component.css']
 })
 export class RelatorioReceitasComponent implements OnInit {
-  
   public dataInicial: Date | undefined;
   public dataFinal: Date | undefined;
 
-    relatorio: RelatorioReceitaResponse = {
-        pedidos: [], 
-        totalReceita: 0
-      };
+  relatorio: RelatorioReceitaResponse = {
+    pedidos: [], 
+    totalReceita: 0
+  };
 
-      constructor(private relatorioService: RelatorioService) {}
+  constructor(private relatorioService: RelatorioService) {}
 
+  ngOnInit(): void {}
 
-      ngOnInit(): void {
+  public mensagemErro: string | null = null;
+
+  onDataInicialChange(event: any): void {
+    this.dataInicial = event.value;
+  }
+
+  onDataFinalChange(event: any): void {
+    this.dataFinal = event.value;
+  }
+
+  gerarRelatorio() {
+    if (this.dataInicial !== undefined && this.dataFinal !== undefined) {
+      if (new Date(this.dataInicial) > new Date(this.dataFinal)) {
+        this.mensagemErro = 'A data inicial não pode ser maior que a data final.';
+        return;
       }
-    
-      gerarRelatorio() {
-        if(this.dataInicial !== undefined || this.dataFinal !== undefined){
-          const dataInicialFormatada = moment(this.dataInicial).format('YYYY-MM-DDTHH:mm:ss.SSS');
-          const dataFinalFormatada = moment(this.dataFinal).format('YYYY-MM-DDTHH:mm:ss.SSS');
-          this.relatorioService.gerarRelatorioDeReceitas(dataInicialFormatada, dataFinalFormatada).subscribe(relatorio => {
-            this.relatorio = relatorio;
-            this.gerarPDF();
-          });
-        } else{
-          this.relatorioService.gerarRelatorioDeTodoReceitas().subscribe(relatorio => {
-            this.relatorio = relatorio;
-            this.gerarPDF();
-           });
-          }         
-      }    
-    
-  
+      this.mensagemErro = null;
+      const dataInicialFormatada = moment(this.dataInicial).format('YYYY-MM-DDTHH:mm:ss.SSS');
+      const dataFinalFormatada = moment(this.dataFinal).format('YYYY-MM-DDTHH:mm:ss.SSS');
+      this.relatorioService.gerarRelatorioDeReceitas(dataInicialFormatada, dataFinalFormatada).subscribe(relatorio => {
+        this.relatorio = relatorio;
+        this.gerarPDF();
+      });
+    } else {
+      this.mensagemErro = null;
+      this.relatorioService.gerarRelatorioDeTodoReceitas().subscribe(relatorio => {
+        this.relatorio = relatorio;
+        this.gerarPDF();
+      });
+    }         
+  }
 
   @ViewChild('content') content!: ElementRef;
 
@@ -58,7 +67,7 @@ export class RelatorioReceitasComponent implements OnInit {
       return [
         pedido.id,
         pedido.value.toFixed(2),
-        new Date(pedido.openDate).toLocaleDateString()
+        moment(pedido.openDate).format('DD/MM/YYYY') // Formato brasileiro
       ];
     });
   
@@ -79,5 +88,4 @@ export class RelatorioReceitasComponent implements OnInit {
     
     doc.save('relatorio_receitas.pdf');
   }
-  
 }

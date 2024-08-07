@@ -1,0 +1,18 @@
+.btn-group {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.receita {
+    color: aliceblue;
+    background-color: #1A5280;
+}
+.clientes {
+    color: aliceblue;
+  background-color: #559958;
+}
+
+.fieis {
+    color: aliceblue;
+  background-color: #D95409;
+}

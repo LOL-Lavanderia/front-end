@@ -1,31 +1,22 @@
-.form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 15px;
+mat-toolbar{
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
-  
-  .full-width {
-    width: 100%;
+mat-card{
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  overflow: auto;
+}
+
+.formulario{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+}
+
+.endereco{
+  mat-form-field{
+    padding: 2px;
   }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  
-  .mat-toolbar {
-    justify-content: center;
-  }
-  
-  .mat-card {
-    padding: 24px;
-    margin: 24px auto;
-    max-width: 600px;
-  }
-  
-  button {
-    align-self: flex-end;
-  }
-  
+}

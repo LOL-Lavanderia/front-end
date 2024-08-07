@@ -1,10 +1,11 @@
 <body class="d-flex flex-column">
     <div class="container mt-4">
         <h1>Página de Relatórios</h1>
-        <ul>
-            <li><a routerLink="/relatorios/relatorio-receitas">Relatório de Receitas</a></li>
-            <li><a routerLink="/relatorios/relatorio-clientes">Relatório de Clientes</a></li>
-            <li><a routerLink="/relatorios/relatorio-fieis">Relatório de Clientes Fiéis</a></li>
-        </ul>
+        <div class="btn-group">
+            <button mat-fab extended class="receita" routerLink="/relatorios/relatorio-receitas">Relatório de Receitas</button>
+            <button mat-fab extended class="clientes" routerLink="/relatorios/relatorio-clientes">Relatório de Clientes</button>
+            <button mat-fab extended class="fieis" routerLink="/relatorios/relatorio-fieis">Relatório de Clientes Fiéis</button>
+        </div>
+        
         <router-outlet></router-outlet>
     </div>
