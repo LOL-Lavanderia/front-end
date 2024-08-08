@@ -1,4 +1,8 @@
 .btn
 {
 	background-color: rgb(68, 139, 92);
+	margin-bottom: 10px;
+}
+.lista{
+	margin: 10px;
 }
