@@ -27,7 +27,6 @@ export class ItemRoupaComponent implements OnInit {
       this.roupaService.listarRoupas().pipe().subscribe((data) => {
         this.roupas = data;
       }, error => {
-        console.error('Erro ao buscar roupas', error);
       });
     } 
      

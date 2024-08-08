@@ -71,7 +71,6 @@ export class ModalRoupaComponent implements OnInit {
           },
           (error) => {
             this.toastr.error('Erro ao atualizar a roupa.');
-            console.error(error);
           }
         );
       } else {
@@ -82,7 +81,7 @@ export class ModalRoupaComponent implements OnInit {
           },
           (error) => {
             this.toastr.error('Erro ao criar a roupa.');
-            console.error(error);
+
           }
         );
       }

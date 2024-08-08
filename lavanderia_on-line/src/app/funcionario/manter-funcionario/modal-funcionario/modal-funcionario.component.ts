@@ -32,7 +32,6 @@ export class ModalFuncionarioComponent implements OnInit {
   }
 
   getFuncionario(user: Usuario) {
-    console.log(user);
     this.employeeForm.setValue({
       email: user.email,
       name: user.nome,

@@ -25,7 +25,6 @@ export class ManterFuncionarioComponent implements OnInit {
 
     this.userService.listAll().pipe().subscribe((users) => {
       this.employees = users.filter(user => isEmployee(user));
-      console.log(this.employees);
     }
     );
   }

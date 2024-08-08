@@ -18,7 +18,6 @@ export class CadastroClienteService {
   }
 
   getCep(cep: number | string):Observable<Enderecos>{
-    console.log(this.http.get<Enderecos>(`${this.cepUrl}/${cep}`));
     return this.http.get<Enderecos>(`${this.cepUrl}/${cep}`)
   }
 }

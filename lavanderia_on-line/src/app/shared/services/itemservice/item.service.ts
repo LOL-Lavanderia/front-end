@@ -17,7 +17,6 @@ export class ItemService {
   }
 
   deleteItem(id: number): Observable<void> {
-    console.log(`${this.apiUrl}item/${id}`);
     return this.http.delete<void>(`${this.apiUrl}item/${id}`);
   }
 

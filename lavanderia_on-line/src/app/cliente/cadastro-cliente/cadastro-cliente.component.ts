@@ -109,7 +109,6 @@ export class CadastroClienteComponent {
       role
     );
 
-    console.log(newClient);
     this.loading = true;
     this.cadastroClienteService.createClient(newClient).subscribe(
       response => {
@@ -140,7 +139,7 @@ export class CadastroClienteComponent {
         });
       },
       error => {
-        console.error('Erro ao buscar detalhes do CEP', error);
+
       }
     );
   }

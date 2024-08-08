@@ -17,7 +17,6 @@ export class RelatorioClientesComponent implements OnInit {
 
   ngOnInit(): void {
     this.gerarRelatorio();
-    console.log(this.clientes);
   }
 
   gerarRelatorio(){

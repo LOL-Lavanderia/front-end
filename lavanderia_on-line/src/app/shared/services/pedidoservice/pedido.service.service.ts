@@ -80,13 +80,11 @@ export class PedidoService {
     return this.http.get<Order[]>(`${this.apiUrl}/by-cliente/${clientId}`);
   }
   deletePedido(id: number): Observable<void> {
-    console.log(`${this.apiUrl}pedido/${id}`);
     return this.http.delete<void>(`${this.apiUrl}${id}`);
   }
 
   createOrUpdatePedido(order: Order, id: string | undefined): Observable<Order> {
     if (id) {
-      console.log("enviando pra = ", `${this.apiUrl}/${order.id}`);
       order.closeDate = new Date();
       return this.http.put<Order>(`${this.apiUrl}/${order.id}`, order);
     } else {

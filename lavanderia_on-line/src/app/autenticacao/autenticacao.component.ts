@@ -65,7 +65,6 @@ export class AutenticacaoComponent implements OnInit {
           }
         },
         error => {
-          console.error('Login failed:', error);
           this.toastr.error('Usuário/Senha inválidos.', 'Erro');
           this.message = 'Usuário/Senha inválidos.';
           this.loading = false;

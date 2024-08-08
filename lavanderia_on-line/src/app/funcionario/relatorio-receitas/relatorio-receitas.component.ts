@@ -40,8 +40,8 @@ export class RelatorioReceitasComponent implements OnInit {
         return;
       }
       this.mensagemErro = null;
-      const dataInicialFormatada = moment(this.dataInicial).format('YYYY-MM-DDTHH:mm:ss.SSS');
-      const dataFinalFormatada = moment(this.dataFinal).format('YYYY-MM-DDTHH:mm:ss.SSS');
+      const dataInicialFormatada = moment(this.dataInicial).format('YYYY-MM-DDT') + '00:00:00.000';
+      const dataFinalFormatada = moment(this.dataFinal).format('YYYY-MM-DDT') + '23:59:59.999';
       this.relatorioService.gerarRelatorioDeReceitas(dataInicialFormatada, dataFinalFormatada).subscribe(relatorio => {
         this.relatorio = relatorio;
         this.gerarPDF();

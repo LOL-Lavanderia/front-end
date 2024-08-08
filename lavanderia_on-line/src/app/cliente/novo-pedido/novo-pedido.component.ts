@@ -30,7 +30,6 @@ ngOnInit(): void {
    this.obterIdUsuario(); 
     this.roupasService.listarRoupas().pipe().subscribe((roupas) => {
       this.listaDeRoupas = roupas;
-      console.log(this.listaDeRoupas);
     }
     );
 }
@@ -117,7 +116,7 @@ ngOnInit(): void {
     if (userId === null) {
       throw new Error('Usuário não logado.');
     }
-    console.log('ID do usuário atual:', userId);
+
     this.userId = userId;
   }
 }
