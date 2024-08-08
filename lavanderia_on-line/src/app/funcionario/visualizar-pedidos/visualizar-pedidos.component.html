@@ -12,14 +12,14 @@
   <div *ngIf="selectedFilter === 'dateRange'" class="mt-3">
     <mat-form-field appearance="fill" class="mr-5">
       <mat-label>Data Início</mat-label>
-      <input matInput [matDatepicker]="pickerStart" [(ngModel)]="startDate" (dateChange)="onStartDateChange($event)" placeholder="dd/mm/yyyy">
+      <input matInput readonly [matDatepicker]="pickerStart" [(ngModel)]="startDate" (dateChange)="onStartDateChange($event)" placeholder="dd/mm/yyyy">
       <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
       <mat-datepicker #pickerStart></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="mr-5">
       <mat-label>Data Fim</mat-label>
-      <input matInput [matDatepicker]="pickerEnd" [(ngModel)]="endDate" (dateChange)="onEndDateChange($event)" placeholder="dd/mm/yyyy">
+      <input readonly matInput [matDatepicker]="pickerEnd" [(ngModel)]="endDate" (dateChange)="onEndDateChange($event)" placeholder="dd/mm/yyyy">
       <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
       <mat-datepicker #pickerEnd></mat-datepicker>
     </mat-form-field>
